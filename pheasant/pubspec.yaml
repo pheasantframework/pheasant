@@ -1,0 +1,13 @@
+name: pheasant
+description: >-
+  The Pheasant Framework is an innovative and powerful frontend web framework
+  It is used for making powerful and progressive web apps ontop of the Dart language.
+version: 0.1.0-alpha
+
+environment:
+  sdk: '>=3.0.0'
+
+dev_dependencies:
+  build: ^2.4.1
+  build_runner: ^2.4.7
+  build_web_compilers: ^4.0.7
