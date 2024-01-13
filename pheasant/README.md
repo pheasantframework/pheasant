@@ -103,3 +103,5 @@ In future versions, other libraries will be created to expose etra functionality
 - Github Repo: [source](https://github.com/pheasantframework/pheasant), [issues](https://github.com/pheasantframework/pheasant/issues) and [contributor guidelines](https://github.com/pheasantframework/pheasant/blob/development/CONTRIBUTING.md).
 
 If you have any issues, suggestions, or bigger ideas that may not be properly encapsulated in github, [send me an email](raven@tech.nugegroup.com).
+
+This package uses the [MIT License](./LICENSE).

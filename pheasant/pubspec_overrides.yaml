@@ -1,9 +1,0 @@
-dependency_overrides: 
-  pheasant_build:
-    path: ../pheasant_build
-  pheasant_temp:
-    path: ../pheasant_temp
-  pheasant_meta:
-    path: ../pheasant_meta
-  pheasant_assets:
-    path: ../pheasant_assets
