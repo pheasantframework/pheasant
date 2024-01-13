@@ -1,0 +1,31 @@
+<script>
+import 'components/Component.phs' as Component;
+
+int myInt = 5;
+</script>
+
+<template>
+<div>
+    <md class="foo">
+# You Did It!
+This is the first step you've made to making your awesome Web App with Pheasant.
+
+Edit `lib/App.phs` to get started.
+
+## Next Steps
+Here are some next steps you can take to make the most you can out of the Pheasant Framework
+1. Read The Documentation
+The Documentation can help a lot to guide you in making the most out of the framework. You can check the documentation on
+[pub](), or on [github]().
+
+2. Play around
+You can play around with some features here.
+
+## <center>Have Fun!</center>
+    </md>
+    <Component />
+</div>
+</template>
+
+<style src="App.scss" syntax="scss">
+</style>

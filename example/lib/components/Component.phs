@@ -1,0 +1,12 @@
+<script>
+List<String> myList = ["food", "feed", "fied"];
+</script>
+
+<template>
+<div>
+    <p id="like">HEHE</p>
+</div>
+</template>
+
+<style src="./styles.css">
+</style>

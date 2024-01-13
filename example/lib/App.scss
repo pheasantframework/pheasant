@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;1,300&family=Roboto+Mono:wght@200&display=swap');
+
+$font: 'Lato';
+$monoFont: 'Roboto Mono';
+$primary-color: red;
+
+.foo {
+    color: rgb(245, 193, 66);
+    align-content: flex-start;
+    font-family: $font, sans-serif;
+
+    a {
+        color: silver;
+        font-style: italic;
+        font-weight: 300;
+    }
+
+    p {
+        font-weight: 100;
+    }
+
+    code {
+        font-family: $monoFont, monospace;
+    }
+}
+
+div {
+    align-items: flex-start;
+    text-align: left;
+    align-self: start;
+}

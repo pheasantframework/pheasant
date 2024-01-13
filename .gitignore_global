@@ -1,0 +1,9 @@
+build/
+
+.vscode/
+
+.DS_Store
+
+changes.md
+
+laws.md

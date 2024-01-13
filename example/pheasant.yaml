@@ -1,0 +1,14 @@
+project: example
+version: 1.0.0
+env: dart
+entry:
+  main: web/main.dart
+  app: lib/App.phs
+config:
+  sass: true
+  js: true
+  linter: true
+  formatter: true
+  phsComponents: true
+plugins: []
+dependencies: []
