@@ -6,7 +6,7 @@ environment:
   sdk: ^3.2.3
 
 dependencies:
-  pheasant: ^0.1.0-alpha
+  pheasant: any
 
 dev_dependencies:
   build_runner: ^2.4.0
