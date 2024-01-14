@@ -24,7 +24,7 @@ Future<void> componentFileConfig(Logger logger, String projName, String proj, St
   logger.trace('Adding Data to Base Components');
   String mainComponentFileData = '''
 <script>
-import 'component/Component.phs' as Component;
+import 'components/Component.phs' as Component;
 String helloWorld = "Hello, World!";
 </script>
 

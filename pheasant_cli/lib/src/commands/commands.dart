@@ -5,6 +5,7 @@ import 'package:cli_config/cli_config.dart';
 import 'package:cli_util/cli_logging.dart';
 import 'package:io/ansi.dart';
 import 'package:io/io.dart';
+import 'package:pubspec_parse/pubspec_parse.dart' as pub;
 
 import 'run/getters/configfile.dart';
 import 'run/precheck.dart';
@@ -91,16 +92,17 @@ void runCommand(ArgResults results) async {
     commandLineDefines: configArgs,
     environment: Platform.environment
   );
-  handleConfig(config);
   var appConfig = configFileType == PheasantConfigFile.yaml 
   ? PheasantCliBaseConfig.fromYaml(configFileData, configOverrides: config)
   : PheasantCliBaseConfig.fromJson(configFileData, configOverrides: config);
+  handleConfig(config, appConfig: appConfig);
   // Verify you are in right directory
   await checkProject(logger, appConfig);
 
   var progress = logger.progress('Preparing Project for Build');
   File buildFile = await File('build.yaml').create();
-  buildFile = await buildFile.writeAsString(genBuildFile(appConfig));
+  final data = pub.Pubspec.parse(File('pubspec.yaml').readAsStringSync());
+  buildFile = await buildFile.writeAsString(genBuildFile(appConfig, projNameFromPubspec: data.name));
   progress.finish(showTiming: true);
   
   await Future.wait([
@@ -113,6 +115,6 @@ void runCommand(ArgResults results) async {
 }
 
 /// Unimplemented yet
-void handleConfig(Config config) {
+void handleConfig(Config config, {PheasantCliBaseConfig? appConfig}) {
   
 }

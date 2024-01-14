@@ -6,7 +6,7 @@ import 'package:args/args.dart';
 /// The CLI Commands are wrapped in an [ArgParser].
 ArgParser buildPheasantParser() {
   return ArgParser()
-  /// Generic Flags
+  // Generic Flags
     ..addFlag(
       'help',
       abbr: 'h',
@@ -22,6 +22,7 @@ ArgParser buildPheasantParser() {
 
     ..addFlag(
       'verbose',
+      abbr: 'V',
       negatable: false,
       help: 'Print more defined info during commands'
     )
@@ -51,7 +52,6 @@ ArgParser buildPheasantParser() {
         'directory',
         abbr: 'd',
         valueHelp: 'directory',
-        // defaultsTo: '.',
         help: 'The directory to create your new project',
       )
     )
@@ -63,7 +63,6 @@ ArgParser buildPheasantParser() {
         'directory',
         abbr: 'd',
         valueHelp: 'directory',
-        // defaultsTo: '.',
         help: 'The directory to create your new project',
       )
     )
@@ -94,7 +93,6 @@ ArgParser buildPheasantParser() {
         'port',
         abbr: 'p',
         defaultsTo: '8080',
-        valueHelp: '8080',
         help: 'The port to run the web app on'
       )
       ..addFlag(
@@ -111,7 +109,6 @@ ArgParser buildPheasantParser() {
         'port',
         abbr: 'p',
         defaultsTo: '8080',
-        valueHelp: '8080',
         help: 'The port to run the web app on'
       )
     )

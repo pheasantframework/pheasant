@@ -10,7 +10,12 @@ import 'interface.dart';
 import 'config.dart';
 import 'custom_file.dart';
 
-Future<void> initGenerate(Logger logger, ArgResults results, ProcessManager manager, String projName) async {
+Future<void> initGenerate(
+  Logger logger, 
+  ArgResults results, 
+  ProcessManager manager, 
+  String projName
+) async {
   // Generate Project
   var genProgress = logger.progress('Generating Project');
   // Create directory if stated
