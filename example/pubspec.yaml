@@ -1,12 +1,10 @@
 name: phse
-description: An absolute bare-bones web app.
+description: A web app made with Pheasant.
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
 
 environment:
   sdk: ^3.2.3
 
-# Add regular dependencies here.
 dependencies:
   pheasant: ^0.1.0-alpha
 
