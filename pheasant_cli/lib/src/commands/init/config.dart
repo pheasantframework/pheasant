@@ -5,7 +5,7 @@ import 'package:yaml_edit/yaml_edit.dart';
 
 import '../general/errors.dart';
 
-Future<void> createYamlConfig(Logger logger, String proj, String projName) async {
+Future<void> createYamlConfig(Logger logger, String proj, String projName, {Map<String, dynamic>? cliAnswers}) async {
   logger.trace('Setting Up Config File');
   File configFile = await File('$proj/pheasant.yaml').create();
   Map<String, dynamic> config = {
@@ -17,11 +17,11 @@ Future<void> createYamlConfig(Logger logger, String proj, String projName) async
       'app': 'lib/App.phs'
     },
     'config': {
-      'sass': true,
-      'js': true,
-      'linter': true,
-      'formatter': true,
-      'phsComponents': true
+      'sass': cliAnswers?.values.toList()[0] ?? false,
+      'js': cliAnswers?.values.toList()[1] ?? false,
+      'linter': cliAnswers?.values.toList()[3] ?? false,
+      'formatter': cliAnswers?.values.toList()[4] ?? false,
+      'phsComponents': cliAnswers?.values.toList()[2] ?? false
     },
     'plugins': [],
     'dependencies': []
@@ -32,19 +32,12 @@ Future<void> createYamlConfig(Logger logger, String proj, String projName) async
 }
 
 Future<void> pubspecConfig(Logger logger, String proj, Process spawn, ProcessManager manager, Progress genProgress) async {
-   logger.trace('Configuring Pubspec');
-  String pubspecData = await File('$proj/pubspec.yaml').readAsString();
-  pubspecData += '\npublish_to: none';
-  var pubspecEditor = YamlEditor(pubspecData);
-  await File('$proj/pubspec.yaml').writeAsString(pubspecEditor.toString());
-  
   logger.trace('Adding Dependencies');
-  
   spawn = await manager.spawnDetached(
     'dart', ['pub', 'add', '-C', proj, 
-    'pheasant:{"git":{"url":"https://github.com/pheasantframework/pheasant.git","ref":"development","path":"pheasant"}}'
+    'pheasant:any'
   ]);
   await errorCheck(spawn, logger, genProgress);
-  
   logger.trace('Dependencies Added');
+  
 }

@@ -20,8 +20,6 @@ import '../constants/buildfile.dart';
 import '../constants/clidoc.dart';
 import '../utils/src/usage.dart';
 
-const pheasantColor = yellow;
-
 void initCommand(ArgResults results) async {
   if (results.arguments.length <= 1) {
     stderr.writeln(red.wrap('Give a name or directory for your project to get started.'));
@@ -115,7 +113,6 @@ void runCommand(ArgResults results) async {
 }
 
 /// Unimplemented yet
-// TODO: Implement Function
 void handleConfig(Config config) {
   
 }

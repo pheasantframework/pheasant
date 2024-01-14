@@ -1,7 +1,6 @@
 name: pheasant_cli
-description: A sample command-line application with basic argument parsing.
+description: The official cli for running, creating and working with Pheasant projects and applications.
 version: 0.1.0-alpha
-# repository: https://github.com/my_org/my_repo
 
 executables:
   pheasant:

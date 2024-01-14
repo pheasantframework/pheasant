@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:cli_util/cli_logging.dart';
 
 Future<void> componentFileConfig(Logger logger, String projName, String proj, String resolvedPath) async {
@@ -22,9 +23,38 @@ Future<void> componentFileConfig(Logger logger, String projName, String proj, St
   
   logger.trace('Adding Data to Base Components');
   String mainComponentFileData = '''
+<script>
+import 'component/Component.phs' as Component;
+String helloWorld = "Hello, World!";
+</script>
+
+<template>
+<div id="hello">
+  <p>{{helloWorld}}</p>
+  <Component />
+</div>
+</template>
+
+<style>
+#hello {
+  color: aquamarine;
+}
+</style>
   ''';
   await mainComponentFile.writeAsString(mainComponentFileData);
   String componentComponentFileData = '''
+<script>
+</script>
+
+<template>
+<div>
+  <p>Welcome to Raven</p>
+  <p>Configure this project by editing <code>'lib/App.phs'</code></p>
+</div>
+</template>
+
+<style>
+</style>
   ''';
   await componentComponentFile.writeAsString(componentComponentFileData);
 }
