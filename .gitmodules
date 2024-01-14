@@ -1,0 +1,12 @@
+[submodule "pheasant_temp"]
+	path = pheasant_temp
+	url = https://github.com/pheasantframework/pheasant_temp.git
+[submodule "pheasant_assets"]
+	path = pheasant_assets
+	url = https://github.com/pheasantframework/pheasant_assets.git
+[submodule "pheasant_build"]
+	path = pheasant_build
+	url = https://github.com/pheasantframework/pheasant_build.git
+[submodule "pheasant_meta"]
+	path = pheasant_meta
+	url = https://github.com/pheasantframework/pheasant_meta.git
