@@ -1,22 +1,20 @@
 import 'dart:io';
 
 import 'package:args/args.dart';
-import 'package:cli_config/cli_config.dart';
 import 'package:cli_util/cli_logging.dart';
 import 'package:io/ansi.dart';
 import 'package:io/io.dart';
 import 'package:pubspec_parse/pubspec_parse.dart' as pub;
 
-import 'run/getters/configfile.dart';
-import 'run/precheck.dart';
 import 'run/bg_process.dart';
 import 'run/main_process.dart';
 import 'init/gen.dart';
 import 'init/interface.dart';
 import 'doctor/sdksearch.dart';
+import 'general/validate_project.dart';
+import 'build/build_application.dart';
 
 import '../config/config.dart';
-import '../config/configfile.dart';
 import '../constants/buildfile.dart';
 import '../constants/clidoc.dart';
 import '../utils/src/usage.dart';
@@ -41,7 +39,7 @@ void initCommand(ArgResults results) async {
   var logger = verbose ? Logger.verbose() : Logger.standard();
   var manager = ProcessManager();
 
-  await initGenerate(logger, results, manager, projName);
+  await initGenerate(logger, results, manager, projName, linter: answers.values.toList()[3]);
   
   logger.stdout('All ${logger.ansi.emphasized('done')}.');
   exit(0);
@@ -84,20 +82,7 @@ void runCommand(ArgResults results) async {
   var serveManager = ProcessManager();
 
   logger.stdout(wrapWith('Pheasant\n', [yellow, styleBold])!);
-  await checkConfigFiles(logger);
-  logger.trace('Reading Data for Config File');
-  var configFileData = File(configFile).readAsStringSync();
-  var config = Config.fromConfigFileContents(
-    fileContents: configFileData,
-    commandLineDefines: configArgs,
-    environment: Platform.environment
-  );
-  var appConfig = configFileType == PheasantConfigFile.yaml 
-  ? PheasantCliBaseConfig.fromYaml(configFileData, configOverrides: config)
-  : PheasantCliBaseConfig.fromJson(configFileData, configOverrides: config);
-  handleConfig(config, appConfig: appConfig);
-  // Verify you are in right directory
-  await checkProject(logger, appConfig);
+  AppConfig appConfig = await validateProject(logger, configArgs);
 
   var progress = logger.progress('Preparing Project for Build');
   File buildFile = await File('build.yaml').create();
@@ -107,14 +92,24 @@ void runCommand(ArgResults results) async {
   
   await Future.wait([
     bgProcess(buildManager, logger),
-    mainProcess(serveManager, logger, port),
+    mainProcess(serveManager, logger, port: port, options: results.command?.options ?? [], output: results.command!['output']),
   ]);
 
 
   await buildFile.delete();
 }
 
-/// Unimplemented yet
-void handleConfig(Config config, {PheasantCliBaseConfig? appConfig}) {
-  
+void buildCommand(ArgResults results) async {
+  List<String> configArgs = results.wasParsed('define') ? results['define'] : [];
+  var verbose = results.wasParsed('verbose');
+  var logger = verbose ? Logger.verbose() : Logger.standard();
+  var manager = ProcessManager();
+
+  Progress progress = await checkProjectBeforeBuild(logger, configArgs);
+
+  await buildApplication(progress, logger, manager, results);
+
+  logger.stdout('All ${logger.ansi.emphasized('done')}.\n');
+  logger.stdout('Build Written to ${results.command!['output'] ?? 'build'}/');
+  exit(0);
 }
