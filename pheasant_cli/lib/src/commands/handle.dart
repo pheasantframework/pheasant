@@ -19,5 +19,7 @@ void handleCommand(ArgResults argResults, ArgParser argParser) {
   if (argResults.command?.name == 'run' || argResults.command?.name == 'serve') {
     runCommand(argResults);
   }
-
+  if (argResults.command?.name == 'build') {
+    buildCommand(argResults);
+  }
 }

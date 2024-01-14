@@ -6,14 +6,14 @@ Future<void> componentFileConfig(Logger logger, String projName, String proj, St
   logger.trace('Setting Up Main File');
   
   String mainDartFileData = '''
-  import 'package:pheasant/pheasant.dart';
-  
-  // File will be generated.
-  import 'package:$projName/main.phs.dart';
-  
-  void main() {
+import 'package:pheasant/pheasant.dart';
+
+// File will be generated.
+import 'package:$projName/main.phs.dart';
+
+void main() {
   createApp(App);
-  }
+}
   ''';
   await File('$proj/web/main.dart').writeAsString(mainDartFileData);
   

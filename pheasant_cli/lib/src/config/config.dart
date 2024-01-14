@@ -135,3 +135,4 @@ class PheasantCliNodeConfig extends PheasantCliBaseConfig {
 }
 
 enum PheasantEnvironment {dart, node}
+typedef AppConfig = PheasantCliBaseConfig;

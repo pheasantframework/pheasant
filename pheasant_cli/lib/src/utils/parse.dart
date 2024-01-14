@@ -54,6 +54,18 @@ ArgParser buildPheasantParser() {
         valueHelp: 'directory',
         help: 'The directory to create your new project',
       )
+      ..addFlag(
+        'yes',
+        abbr: 'y',
+        negatable: false,
+        help: 'Applies "yes" to all "yes/No" questions asked for configuring the project.'
+      )
+      ..addFlag(
+        'force',
+        abbr: 'f',
+        negatable: false,
+        help: 'Force Creation of this Project.'
+      )
     )
 
     ..addCommand(
@@ -64,6 +76,18 @@ ArgParser buildPheasantParser() {
         abbr: 'd',
         valueHelp: 'directory',
         help: 'The directory to create your new project',
+      )
+      ..addFlag(
+        'yes',
+        abbr: 'y',
+        negatable: false,
+        help: 'Applies "yes" to all "yes/No" questions asked for configuring the project.'
+      )
+      ..addFlag(
+        'force',
+        abbr: 'f',
+        negatable: false,
+        help: 'Force Creation of this Project.'
       )
     )
 
@@ -82,7 +106,13 @@ ArgParser buildPheasantParser() {
       ArgParser()
       ..addFlag(
         'release',
-        help: 'Build release version of this app'
+        abbr: 'r',
+        help: 'Build with release mode for this app'
+      )
+      ..addOption(
+        'output',
+        abbr: 'o',
+        help: 'A directory to write the results of the build to.'
       )
     )
 
@@ -93,12 +123,28 @@ ArgParser buildPheasantParser() {
         'port',
         abbr: 'p',
         defaultsTo: '8080',
-        help: 'The port to run the web app on'
+        help: 'The port to run the web app on.'
+      )
+      ..addOption(
+        'output',
+        abbr: 'o',
+        help: 'A directory to write the results of the build to.'
       )
       ..addFlag(
         'release',
-        negatable: false,
+        abbr: 'r',
+        negatable: true,
         help: 'Whether to run the release version of the application.'
+      )
+      ..addFlag(
+        'auto-restart',
+        negatable: false,
+        help: 'Whether to automatically restart the "main" function during rebuild.'
+      )
+      ..addFlag(
+        'auto-refresh',
+        negatable: false,
+        help: 'Whether to automatically make a full page refresh during rebuild.'
       )
     )
 
@@ -110,6 +156,16 @@ ArgParser buildPheasantParser() {
         abbr: 'p',
         defaultsTo: '8080',
         help: 'The port to run the web app on'
+      )
+      ..addFlag(
+        'auto-restart',
+        negatable: false,
+        help: 'Whether to automatically restart the "main" function during rebuild.'
+      )
+      ..addFlag(
+        'auto-refresh',
+        negatable: false,
+        help: 'Whether to automatically make a full page refresh during rebuild.'
       )
     )
     ;

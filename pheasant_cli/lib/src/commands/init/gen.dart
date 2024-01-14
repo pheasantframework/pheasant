@@ -5,17 +5,18 @@ import 'package:cli_util/cli_logging.dart';
 import 'package:io/io.dart';
 import 'package:path/path.dart';
 
-import '../general/errors.dart';
-import 'interface.dart';
 import 'config.dart';
+import 'interface.dart';
 import 'custom_file.dart';
 
+import '../general/errors.dart';
 Future<void> initGenerate(
   Logger logger, 
   ArgResults results, 
   ProcessManager manager, 
-  String projName
-) async {
+  String projName, {
+  bool linter = false
+}) async {
   // Generate Project
   var genProgress = logger.progress('Generating Project');
   // Create directory if stated
@@ -30,7 +31,7 @@ Future<void> initGenerate(
   logger.trace('Generating base project');
   var proj = (dirPath == null ? resolvedPath : '$resolvedPath/$projName');
   var spawn = await manager.spawnDetached('dart', [
-    'create', '-t', 'web', proj
+    'create', '-t', 'web', proj, results.command!.wasParsed('force') ? '--force' : ''
   ]);
   // Check for errors in spawn
   await errorCheck(spawn, logger, genProgress);
@@ -46,6 +47,8 @@ Future<void> initGenerate(
 
   // Configure pheasant.yaml file
   await createYamlConfig(logger, proj, projName, cliAnswers: answers);
+
+  await analysisOptionsConfig(proj, projName, lint: linter);
 
   genProgress.finish(showTiming: true);
 }

@@ -13,17 +13,21 @@ Map<String, Type> get questions => <String, Type>{
 Map<String, dynamic> answers = Map.fromIterable(questions.keys);
 
 void initInterface(ArgResults results) {
-  questions.forEach((key, value) {
-    stdout.writeAll([
-      lightBlue.wrap(key)!,
-      styleBold.wrap(value == bool ? '(y/N) ' : '')
-    ], " ");
-    final ans = stdin.readLineSync();
-    if (ans == null) {
-      answers[key] = false;
-    } else {
-      answers[key] = ans == 'y';
-    }
-  });
+  if (results.command!.wasParsed('yes')) {
+    answers.updateAll((key, value) => true);
+  } else {
+    questions.forEach((key, value) {
+      stdout.writeAll([
+        lightBlue.wrap(key)!,
+        styleBold.wrap(value == bool ? '(y/N) ' : '')
+      ], " ");
+      final ans = stdin.readLineSync();
+      if (ans == null) {
+        answers[key] = false;
+      } else {
+        answers[key] = ans == 'y';
+      }
+    });
+  }
   stdout.writeln();
 }

@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:cli_util/cli_logging.dart';
 import 'package:io/io.dart';
 import 'package:yaml_edit/yaml_edit.dart';
@@ -40,4 +41,23 @@ Future<void> pubspecConfig(Logger logger, String proj, Process spawn, ProcessMan
   await errorCheck(spawn, logger, genProgress);
   logger.trace('Dependencies Added');
   
+}
+
+Future<void> analysisOptionsConfig(String projDir, String projName, {bool lint = false}) async {
+  var analysisOptions = await File('$projDir/analysis_options.yaml').readAsString();
+  analysisOptions += '''
+analyzer:
+  exclude: [build/**]
+  errors:
+    uri_has_not_been_generated: ignore
+
+''';
+  if (lint) {
+    analysisOptions += '''
+linter:
+  rules:
+    - camel_case_types
+''';
+  }
+  await File('$projDir/analysis_options.yaml').writeAsString(analysisOptions);
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:async';
 
 import 'package:cli_util/cli_logging.dart';
 import 'package:io/ansi.dart';
@@ -8,7 +9,18 @@ import 'package:io/io.dart';
 import 'log/analyze_log.dart';
 import '../general/errors.dart';
 
-Future<void> mainProcess(ProcessManager manager, Logger logger, [String port = '8080']) async {
+Future<void> mainProcess(ProcessManager manager, Logger logger, {String port = '8080', Iterable<String> options = const [], String? output}) async {
+  
+  List<String> runOptions = [];
+  for (String item in options) {
+    if (item == 'output' || item == 'release') {
+      runOptions.add('--$item');
+      if (item == 'output' && output != null) runOptions.add(output);
+    } else if (item.contains('auto')) {
+      runOptions.addAll(item.split('--').map((e) => e == 'auto' ? '--auto' : e));
+    }
+  }
+  String outputOption = options.singleWhere((element) => element == 'output', orElse: () => "");
   var validateProgress = logger.progress('Getting App Ready');
   
   Process process;
@@ -27,7 +39,7 @@ Future<void> mainProcess(ProcessManager manager, Logger logger, [String port = '
   await Future.delayed(Duration(milliseconds: 1000));
   process = await manager.spawnDetached(
     'webdev', 
-    ['serve', 'web:$port']
+    ['serve', 'web:$port', ...runOptions, ...(outputOption.isNotEmpty && output != null ? [outputOption, outputOption]: [])]
   )..stdout.transform(utf8.decoder).forEach((stream) {
     if (stream.contains('WARNING') || stream.contains('SEVERE')) logger.stdout(wrapWith(analyzeLog(stream), [stream.contains('WARNING') ? yellow : red])!);
     if (stream.contains('--------------') && log == 0) {
@@ -60,3 +72,7 @@ Future<void> mainProcess(ProcessManager manager, Logger logger, [String port = '
     exit(0);
   });
 }
+
+/** Build options
+ * --release
+ */
