@@ -26,7 +26,7 @@ Pheasant works by rendering components in `.phs` files. These files consist of t
 </template>
 ```
 2. The **script** which contains Dart data located inside it, which can be used in the **template** part for rendering. Here you can simply write plain Dart Code, and import dart libraries as well as other Pheasant Files/Components.
-```dart
+```
 <script>
 int myNum = 9;
 
