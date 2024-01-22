@@ -3,3 +3,11 @@ changes.md
 laws.md
 
 .DS_Store
+
+demo/
+
+pubspec_overrides.yaml
+
+.dart_tool/
+
+pubpsec.lock
