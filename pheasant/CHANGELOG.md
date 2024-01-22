@@ -1,3 +1,8 @@
+## 0.1.0-beta
+- Added support for state management and event handling.
+- Extended support for Custom Components
+- Added support for passing data to child via `@prop` and `@noprop`.
+
 ## 0.1.0-alpha
 - Initial creation of the framework
 - Support for basic features in `.phs` files

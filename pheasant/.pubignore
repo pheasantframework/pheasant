@@ -11,3 +11,5 @@ doc/api/
 .DS_Store
 
 .vscode/
+
+pubspec_overrides.yaml

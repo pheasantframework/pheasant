@@ -3,5 +3,5 @@
 /// This library only exposes the two functions from the `html` library used in the compiled dart code, and the `PheasantTemplate` class, which represents the backbone for all Pheasant-Compiled File Components
 library build;
 
-export 'package:pheasant_temp/pheasant_build.dart' show PheasantTemplate;
+export 'package:pheasant_temp/pheasant_build.dart' show PheasantTemplate, TemplateState, AppState, Prop, prop, noprop;
 export 'package:html/parser.dart' show parse, parseFragment;
