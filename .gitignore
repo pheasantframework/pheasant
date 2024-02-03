@@ -10,4 +10,6 @@ pubspec_overrides.yaml
 
 .dart_tool/
 
-pubpsec.lock
+pubspec.lock
+
+doc_files.sh
