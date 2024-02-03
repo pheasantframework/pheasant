@@ -11,7 +11,7 @@ When it comes to web development, developers are constantly looking for better w
 
 - **Fast Reload and Build Process**: The Pheasant Framework is able to work the way it does thanks to the power of the Dart Language, as it has **out-of-the-box** fast-reloading, and fast building of code. Pheasant projects can easily be made, configured and built with one-liner commands. The Framework automatically watches all files and updates the UI once a change is made, eliminating the need for external build frameworks, so you can focus on your application. Creating your projects are also much faster, as the framework doesn't use so many libraries, nor does it need to depend on `node_modules` like other similar JavaScript Frameworks.
 
-- **In-Buiilt CSS Preprocessing**: The Pheasant Framework contains in-built support for CSS Preprocessing using `sass`, as well as a simple API for **web components** and the ability to statically generate sites with in-built support for **markdown** rendering.
+- **In-Built CSS Preprocessing**: The Pheasant Framework contains in-built support for CSS Preprocessing using `sass`, as well as a simple API for **web components** and the ability to statically generate sites with in-built support for **markdown** rendering.
 
 - **Zero Virtual DOM**: The Pheasant Framework also *compiles* your code, so there is no need to ship a virtual DOM, instead all pheasant code is compiled to Dart code, with some pheasant-specific modifications, that can be injected directly into the HTML DOM. 
 
