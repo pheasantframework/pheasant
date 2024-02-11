@@ -2,9 +2,13 @@ targets:
   $default:
     builders:
       phse|pheasantMainBuilder:
-        options: 
-          sass: true 
-
+        options:
+          entry: lib/App.phs
+      phse|pheasantFileBuilder:
+        options:
+          entry: lib/App.phs
+          sass: true
+          phsComponents: true
 builders:
   pheasantMainBuilder:
     import: package:pheasant_build/src/build/builder.dart

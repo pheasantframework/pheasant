@@ -10,7 +10,7 @@ int myInt = 5;
 # You Did It!
 This is the first step you've made to making your awesome Web App with Pheasant.
 
-Edit `lib/App.phs` to get started.
+<center> Edit `lib/App.phs` to get started. </center>
 
 ## Next Steps
 Here are some next steps you can take to make the most you can out of the Pheasant Framework
@@ -21,9 +21,9 @@ The Documentation can help a lot to guide you in making the most out of the fram
 2. Play around
 You can play around with some features here.
 
-## <center>Have Fun!</center>
+## <center>Have Fun! </center>
     </md>
-    <Component />
+    <Component p-bind:number="10" />
 </div>
 </template>
 

@@ -1,10 +1,19 @@
 <script>
+import 'component.dart';
+
 List<String> myList = ["food", "feed", "fied"];
+
+@prop
+int number;
 </script>
 
 <template>
 <div>
-    <p id="like">HEHE</p>
+    <p id="like">OK!</p>
+    <div p-for="String item in myList">
+        <p>{item}</p>
+        <p>{{code}}</p>
+    </div>
 </div>
 </template>
 
