@@ -9,13 +9,15 @@ String genBuildFile(PheasantCliBaseConfig pheasantConfig, {String? projNameFromP
           '${projNameFromPubspec ?? pheasantConfig.projName}|pheasantMainBuilder': {
             'options': {
               'entry': pheasantConfig.entrypoints['app'],
+              'web': pheasantConfig.entrypoints['main'],
             }
           },
           '${projNameFromPubspec ?? pheasantConfig.projName}|pheasantFileBuilder': {
             'options': {
               'entry': pheasantConfig.entrypoints['app'],
               'sass': pheasantConfig.generalConfigs['sass'],
-              'phsComponents': pheasantConfig.generalConfigs['phsComponents']
+              'phsComponents': pheasantConfig.generalConfigs['phsComponents'],
+              'js': pheasantConfig.generalConfigs['js'],
             }
           }
         }
