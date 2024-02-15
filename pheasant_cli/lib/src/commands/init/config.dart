@@ -6,17 +6,15 @@ import 'package:yaml_edit/yaml_edit.dart';
 
 import '../general/errors.dart';
 
-Future<void> createYamlConfig(Logger logger, String proj, String projName, {Map<String, dynamic>? cliAnswers}) async {
+Future<void> createYamlConfig(Logger logger, String proj, String projName,
+    {Map<String, dynamic>? cliAnswers}) async {
   logger.trace('Setting Up Config File');
   File configFile = await File('$proj/pheasant.yaml').create();
   Map<String, dynamic> config = {
     'project': projName,
     'version': '1.0.0',
     'env': 'dart',
-    'entry': {
-      'main': 'web/main.dart',
-      'app': 'lib/App.phs'
-    },
+    'entry': {'main': 'web/main.dart', 'app': 'lib/App.phs'},
     'config': {
       'sass': cliAnswers?.values.toList()[0] ?? false,
       'js': cliAnswers?.values.toList()[1] ?? false,
@@ -32,19 +30,19 @@ Future<void> createYamlConfig(Logger logger, String proj, String projName, {Map<
   await configFile.writeAsString(yamlEditor.toString());
 }
 
-Future<void> pubspecConfig(Logger logger, String proj, Process spawn, ProcessManager manager, Progress genProgress) async {
+Future<void> pubspecConfig(Logger logger, String proj, Process spawn,
+    ProcessManager manager, Progress genProgress) async {
   logger.trace('Adding Dependencies');
-  spawn = await manager.spawnDetached(
-    'dart', ['pub', 'add', '-C', proj, 
-    'pheasant:any'
-  ]);
+  spawn = await manager
+      .spawnDetached('dart', ['pub', 'add', '-C', proj, 'pheasant:any']);
   await errorCheck(spawn, logger, genProgress);
   logger.trace('Dependencies Added');
-  
 }
 
-Future<void> analysisOptionsConfig(String projDir, String projName, {bool lint = false}) async {
-  var analysisOptions = await File('$projDir/analysis_options.yaml').readAsString();
+Future<void> analysisOptionsConfig(String projDir, String projName,
+    {bool lint = false}) async {
+  var analysisOptions =
+      await File('$projDir/analysis_options.yaml').readAsString();
   analysisOptions += '''
 analyzer:
   exclude: [build/**]

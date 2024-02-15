@@ -1,5 +1,6 @@
 String? extractExpressionInBrackets(String input) {
-  RegExp regExp = RegExp(r'\((.*?)\)'); // Regular expression to match content within parentheses
+  RegExp regExp = RegExp(
+      r'\((.*?)\)'); // Regular expression to match content within parentheses
 
   Match? match = regExp.firstMatch(input);
 

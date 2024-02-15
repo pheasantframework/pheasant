@@ -23,7 +23,6 @@ void handleArguments(List<String> arguments) {
     }
 
     handleCommand(results, argParser);
-  
   } on FormatException catch (e) {
     // Print usage information if an invalid argument was provided.
     print(e.message);

@@ -7,7 +7,8 @@ void handleCommand(ArgResults argResults, ArgParser argParser) {
   if (argResults.command == null) {
     welcome(argParser);
   }
-  if (argResults.command?.name == 'init' || argResults.command?.name == 'create') {
+  if (argResults.command?.name == 'init' ||
+      argResults.command?.name == 'create') {
     initCommand(argResults);
   }
   if (argResults.command?.name == 'doctor') {
@@ -16,7 +17,8 @@ void handleCommand(ArgResults argResults, ArgParser argParser) {
   if (argResults.command?.name == 'help') {
     helpCommand(argResults, argParser);
   }
-  if (argResults.command?.name == 'run' || argResults.command?.name == 'serve') {
+  if (argResults.command?.name == 'run' ||
+      argResults.command?.name == 'serve') {
     runCommand(argResults);
   }
   if (argResults.command?.name == 'build') {
