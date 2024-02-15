@@ -37,6 +37,7 @@ Future<void> mainProcess(ProcessManager manager, Logger logger, {String port = '
   logger.trace('Running App using Webdev');
   int log = 0;
   await Future.delayed(Duration(milliseconds: 1000));
+  
   process = await manager.spawnDetached(
     'webdev', 
     ['serve', 'web:$port', ...runOptions, ...(outputOption.isNotEmpty && output != null ? [outputOption, outputOption]: [])]
