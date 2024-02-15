@@ -6,14 +6,14 @@ import 'package:io/io.dart';
 import '../general/errors.dart';
 
 Future<void> bgProcess(ProcessManager manager, Logger logger) async {
-  var process = await manager.spawnDetached('dart', ['run', 'build_runner', 'watch'])
-  ..stdout.transform(utf8.decoder).forEach((event) {
-    if (event.contains('Succeeded')) {
-      stdout.writeln('\nBuild Succeeded');
-    }
-  });
+  var process =
+      await manager.spawnDetached('dart', ['run', 'build_runner', 'watch'])
+        ..stdout.transform(utf8.decoder).forEach((event) {
+          if (event.contains('Succeeded')) {
+            stdout.writeln('\nBuild Succeeded');
+          }
+        });
   await errorCheck(process, logger, null);
-  
 
   ProcessSignal.sigint.watch().listen((event) {
     stdout.write(styleItalic.wrap('\nExiting Web App...'));

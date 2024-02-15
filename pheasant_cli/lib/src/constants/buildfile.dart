@@ -1,18 +1,21 @@
 import 'package:pheasant_cli/src/config/config.dart';
 import 'package:yaml_edit/yaml_edit.dart';
 
-String genBuildFile(PheasantCliBaseConfig pheasantConfig, {String? projNameFromPubspec}) {
+String genBuildFile(PheasantCliBaseConfig pheasantConfig,
+    {String? projNameFromPubspec}) {
   Map<String, dynamic> buildConfig = {
     'targets': {
       r'$default': {
         'builders': {
-          '${projNameFromPubspec ?? pheasantConfig.projName}|pheasantMainBuilder': {
+          '${projNameFromPubspec ?? pheasantConfig.projName}|pheasantMainBuilder':
+              {
             'options': {
               'entry': pheasantConfig.entrypoints['app'],
               'web': pheasantConfig.entrypoints['main'],
             }
           },
-          '${projNameFromPubspec ?? pheasantConfig.projName}|pheasantFileBuilder': {
+          '${projNameFromPubspec ?? pheasantConfig.projName}|pheasantFileBuilder':
+              {
             'options': {
               'entry': pheasantConfig.entrypoints['app'],
               'sass': pheasantConfig.generalConfigs['sass'],

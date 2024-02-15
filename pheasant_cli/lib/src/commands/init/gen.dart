@@ -10,13 +10,10 @@ import 'interface.dart';
 import 'custom_file.dart';
 
 import '../general/errors.dart';
+
 Future<void> initGenerate(
-  Logger logger, 
-  ArgResults results, 
-  ProcessManager manager, 
-  String projName, {
-  bool linter = false
-}) async {
+    Logger logger, ArgResults results, ProcessManager manager, String projName,
+    {bool linter = false}) async {
   // Generate Project
   var genProgress = logger.progress('Generating Project');
   // Create directory if stated
@@ -31,7 +28,11 @@ Future<void> initGenerate(
   logger.trace('Generating base project');
   var proj = (dirPath == null ? resolvedPath : '$resolvedPath/$projName');
   var spawn = await manager.spawnDetached('dart', [
-    'create', '-t', 'web', proj, results.command!.wasParsed('force') ? '--force' : ''
+    'create',
+    '-t',
+    'web',
+    proj,
+    results.command!.wasParsed('force') ? '--force' : ''
   ]);
   // Check for errors in spawn
   await errorCheck(spawn, logger, genProgress);

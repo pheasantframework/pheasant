@@ -2,7 +2,7 @@
 const String version = '0.1.0-alpha';
 
 Map<String, String> get githubLink => {
-  'url': 'https://github.com/pheasantframework/pheasant.git',
-  'ref': 'development',
-  'path': 'pheasant',
-};
+      'url': 'https://github.com/pheasantframework/pheasant.git',
+      'ref': 'development',
+      'path': 'pheasant',
+    };

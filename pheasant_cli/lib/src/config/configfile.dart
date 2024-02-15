@@ -1,1 +1,1 @@
-enum PheasantConfigFile {yaml, json}
+enum PheasantConfigFile { yaml, json }
