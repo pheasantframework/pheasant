@@ -1,3 +1,6 @@
+## 0.1.0-beta.1
+- Added state support for deeply nested state
+
 ## 0.1.0-beta
 - Added support for state management and event handling.
 - Extended support for Custom Components
