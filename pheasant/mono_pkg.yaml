@@ -1,0 +1,10 @@
+sdk:
+ - dev
+ - pubspec
+
+stages:
+  - analyze:
+    - analyze
+    - format
+  - unit_test:
+    - test
