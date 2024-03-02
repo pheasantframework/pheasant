@@ -1,0 +1,16 @@
+github:
+  dependabot:
+    updates:
+      - package-ecosystem: "github-actions"
+        directory: "/"
+        schedule:
+          interval: "monthly"
+
+self_validate: analyze
+
+# merge_stages:
+# - analyze
+
+coverage_service:
+# https://coveralls.io/ - the default
+- coveralls
