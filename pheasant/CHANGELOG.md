@@ -1,3 +1,6 @@
+## 0.1.0-extended
+- Added Custom Components API for creating custom components and attributes
+
 ## 0.1.0-beta.1
 - Added state support for deeply nested state
 - Fixed GitHub Link
