@@ -41,20 +41,20 @@ Future<void> mainProcess(ProcessManager manager, Logger logger,
 
   logger.trace('Running App using Webdev');
   int log = 0;
-  await Future.delayed(Duration(milliseconds: 1000));
-
-  process = await manager.spawnDetached('webdev', [
+  await Future.delayed(Duration(milliseconds: 1200));
+  process = await manager.spawnBackground('webdev', [
     'serve',
     'web:$port',
     ...runOptions,
     ...(outputOption.isNotEmpty && output != null
         ? [outputOption, outputOption]
         : [])
-  ])
+  ], runInShell: true)
     ..stdout.transform(utf8.decoder).forEach((stream) {
-      if (stream.contains('WARNING') || stream.contains('SEVERE'))
+      if (stream.contains('WARNING') || stream.contains('SEVERE')) {
         logger.stdout(wrapWith(
             analyzeLog(stream), [stream.contains('WARNING') ? yellow : red])!);
+      }
       if (stream.contains('--------------') && log == 0) {
         log = 1;
         logger.trace('Web server started successfully!');

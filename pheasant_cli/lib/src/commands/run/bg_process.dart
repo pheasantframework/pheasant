@@ -6,6 +6,7 @@ import 'package:io/io.dart';
 import '../general/errors.dart';
 
 Future<void> bgProcess(ProcessManager manager, Logger logger) async {
+  // Test
   var process =
       await manager.spawnDetached('dart', ['run', 'build_runner', 'watch'])
         ..stdout.transform(utf8.decoder).forEach((event) {
