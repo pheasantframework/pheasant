@@ -19,10 +19,6 @@ Future<void> mainProcess(ProcessManager manager, Logger logger,
       runOptions.add('--$item');
       if (item == 'output' && output != null) runOptions.add(output);
     } 
-    // else if (item.contains('auto')) {
-    //   runOptions
-    //       .addAll(item.split('--').map((e) => e == 'auto' ? '--auto' : e));
-    // }
   }
   String outputOption =
       options.singleWhere((element) => element == 'output', orElse: () => "");
@@ -41,7 +37,7 @@ Future<void> mainProcess(ProcessManager manager, Logger logger,
   var webdev = logger.progress('Running Build in Web');
 
   logger.trace('Running App using Webdev');
-  int log = 0;
+  // int log = 0;
   await Future.delayed(Duration(milliseconds: 1200));
   process = await manager.spawnDetached('webdev', [
     'daemon',
@@ -52,12 +48,21 @@ Future<void> mainProcess(ProcessManager manager, Logger logger,
         : [])
   ], runInShell: true)
     ..stdout.transform(utf8.decoder).forEach((stream) {
-      if (stream.isEmpty || stream == " " || stream == "\n") {} else {
+      if (stream.isEmpty || stream == " " || stream == "\n" || !stream.contains('[') || !stream.contains(']')) {}
+      else if (stream.contains('[SEVERE]')) {
+        logger.trace(red.wrap(stream)!);
+      }
+       else {
       // logger.trace("$stream : ${stream.isEmpty} : ${stream.length} : ${stream == " "}");
       var datastream = LineSplitter().convert(stream.splitMapJoin('][', onMatch: (m) => ']\n['));
       datastream.forEach((element) {
-        final output = jsonDecode(element);
-        dynamic mainstream = output.isEmpty ? {} : output[0];
+        dynamic mainstream;
+        if (_jsondecodable(element)) {
+          final output = jsonDecode(element);
+          mainstream = output.isEmpty ? {} : output[0];
+        } else {
+          mainstream = {};
+        }
       logger.trace('Event: ${mainstream['event']}, Log: ${mainstream['params']['log']}');
       if (mainstream['event'] == "app.started" || (mainstream['params']['log'] ?? "").contains("Succeeded")) {
         logger.trace('Web server started successfully!');
@@ -78,9 +83,19 @@ Future<void> mainProcess(ProcessManager manager, Logger logger,
 
   ProcessSignal.sigint.watch().listen((event) {
     stdout.write(styleItalic.wrap('\nExiting Web App...'));
+    File('build.yaml').deleteSync();
     process.kill();
     exit(0);
   });
+}
+
+bool _jsondecodable(String element) {
+  try {
+    json.decode(element);
+  } catch (e) {
+    return false;
+  } 
+  return true;
 }
 
 void _handleWebdevServeErrors(String stream, Logger logger) {

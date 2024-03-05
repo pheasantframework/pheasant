@@ -22,7 +22,10 @@ Future<void> createYamlConfig(Logger logger, String proj, String projName,
       'formatter': cliAnswers?.values.toList()[4] ?? false,
       'phsComponents': cliAnswers?.values.toList()[2] ?? false
     },
-    'plugins': [],
+    'plugins': {
+      'main': [],
+      'dev': []
+    },
     'dependencies': []
   };
   final yamlEditor = YamlEditor('');

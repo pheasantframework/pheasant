@@ -5,7 +5,7 @@ import 'package:cli_util/cli_logging.dart';
 
 import '../run/getters/configfile.dart';
 import '../run/handle_config.dart';
-import '../run/precheck.dart';
+import '../run/prereq/precheck.dart';
 import '../../config/config.dart';
 import '../../config/configfile.dart';
 

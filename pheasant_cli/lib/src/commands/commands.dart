@@ -1,3 +1,6 @@
+// ignore_for_file: constant_identifier_names
+
+import 'dart:async';
 import 'dart:io';
 
 import 'package:args/args.dart';
@@ -6,9 +9,12 @@ import 'package:io/ansi.dart';
 import 'package:io/io.dart';
 import 'package:pubspec_parse/pubspec_parse.dart' as pub;
 
+
+import 'run/prereq/get_plugins.dart';
 import 'run/bg_process.dart';
 import 'run/main_process.dart';
-import 'init/gen.dart';
+import 'init/app/appgen.dart';
+import 'init/plugin/plugingen.dart';
 import 'init/interface.dart';
 import 'doctor/sdksearch.dart';
 import 'general/validate_project.dart';
@@ -19,7 +25,27 @@ import '../constants/buildfile.dart';
 import '../constants/clidoc.dart';
 import '../utils/src/usage.dart';
 
+enum ProjectType {
+  Application,
+  Plugin,
+  DevPlugin
+}
+
+ProjectType parseProject(String name) {
+  if (name == 'app') return ProjectType.Application;
+  if (name == 'plugin') return ProjectType.Plugin;
+  if (name == 'dev-plugin') return ProjectType.DevPlugin;
+  return ProjectType.Application;
+}
+
 void initCommand(ArgResults results) async {
+  ProjectType projectType;
+  try {
+    projectType = parseProject(results.command?['type']);
+  } catch (e) {
+    stderr.writeln(red.wrap('"type" value invalid.'));
+    exit(ExitCode.noInput.code);
+  }
   if (results.arguments.length <= 1) {
     stderr.writeln(
         red.wrap('Give a name or directory for your project to get started.'));
@@ -33,13 +59,30 @@ void initCommand(ArgResults results) async {
   final projName = (results.arguments[1].contains('-')
       ? results.arguments.last.split('/').last
       : results.arguments[1]);
-  initInterface(results);
+
+  switch (projectType) {
+    case ProjectType.Application:
+      initAppInterface(results);
+      break;
+    case ProjectType.Plugin:
+      await initPluginInterface(results);
+      break;
+    default:
+      break;
+  }
+  
   var verbose = results.wasParsed('verbose');
   var logger = verbose ? Logger.verbose() : Logger.standard();
   var manager = ProcessManager();
 
-  await initGenerate(logger, results, manager, projName,
-      linter: answers.values.toList()[3]);
+  switch (projectType) {
+    case ProjectType.Application:
+      await initAppGenerate(logger, results, manager, projName, linter: appanswers.values.toList()[3]);
+      break;
+    default:
+      await initPluginGenerate(logger, results, manager, projName, pluginanswers, linter: pluginanswers.values.toList()[3]);
+      break;
+  }
 
   logger.stdout('All ${logger.ansi.emphasized('done')}.');
   exit(0);
@@ -89,9 +132,10 @@ void runCommand(ArgResults results) async {
 
   var progress = logger.progress('Preparing Project for Build');
   File buildFile = await File('build.yaml').create();
+  await getPlugins(appConfig);
   final data = pub.Pubspec.parse(File('pubspec.yaml').readAsStringSync());
-  buildFile = await buildFile
-      .writeAsString(genBuildFile(appConfig, projNameFromPubspec: data.name));
+
+  buildFile = await buildFile.writeAsString(genBuildFile(appConfig, projNameFromPubspec: data.name));
   progress.finish(showTiming: true);
 
   await Future.wait([

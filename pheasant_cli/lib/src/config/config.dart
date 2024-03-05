@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:cli_config/cli_config.dart';
 import 'package:yaml/yaml.dart';
@@ -106,16 +107,40 @@ class PheasantDependencies {
 class PheasantPlugin {
   String name;
   String version;
+  String? source;
+  String? sourcesupp;
 
-  PheasantPlugin({required this.name, this.version = '1.0.0'});
+  PheasantPlugin({required this.name, this.version = '1.0.0', this.source, this.sourcesupp}) {
+    if (source != null && sourcesupp == null || sourcesupp == '') {
+      stderr.write("Both 'source' and supporting path/link must be provided for plugin: $name");
+      exit(1);
+    }
+  }
 
-  PheasantPlugin.fromJson(String jsonData)
-      : name = (jsonDecode(jsonData) as Map).keys.first,
-        version = (jsonDecode(jsonData) as Map).values.first['version'];
+  PheasantPlugin.fromJson(String jsonData): 
+  name = (jsonDecode(jsonData) as Map).keys.first,
+  version = (jsonDecode(jsonData) as Map).values.first['version'],
+  source = (jsonDecode(jsonData) as Map).values.first['source'],
+  sourcesupp = (jsonDecode(jsonData) as Map).values.first.values.last;
 
-  PheasantPlugin.fromMap(Map<String, dynamic> mapData)
-      : name = mapData.keys.first,
-        version = mapData.values.first['version'];
+  PheasantPlugin.fromMap(Map<String, dynamic> mapData):
+  name = mapData.keys.first,
+  version = mapData.values.first['version'],
+  source = mapData.values.first['source'],
+  sourcesupp = mapData.values.first.values.last;
+
+  String get supptype {
+    if (source == 'path') return 'path';
+    if (source == 'github') return 'git';
+    if (source == 'hosted') return 'hosted';
+    return 'unknown';
+  }
+}
+
+class PheasantDevPlugin extends PheasantPlugin {
+  PheasantDevPlugin({required super.name, super.version = '1.0.0', super.source, super.sourcesupp}) : super();
+  PheasantDevPlugin.fromJson(super.jsonData) : super.fromJson();
+  PheasantDevPlugin.fromMap(super.mapData) : super.fromMap();
 }
 
 class PheasantCliDartConfig extends PheasantCliBaseConfig {
