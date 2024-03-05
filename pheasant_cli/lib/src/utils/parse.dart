@@ -51,7 +51,15 @@ ArgParser buildPheasantParser() {
           ..addFlag('force',
               abbr: 'f',
               negatable: false,
-              help: 'Force Creation of this Project.'))
+              help: 'Force Creation of this Project.')
+          ..addOption(
+            'type',
+            abbr: 't',
+            help: 'The type of Pheasant Project to generate',
+            allowed: ['plugin', 'app'],
+            defaultsTo: 'app'
+          )
+        )
     ..addCommand(
         'create',
         ArgParser()
@@ -98,14 +106,7 @@ ArgParser buildPheasantParser() {
               abbr: 'r',
               negatable: true,
               help: 'Whether to run the release version of the application.')
-          ..addFlag('auto-restart',
-              negatable: false,
-              help:
-                  'Whether to automatically restart the "main" function during rebuild.')
-          ..addFlag('auto-refresh',
-              negatable: false,
-              help:
-                  'Whether to automatically make a full page refresh during rebuild.'))
+                  )
     ..addCommand(
         'serve',
         ArgParser()
@@ -113,12 +114,5 @@ ArgParser buildPheasantParser() {
               abbr: 'p',
               defaultsTo: '8080',
               help: 'The port to run the web app on')
-          ..addFlag('auto-restart',
-              negatable: false,
-              help:
-                  'Whether to automatically restart the "main" function during rebuild.')
-          ..addFlag('auto-refresh',
-              negatable: false,
-              help:
-                  'Whether to automatically make a full page refresh during rebuild.'));
+                  );
 }
