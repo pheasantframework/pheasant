@@ -19,5 +19,6 @@ Future<void> bgProcess(ProcessManager manager, Logger logger) async {
   ProcessSignal.sigint.watch().listen((event) {
     stdout.write(styleItalic.wrap('\nExiting Web App...'));
     process.kill();
+    File('build.yaml').deleteSync();
   });
 }
