@@ -2,12 +2,13 @@ import 'dart:io';
 
 import 'package:cli_util/cli_logging.dart';
 import 'package:io/io.dart';
+import 'package:pheasant_cli/src/config/config.dart';
 import 'package:yaml_edit/yaml_edit.dart';
 
 import '../general/errors.dart';
 
 Future<void> createYamlConfig(Logger logger, String proj, String projName,
-    {Map<String, dynamic>? cliAnswers}) async {
+    {Map<String, dynamic>? cliAnswers, AppConfig? appConfig}) async {
   logger.trace('Setting Up Config File');
   File configFile = await File('$proj/pheasant.yaml').create();
   Map<String, dynamic> config = {
@@ -23,8 +24,26 @@ Future<void> createYamlConfig(Logger logger, String proj, String projName,
       'phsComponents': cliAnswers?.values.toList()[2] ?? false
     },
     'plugins': {
-      'main': [],
-      'dev': []
+      'main': appConfig?.plugins.where((el) => el is! PheasantDevPlugin).map((e) {
+        Map<String, dynamic> plugmap = {
+          e.name: {
+            'version': e.version
+          }
+        };
+        if (e.source != null) plugmap[e.name].addAll({'source': e.source!});
+        if (e.sourcesupp != null && e.sourcesuppName != null) plugmap[e.name].addAll({e.sourcesuppName!: e.sourcesupp!});
+        return plugmap;
+      }).toList() ?? [],
+      'dev': appConfig?.plugins.whereType<PheasantDevPlugin>().map((e) {
+        Map<String, dynamic> plugmap = {
+          e.name: {
+            'version': e.version
+          }
+        };
+        if (e.source != null) plugmap[e.name].addAll({'source': e.source!});
+        if (e.sourcesupp != null && e.sourcesuppName != null) plugmap[e.name].addAll({e.sourcesuppName!: e.sourcesupp!});
+        return plugmap;
+      }).toList() ?? []
     },
     'dependencies': []
   };

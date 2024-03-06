@@ -28,6 +28,28 @@ ArgParser buildPheasantParser() {
         splitCommas: true,
         help: 'Define and/or override configuration variables')
     ..addCommand(
+      'add',
+      ArgParser()
+      ..addOption(
+        'git',
+        valueHelp: 'url',
+        help: 'Denote this is a github plugin with the repository at <url>'
+      )
+      ..addOption(
+        'path',
+        valueHelp: 'PATH',
+        help: 'Denote this is a plugin gotten from path: <PATH>'
+      )
+      ..addOption(
+        'hosted',
+        valueHelp: 'url',
+        help: 'Denote that this plugin is hosted outside pub.dev and on <url>'
+      )
+    )
+    ..addCommand(
+      'remove',
+    )
+    ..addCommand(
         'help',
         ArgParser()
           ..addFlag('detailed',

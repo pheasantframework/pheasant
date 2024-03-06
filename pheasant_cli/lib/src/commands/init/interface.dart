@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:args/args.dart';
+import 'package:cli_util/cli_logging.dart';
 import 'package:io/ansi.dart';
 
 Map<String, Type> get _appquestions => <String, Type>{
@@ -40,30 +41,24 @@ void initAppInterface(ArgResults results) {
   stdout.writeln();
 }
 
-Future<void> initPluginInterface(ArgResults results) async {
+Future<void> initPluginInterface(ArgResults results, {Logger? logger}) async {
   final pluginOptions = ["components", "state (not supported)", "app extensions (not supported)"];
   if (results.command!.wasParsed('yes')) {
     pluginanswers[pluginanswers.keys.first] = pluginOptions;
     pluginanswers[pluginanswers.keys.last] = true;
   } else {
-    _pluginquestions.forEach((key, value) async {
       final initList = ["components", "state (not supported)", "app extensions (not supported)"];
       final _initList = ["components", "state (not supported)", "app extensions (not supported)"];
-      if (value == List) {
-        var choices = await optionSelector(pluginOptions, initList, _initList, " : ", color: cyan);
-        pluginanswers[key] = choices;
+      final choices = await optionSelector(pluginOptions, initList, _initList, " : ", color: cyan);
+      pluginanswers[_pluginquestions.keys.first] = choices;
+      var key = _pluginquestions.keys.last;
+      stdout.writeAll([lightBlue.wrap(key)!, styleBold.wrap('(y/N) ')], " ");
+      final ans = stdin.readLineSync();
+      if (ans == null) {
+        pluginanswers[key] = false;
       } else {
-        stdout.writeAll(
-          [lightBlue.wrap(key)!, styleBold.wrap(value == bool ? '(y/N) ' : '')],
-          " ");
-        final ans = stdin.readLineSync();
-        if (ans == null) {
-          pluginanswers[key] = false;
-        } else {
-          pluginanswers[key] = ans == 'y';
-        }
+        pluginanswers[key] = ans == 'y';
       }
-    });
   }
   stdout.writeln();
 }
@@ -90,7 +85,8 @@ Future<Iterable<String>> optionSelector(
   int index = 1;
   List<int> coloured = [];
   late StreamSubscription<List<int>> sub;
-    sub = stdin.listen((event) {
+    var stdinbroadcast = stdin.asBroadcastStream();
+    sub = stdinbroadcast.listen((event) {
     String character = utf8.decode(event);
     if (character == '\x1B[D') {
       if (index >= 1) {
@@ -120,12 +116,12 @@ Future<Iterable<String>> optionSelector(
         }
       } ).toList();
       }
-      
       initObjects.setAll(0, objects);
       resetOptions(objects, separator);
     } else if (event.length == 1 && event[0] == 10) {
       if (!coloured.contains(index)) coloured.add(index);
       stdout.write(ending ?? "");
+      stdin.lineMode = true;
       sub.cancel();
       completer.complete(coloured.map((e) => previousInit[e]));
     }
@@ -133,5 +129,8 @@ Future<Iterable<String>> optionSelector(
       resetOptions(objects, separator);
     }
   });
-  return completer.future as Future<Iterable<String>>;
+
+  return completer.future.then<Iterable<String>>((value) {
+    return value;
+  });
 }
