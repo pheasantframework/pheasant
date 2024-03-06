@@ -9,6 +9,7 @@ import 'package:io/ansi.dart';
 import 'package:io/io.dart';
 import 'package:pheasant_cli/src/commands/add/add_plugins.dart';
 import 'package:pheasant_cli/src/commands/general/configfile.dart';
+import 'package:pheasant_cli/src/commands/remove/remove_plugins.dart';
 import 'package:pubspec_parse/pubspec_parse.dart' as pub;
 
 
@@ -185,8 +186,8 @@ void addCommand(ArgResults results) async {
   logger.trace('Parsing config file');
   AppConfig appConfig = await validateProject(logger, configArgs, plugin: true);
   logger.trace('Adding plugins');
-  addPlugins(items, gitUrl, appConfig, pathUrl, hostUrl);
-  await writeConfigToFile(appConfig);
+  AppConfig newConfig = addPlugins(items, gitUrl, appConfig, pathUrl, hostUrl);
+  await writeConfigToFile(newConfig);
   genProgress.finish(showTiming: true);
 
   logger.stdout('All ${logger.ansi.emphasized('done')}.');
@@ -203,15 +204,7 @@ void removeCommand(ArgResults results) async {
   var genProgress = logger.progress('Removing Plugins');
   logger.trace('Parsing config file');
   AppConfig appConfig = await validateProject(logger, configArgs, plugin: true);
-  if (appConfig.plugins.where((element) => plugins.contains(element.name)).isNotEmpty) {
-    for (var el in plugins) {
-      appConfig.plugins.removeWhere((element) => element.name == el);
-    }
-  } else if (appConfig.devPlugins.where((element) => plugins.contains(element.name)).isNotEmpty) {
-    for (var el in plugins) {
-      appConfig.devPlugins.removeWhere((element) => element.name == el);
-    }
-  }
+  removePlugins(appConfig, plugins);
   await writeConfigToFile(appConfig);
 
   genProgress.finish(showTiming: true);
