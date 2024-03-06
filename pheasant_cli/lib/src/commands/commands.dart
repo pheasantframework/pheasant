@@ -7,6 +7,8 @@ import 'package:args/args.dart';
 import 'package:cli_util/cli_logging.dart';
 import 'package:io/ansi.dart';
 import 'package:io/io.dart';
+import 'package:pheasant_cli/src/commands/add/add_plugins.dart';
+import 'package:pheasant_cli/src/commands/general/configfile.dart';
 import 'package:pubspec_parse/pubspec_parse.dart' as pub;
 
 
@@ -73,14 +75,16 @@ void initCommand(ArgResults results) async {
   
   var verbose = results.wasParsed('verbose');
   var logger = verbose ? Logger.verbose() : Logger.standard();
-  var manager = ProcessManager();
+  var manager = ProcessManager(stdin: stdin);
 
   switch (projectType) {
     case ProjectType.Application:
       await initAppGenerate(logger, results, manager, projName, linter: appanswers.values.toList()[3]);
       break;
+    case ProjectType.Plugin:
+      await initPluginGenerate(logger, results, manager, projName, pluginanswers);
+      break;
     default:
-      await initPluginGenerate(logger, results, manager, projName, pluginanswers, linter: pluginanswers.values.toList()[3]);
       break;
   }
 
@@ -132,7 +136,9 @@ void runCommand(ArgResults results) async {
 
   var progress = logger.progress('Preparing Project for Build');
   File buildFile = await File('build.yaml').create();
-  await getPlugins(appConfig);
+  if (!(appConfig.plugins.isEmpty && appConfig.devPlugins.isEmpty)) {
+    await getPlugins(appConfig, logger: logger);
+  }
   final data = pub.Pubspec.parse(File('pubspec.yaml').readAsStringSync());
 
   buildFile = await buildFile.writeAsString(genBuildFile(appConfig, projNameFromPubspec: data.name));
@@ -162,5 +168,55 @@ void buildCommand(ArgResults results) async {
 
   logger.stdout('All ${logger.ansi.emphasized('done')}.\n');
   logger.stdout('Build Written to ${results.command!['output'] ?? 'build'}/');
+  exit(0);
+}
+
+void addCommand(ArgResults results) async {
+  List<String> configArgs = results.wasParsed('define') ? results['define'] : [];
+  var verbose = results.wasParsed('verbose');
+  var logger = verbose ? Logger.verbose() : Logger.standard();
+  List<String> plugins = results.command!.arguments.where((element) => !element.contains('-')).toList();
+  String? gitUrl = results.command!['git'];
+  String? pathUrl = results.command!['path'];
+  String? hostUrl = results.command!['hosted'];
+
+  Iterable<List<String>> items = plugins.map((e) => e.split(':'));
+  var genProgress = logger.progress("Adding plugin(s) to 'pheasant.yaml' file");
+  logger.trace('Parsing config file');
+  AppConfig appConfig = await validateProject(logger, configArgs, plugin: true);
+  logger.trace('Adding plugins');
+  addPlugins(items, gitUrl, appConfig, pathUrl, hostUrl);
+  await writeConfigToFile(appConfig);
+  genProgress.finish(showTiming: true);
+
+  logger.stdout('All ${logger.ansi.emphasized('done')}.');
+  logger.stdout('The following plugins were added: ${logger.ansi.emphasized(plugins.join(' '))}');
+  exit(0);
+}
+
+void removeCommand(ArgResults results) async {
+  List<String> configArgs = results.wasParsed('define') ? results['define'] : [];
+  var verbose = results.wasParsed('verbose');
+  var logger = verbose ? Logger.verbose() : Logger.standard();
+  List<String> plugins = results.command!.arguments.where((element) => !element.contains('-')).toList();
+
+  var genProgress = logger.progress('Removing Plugins');
+  logger.trace('Parsing config file');
+  AppConfig appConfig = await validateProject(logger, configArgs, plugin: true);
+  if (appConfig.plugins.where((element) => plugins.contains(element.name)).isNotEmpty) {
+    for (var el in plugins) {
+      appConfig.plugins.removeWhere((element) => element.name == el);
+    }
+  } else if (appConfig.devPlugins.where((element) => plugins.contains(element.name)).isNotEmpty) {
+    for (var el in plugins) {
+      appConfig.devPlugins.removeWhere((element) => element.name == el);
+    }
+  }
+  await writeConfigToFile(appConfig);
+
+  genProgress.finish(showTiming: true);
+
+  logger.stdout('All ${logger.ansi.emphasized('done')}.');
+  logger.stdout('The following plugins were removed: ${logger.ansi.emphasized(plugins.join(' '))}');
   exit(0);
 }
