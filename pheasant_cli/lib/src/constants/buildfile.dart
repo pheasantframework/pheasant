@@ -1,8 +1,10 @@
+import 'package:cli_util/cli_logging.dart';
 import 'package:pheasant_cli/src/config/config.dart';
 import 'package:yaml_edit/yaml_edit.dart';
 
 String genBuildFile(PheasantCliBaseConfig pheasantConfig,
-    {String? projNameFromPubspec}) {
+    {String? projNameFromPubspec, Logger? logger}) {
+      logger?.trace('Generating Build Files');
   Map<String, dynamic> buildConfig = {
     'targets': {
       r'$default': {
@@ -10,14 +12,14 @@ String genBuildFile(PheasantCliBaseConfig pheasantConfig,
           '${projNameFromPubspec ?? pheasantConfig.projName}|pheasantMainBuilder':
               {
             'options': {
-              'entry': pheasantConfig.entrypoints['app'],
-              'web': pheasantConfig.entrypoints['main'],
+              'entry': pheasantConfig.entrypoints?['app'],
+              'web': pheasantConfig.entrypoints?['main'],
             }
           },
           '${projNameFromPubspec ?? pheasantConfig.projName}|pheasantFileBuilder':
               {
             'options': {
-              'entry': pheasantConfig.entrypoints['app'],
+              'entry': pheasantConfig.entrypoints!['app'],
               'sass': pheasantConfig.generalConfigs['sass'],
               'phsComponents': pheasantConfig.generalConfigs['phsComponents'],
               'js': pheasantConfig.generalConfigs['js'],

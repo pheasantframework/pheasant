@@ -2,17 +2,16 @@ import 'dart:async';
 import 'dart:io';
 import 'package:args/args.dart';
 import 'package:cli_util/cli_logging.dart';
-import 'package:io/ansi.dart';
 import 'package:io/io.dart';
 import 'package:path/path.dart';
-import 'package:pheasant_cli/src/commands/general/errors.dart';
-import 'package:pheasant_cli/src/commands/init/app/appgen.dart';
-import 'package:pheasant_cli/src/commands/init/interface.dart';
 
+import 'pluginconfig.dart';
+import '../../general/errors.dart';
+import '../app/appgen.dart';
 import '../config.dart';
 
 
-FutureOr<void> initPluginGenerate(Logger logger, ArgResults results, ProcessManager manager, String projName, Map<String, dynamic> pluginanswers, {required linter}) async {
+FutureOr<void> initPluginGenerate(Logger logger, ArgResults results, ProcessManager manager, String projName, Map<String, dynamic> pluginanswers) async {
   final baseProject = await baseGeneration(logger, results, projName, manager);
   var proj = baseProject.proj;
   var spawn = baseProject.process;
@@ -22,12 +21,34 @@ FutureOr<void> initPluginGenerate(Logger logger, ArgResults results, ProcessMana
   await pubspecConfig(logger, proj, spawn, manager, genProgress);
   genProgress.finish(showTiming: true);
 
-  await fileGenConfig(logger, projName, proj, resolvedPath, filesRef: pluginanswers);
+  await fileGenConfig(logger, projName, proj, resolvedPath, manager, filesRef: pluginanswers, results: results);
 
   // Configure pheasant.yaml file
-  await createYamlConfig(logger, proj, projName, cliAnswers: pluginanswers);
+  await createYamlConfig(logger, proj, projName);
+
+  await _makeYamlPlugin(proj);
 
   genProgress.finish(showTiming: true);
+}
+
+Future<void> _makeYamlPlugin(String proj) async {
+  String pheasantYamlRerender = '''
+project: nini
+version: 1.0.0
+env: dart
+type: plugin
+config:
+  sass: false
+  js: false
+  linter: false
+  formatter: false
+  phsComponents: false
+plugins:
+  main: []
+  dev: []
+dependencies: []
+''';
+  await File('$proj/pheasant.yaml').writeAsString(pheasantYamlRerender);
 }
 
 Future<ProjGenClass> baseGeneration(Logger logger, ArgResults results, String projName, ProcessManager manager) async {
@@ -61,45 +82,4 @@ Future<ProjGenClass> baseGeneration(Logger logger, ArgResults results, String pr
     proj: proj,
     process: spawn
   );
-}
-
-Future<void> fileGenConfig(Logger logger, String projName, String proj, String resolvedPath, {required Map<String, dynamic> filesRef}) async {
-  List<String> answers = pluginanswers.values.first;
-  if (answers.isEmpty) {
-    stderr.writeln(wrapWith('You must provide one plugin type to create', [red, styleBold]));
-    exit(1);
-  } else if (answers.where((element) => element.contains("components")).isEmpty) {
-    stderr.writeln(wrapWith('Sorry, but the plugin types: ${answers.join(", ")}, are not supported yet. Please check the Pheasant Framework on pub.dev for any updates.', [green]));
-    exit(0);
-  } else {
-    if (answers.where((element) => element.contains("(not supported)")).isNotEmpty) {
-      stderr.writeln(wrapWith('Sorry, but the plugin types: ${answers.join(", ")}, are not supported yet. Please check the Pheasant Framework on pub.dev for any updates.', [green]));
-    }
-  }
-
-  String mainFilePlaceholder = '''
-import 'package:pheasant/custom.dart';
-
-/// This is the name of your plugin component.
-/// 
-/// Change this, or make a function to call the constructor in order to change the name of the component when rendered
-/// 
-/// For more guidelines on making your custom component check: https://github.com/pheasantframework/pheasant/blob/patch/docs/custom/components.md
-class PlaceholderPlugin extends PheasantComponent {
-  // You can add attribute definitions as well to your component
-
-  // This function must always be overriden to provide the element.
-  @override
-  Element renderComponent([TemplateState? state]) {
-    return ParagraphElement()..text = "Hello World!";
-  }
-}
-
-// You can add more components, but it is recommended to export them all into one file for ease of access by the framework renderer.
-''';
-  File componentfile = await File('$proj/lib/components.dart').create(recursive: true);
-  await componentfile.writeAsString(mainFilePlaceholder);
-
-  await Directory('$proj/example').delete();
-  
 }
