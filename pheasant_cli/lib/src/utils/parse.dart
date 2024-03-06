@@ -28,6 +28,23 @@ ArgParser buildPheasantParser() {
         splitCommas: true,
         help: 'Define and/or override configuration variables')
     ..addCommand(
+        'add',
+        ArgParser()
+          ..addOption('git',
+              valueHelp: 'url',
+              help:
+                  'Denote this is a github plugin with the repository at <url>')
+          ..addOption('path',
+              valueHelp: 'PATH',
+              help: 'Denote this is a plugin gotten from path: <PATH>')
+          ..addOption('hosted',
+              valueHelp: 'url',
+              help:
+                  'Denote that this plugin is hosted outside pub.dev and on <url>'))
+    ..addCommand(
+      'remove',
+    )
+    ..addCommand(
         'help',
         ArgParser()
           ..addFlag('detailed',
@@ -51,7 +68,12 @@ ArgParser buildPheasantParser() {
           ..addFlag('force',
               abbr: 'f',
               negatable: false,
-              help: 'Force Creation of this Project.'))
+              help: 'Force Creation of this Project.')
+          ..addOption('type',
+              abbr: 't',
+              help: 'The type of Pheasant Project to generate',
+              allowed: ['plugin', 'app'],
+              defaultsTo: 'app'))
     ..addCommand(
         'create',
         ArgParser()
@@ -97,28 +119,12 @@ ArgParser buildPheasantParser() {
           ..addFlag('release',
               abbr: 'r',
               negatable: true,
-              help: 'Whether to run the release version of the application.')
-          ..addFlag('auto-restart',
-              negatable: false,
-              help:
-                  'Whether to automatically restart the "main" function during rebuild.')
-          ..addFlag('auto-refresh',
-              negatable: false,
-              help:
-                  'Whether to automatically make a full page refresh during rebuild.'))
+              help: 'Whether to run the release version of the application.'))
     ..addCommand(
         'serve',
         ArgParser()
           ..addOption('port',
               abbr: 'p',
               defaultsTo: '8080',
-              help: 'The port to run the web app on')
-          ..addFlag('auto-restart',
-              negatable: false,
-              help:
-                  'Whether to automatically restart the "main" function during rebuild.')
-          ..addFlag('auto-refresh',
-              negatable: false,
-              help:
-                  'Whether to automatically make a full page refresh during rebuild.'));
+              help: 'The port to run the web app on'));
 }

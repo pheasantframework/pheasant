@@ -7,7 +7,8 @@ Map<String, String> get cmdInfo => {
       'run': 'Run a project from the server',
       'serve': 'Alias for "run"',
       'build': 'Build a project for deployment',
-      'test': 'Run tests for the pheasant project'
+      'test': 'Run tests for the pheasant project',
+      'add': 'Add Plugins/Dependencies to your project'
     };
 
 Map<String, String> get cmdDetailed => {

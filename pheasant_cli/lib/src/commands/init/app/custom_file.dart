@@ -10,6 +10,7 @@ Future<void> componentFileConfig(
 import 'package:pheasant/pheasant.dart';
 
 // File will be generated.
+// ignore: uri_does_not_exist
 import 'package:$projName/main.phs.dart';
 
 void main() {

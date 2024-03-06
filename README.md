@@ -1,6 +1,7 @@
 # <center><div style="color:gold">Pheasant</div></center>
 
-![Pub Version](https://img.shields.io/pub/v/pheasant?labelColor=rgb(245%2C%20193%2C%2066)&link=https%3A%2F%2Fpub.dev%2Fpackages%2Fpheasant)  ![Pub Publisher](https://img.shields.io/pub/publisher/pheasant?labelColor=rgb(245%2C%20193%2C%2066)&link=https%3A%2F%2Fpub.dev%2Fpackages%2Fpheasant)
+![Pub Version](https://img.shields.io/pub/v/pheasant?labelColor=rgb(245%2C%20193%2C%2066)&link=https%3A%2F%2Fpub.dev%2Fpackages%2Fpheasant)  ![Pub Publisher](https://img.shields.io/pub/publisher/pheasant?labelColor=rgb(245%2C%20193%2C%2066)&link=https%3A%2F%2Fpub.dev%2Fpackages%2Fpheasant) ![GitHub License](https://img.shields.io/github/license/pheasantframework/pheasant?labelColor=rgb(245%2C%20193%2C%2066))
+
 
 Pheasant is a modern-day, progressive, fast-reload, powerful frontend web framework and platform written, and operated with in the [Dart Language](https://dart.dev), with support for JavaScript. It grants all the features of modern web development (Web Components, HTML Rendering and more) with the dynamic power of Dart.
 

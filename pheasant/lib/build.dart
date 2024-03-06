@@ -4,5 +4,13 @@
 library build;
 
 export 'package:pheasant_temp/pheasant_build.dart'
-    show PheasantTemplate, TemplateState, ChangeWatcher, ElementChangeWatcher, AppState, Prop, prop, noprop;
+    show
+        PheasantTemplate,
+        TemplateState,
+        ChangeWatcher,
+        ElementChangeWatcher,
+        AppState,
+        Prop,
+        prop,
+        noprop;
 export 'package:html/parser.dart' show parse, parseFragment;

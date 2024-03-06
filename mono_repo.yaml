@@ -8,9 +8,6 @@ github:
 
 self_validate: analyze
 
-# merge_stages:
-# - analyze
-
 coverage_service:
-# https://coveralls.io/ - the default
+
 - coveralls

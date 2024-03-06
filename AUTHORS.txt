@@ -2,6 +2,4 @@
 # Pheasant Framework. Names should be added to the list like so:
 #
 # Name - Organization - <email address>
-
-NIMA - The Pheasant Group - <>
 Nikechukwu Okoronkwo - Private - <nikechukwu@gmail.com>

@@ -1,14 +1,22 @@
+// ignore_for_file: constant_identifier_names
+
+import 'dart:async';
 import 'dart:io';
 
 import 'package:args/args.dart';
 import 'package:cli_util/cli_logging.dart';
 import 'package:io/ansi.dart';
 import 'package:io/io.dart';
+import 'package:pheasant_cli/src/commands/add/add_plugins.dart';
+import 'package:pheasant_cli/src/commands/general/configfile.dart';
+import 'package:pheasant_cli/src/commands/remove/remove_plugins.dart';
 import 'package:pubspec_parse/pubspec_parse.dart' as pub;
 
+import 'run/prereq/get_plugins.dart';
 import 'run/bg_process.dart';
 import 'run/main_process.dart';
-import 'init/gen.dart';
+import 'init/app/appgen.dart';
+import 'init/plugin/plugingen.dart';
 import 'init/interface.dart';
 import 'doctor/sdksearch.dart';
 import 'general/validate_project.dart';
@@ -19,7 +27,23 @@ import '../constants/buildfile.dart';
 import '../constants/clidoc.dart';
 import '../utils/src/usage.dart';
 
+enum ProjectType { Application, Plugin, DevPlugin }
+
+ProjectType parseProject(String name) {
+  if (name == 'app') return ProjectType.Application;
+  if (name == 'plugin') return ProjectType.Plugin;
+  if (name == 'dev-plugin') return ProjectType.DevPlugin;
+  return ProjectType.Application;
+}
+
 void initCommand(ArgResults results) async {
+  ProjectType projectType;
+  try {
+    projectType = parseProject(results.command?['type']);
+  } catch (e) {
+    stderr.writeln(red.wrap('"type" value invalid.'));
+    exit(ExitCode.noInput.code);
+  }
   if (results.arguments.length <= 1) {
     stderr.writeln(
         red.wrap('Give a name or directory for your project to get started.'));
@@ -33,13 +57,34 @@ void initCommand(ArgResults results) async {
   final projName = (results.arguments[1].contains('-')
       ? results.arguments.last.split('/').last
       : results.arguments[1]);
-  initInterface(results);
+
+  switch (projectType) {
+    case ProjectType.Application:
+      initAppInterface(results);
+      break;
+    case ProjectType.Plugin:
+      await initPluginInterface(results);
+      break;
+    default:
+      break;
+  }
+
   var verbose = results.wasParsed('verbose');
   var logger = verbose ? Logger.verbose() : Logger.standard();
-  var manager = ProcessManager();
+  var manager = ProcessManager(stdin: stdin);
 
-  await initGenerate(logger, results, manager, projName,
-      linter: answers.values.toList()[3]);
+  switch (projectType) {
+    case ProjectType.Application:
+      await initAppGenerate(logger, results, manager, projName,
+          linter: appanswers.values.toList()[3]);
+      break;
+    case ProjectType.Plugin:
+      await initPluginGenerate(
+          logger, results, manager, projName, pluginanswers);
+      break;
+    default:
+      break;
+  }
 
   logger.stdout('All ${logger.ansi.emphasized('done')}.');
   exit(0);
@@ -89,7 +134,11 @@ void runCommand(ArgResults results) async {
 
   var progress = logger.progress('Preparing Project for Build');
   File buildFile = await File('build.yaml').create();
+  if (!(appConfig.plugins.isEmpty && appConfig.devPlugins.isEmpty)) {
+    await getPlugins(appConfig, logger: logger);
+  }
   final data = pub.Pubspec.parse(File('pubspec.yaml').readAsStringSync());
+
   buildFile = await buildFile
       .writeAsString(genBuildFile(appConfig, projNameFromPubspec: data.name));
   progress.finish(showTiming: true);
@@ -118,5 +167,57 @@ void buildCommand(ArgResults results) async {
 
   logger.stdout('All ${logger.ansi.emphasized('done')}.\n');
   logger.stdout('Build Written to ${results.command!['output'] ?? 'build'}/');
+  exit(0);
+}
+
+void addCommand(ArgResults results) async {
+  List<String> configArgs =
+      results.wasParsed('define') ? results['define'] : [];
+  var verbose = results.wasParsed('verbose');
+  var logger = verbose ? Logger.verbose() : Logger.standard();
+  List<String> plugins = results.command!.arguments
+      .where((element) => !element.contains('-'))
+      .toList();
+  String? gitUrl = results.command!['git'];
+  String? pathUrl = results.command!['path'];
+  String? hostUrl = results.command!['hosted'];
+
+  Iterable<List<String>> items = plugins.map((e) => e.split(':'));
+  var genProgress = logger.progress("Adding plugin(s) to 'pheasant.yaml' file");
+  logger.stdout('\n');
+  logger.trace('Parsing config file');
+  AppConfig appConfig = await validateProject(logger, configArgs, plugin: true);
+  logger.trace('Adding plugins');
+  AppConfig newConfig = addPlugins(items, gitUrl, appConfig, pathUrl, hostUrl);
+  await writeConfigToFile(newConfig);
+  genProgress.finish(showTiming: true);
+
+  logger.stdout('All ${logger.ansi.emphasized('done')}.');
+  logger.stdout(
+      'The following plugins were added: ${logger.ansi.emphasized(plugins.join(' '))}');
+  exit(0);
+}
+
+void removeCommand(ArgResults results) async {
+  List<String> configArgs =
+      results.wasParsed('define') ? results['define'] : [];
+  var verbose = results.wasParsed('verbose');
+  var logger = verbose ? Logger.verbose() : Logger.standard();
+  List<String> plugins = results.command!.arguments
+      .where((element) => !element.contains('-'))
+      .toList();
+
+  var genProgress = logger.progress('Removing Plugins');
+  logger.stdout('\n');
+  logger.trace('Parsing config file');
+  AppConfig appConfig = await validateProject(logger, configArgs, plugin: true);
+  removePlugins(appConfig, plugins);
+  await writeConfigToFile(appConfig);
+
+  genProgress.finish(showTiming: true);
+
+  logger.stdout('All ${logger.ansi.emphasized('done')}.');
+  logger.stdout(
+      'The following plugins were removed: ${logger.ansi.emphasized(plugins.join(' '))}');
   exit(0);
 }

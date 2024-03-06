@@ -1,0 +1,3 @@
+example/*.html linguist-vendored
+example/*.scss linguist-vendored
+example/*.css linguist-vendored
