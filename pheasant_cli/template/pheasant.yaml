@@ -13,14 +13,14 @@ config:
 plugins: 
   main: 
     - pheasant_router: 
-        version: ^0.1.0
-        source: path
-        path: ../path/to/dir
+      version: ^0.1.0
+      source: path
+      path: ../path/to/dir
     - pheasantjs_ext:
-        version: any
-        source: github
-        url: https://github.com/username/repo
+      version: any
+      source: git
+      url: https://github.com/username/repo
     - pheasant_tests:
-        version: latest
+      version: latest
   dev: []
 dependencies: []
