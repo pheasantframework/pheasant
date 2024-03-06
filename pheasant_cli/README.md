@@ -1,4 +1,4 @@
-# The Pheasant Framework Command Line Interface
+# The Pheasant Framework CLI
 This is the package for the Pheasant Command Line Interface Application. 
 
 `pheasant` is a cli tool for creating, testing, running and working on pheasant applications. With this tool, you can quickly get started with creating your pheasant projects with ease.
