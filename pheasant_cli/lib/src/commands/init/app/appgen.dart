@@ -14,9 +14,13 @@ import '../../general/errors.dart';
 
 Future<void> initAppGenerate(
     Logger logger, ArgResults results, ProcessManager manager, String projName,
-    {bool linter = false, AppConfig? config, String? projPath, bool plugin = false}) async {
+    {bool linter = false,
+    AppConfig? config,
+    String? projPath,
+    bool plugin = false}) async {
   // Generate Project
-  final baseProject = await baseGeneration(logger, results, projName, manager, projPath: projPath);
+  final baseProject = await baseGeneration(logger, results, projName, manager,
+      projPath: projPath);
   var proj = baseProject.proj;
   var spawn = baseProject.process;
   var genProgress = baseProject.progress;
@@ -31,7 +35,8 @@ Future<void> initAppGenerate(
   await componentFileConfig(logger, projName, proj, resolvedPath);
 
   // Configure pheasant.yaml file
-  await createYamlConfig(logger, proj, projName, cliAnswers: plugin ? null : appanswers, appConfig: config);
+  await createYamlConfig(logger, proj, projName,
+      cliAnswers: plugin ? null : appanswers, appConfig: config);
 
   await analysisOptionsConfig(proj, projName, lint: linter);
 
@@ -40,13 +45,13 @@ Future<void> initAppGenerate(
 
 class ProjGenClass {
   Logger logger;
-  
+
   Progress progress;
-  
+
   String proj;
-  
+
   String path;
-  
+
   Process process;
 
   ProjGenClass({
@@ -58,7 +63,9 @@ class ProjGenClass {
   });
 }
 
-Future<ProjGenClass> baseGeneration(Logger logger, ArgResults results, String projName, ProcessManager manager,{String? projPath}) async {
+Future<ProjGenClass> baseGeneration(
+    Logger logger, ArgResults results, String projName, ProcessManager manager,
+    {String? projPath}) async {
   var genProgress = logger.progress('Generating Project');
   // Create directory if stated
   final dirPath = results.command?['directory'];
@@ -70,7 +77,9 @@ Future<ProjGenClass> baseGeneration(Logger logger, ArgResults results, String pr
 
   // Create base project
   logger.trace('Generating base project');
-  var proj = (dirPath == null ? resolvedPath : '$resolvedPath/${projPath ?? projName}');
+  var proj = (dirPath == null
+      ? resolvedPath
+      : '$resolvedPath/${projPath ?? projName}');
   var spawn = await manager.spawnDetached('dart', [
     'create',
     '-t',
@@ -83,10 +92,9 @@ Future<ProjGenClass> baseGeneration(Logger logger, ArgResults results, String pr
   logger.trace('Base Project Generated');
 
   return ProjGenClass(
-    logger: logger,
-    progress: genProgress,
-    path: resolvedPath,
-    proj: proj,
-    process: spawn
-  );
+      logger: logger,
+      progress: genProgress,
+      path: resolvedPath,
+      proj: proj,
+      process: spawn);
 }

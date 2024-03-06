@@ -5,14 +5,15 @@ import 'package:cli_util/cli_logging.dart';
 import 'package:io/ansi.dart';
 import 'package:pheasant_cli/src/config/config.dart';
 
-Future<String> _getPluginNames(PheasantPlugin element, List<dynamic> errors) async {
-   String name = element.name;
+Future<String> _getPluginNames(
+    PheasantPlugin element, List<dynamic> errors) async {
+  String name = element.name;
   if (element is PheasantDevPlugin) {
     name = 'dev:$name';
   }
   if (element.source == null) {
-    if (element.version == 'latest') {} 
-    else if (element.version == 'any') {
+    if (element.version == 'latest') {
+    } else if (element.version == 'any') {
       name = '$name:any';
     } else {
       name = '$name:${element.version}';
@@ -43,13 +44,18 @@ Future<void> getPlugins(AppConfig appConfig, {Logger? logger}) async {
   final pluginstrings = _getpluginstrings(appConfig, errors);
   logger?.trace('Retrieving Plugins');
   if (pluginstrings.isNotEmpty) {
-    final pubprocess = await Process.run('dart', ['pub', 'add', ...pluginstrings], stderrEncoding: utf8, stdoutEncoding: utf8);
+    final pubprocess = await Process.run(
+        'dart', ['pub', 'add', ...pluginstrings],
+        stderrEncoding: utf8, stdoutEncoding: utf8);
     if (pubprocess.stderr != null && pubprocess.stderr.toString().isNotEmpty) {
       errors.add(pubprocess.stderr);
     }
   }
   if (errors.isNotEmpty) {
-    stderr.writeAll([wrapWith("Errors retrieving plugin packages: ", [red, styleBold]), ...errors.map((e) => styleBold.wrap(e))], " ");
+    stderr.writeAll([
+      wrapWith("Errors retrieving plugin packages: ", [red, styleBold]),
+      ...errors.map((e) => styleBold.wrap(e))
+    ], " ");
     exit(1);
   }
   logger?.trace('Plugins Gotten');

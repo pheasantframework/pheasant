@@ -12,7 +12,11 @@ Future<void> writeConfigToFile(AppConfig appConfig) async {
   yamlEditor.update([], yamlMap);
   bool exist = File('./pheasant.yaml').existsSync();
   if (!exist) {
-    stderr.writeln(red.wrap("\nError: ${wrapWith("The 'pheasant.yaml' file doesn't exist", [white, styleBold])}"));
+    stderr.writeln(red.wrap(
+        "\nError: ${wrapWith("The 'pheasant.yaml' file doesn't exist", [
+          white,
+          styleBold
+        ])}"));
     exit(2);
   }
   await File('./pheasant.yaml').writeAsString(yamlEditor.toString());

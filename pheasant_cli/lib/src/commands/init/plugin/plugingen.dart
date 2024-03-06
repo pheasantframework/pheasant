@@ -10,8 +10,12 @@ import '../../general/errors.dart';
 import '../app/appgen.dart';
 import '../config.dart';
 
-
-FutureOr<void> initPluginGenerate(Logger logger, ArgResults results, ProcessManager manager, String projName, Map<String, dynamic> pluginanswers) async {
+FutureOr<void> initPluginGenerate(
+    Logger logger,
+    ArgResults results,
+    ProcessManager manager,
+    String projName,
+    Map<String, dynamic> pluginanswers) async {
   final baseProject = await baseGeneration(logger, results, projName, manager);
   var proj = baseProject.proj;
   var spawn = baseProject.process;
@@ -21,7 +25,8 @@ FutureOr<void> initPluginGenerate(Logger logger, ArgResults results, ProcessMana
   await pubspecConfig(logger, proj, spawn, manager, genProgress);
   genProgress.finish(showTiming: true);
 
-  await fileGenConfig(logger, projName, proj, resolvedPath, manager, filesRef: pluginanswers, results: results);
+  await fileGenConfig(logger, projName, proj, resolvedPath, manager,
+      filesRef: pluginanswers, results: results);
 
   // Configure pheasant.yaml file
   await createYamlConfig(logger, proj, projName);
@@ -51,7 +56,8 @@ dependencies: []
   await File('$proj/pheasant.yaml').writeAsString(pheasantYamlRerender);
 }
 
-Future<ProjGenClass> baseGeneration(Logger logger, ArgResults results, String projName, ProcessManager manager) async {
+Future<ProjGenClass> baseGeneration(Logger logger, ArgResults results,
+    String projName, ProcessManager manager) async {
   var genProgress = logger.progress('Generating Project');
   // Create directory if stated
   final dirPath = results.command?['directory'];
@@ -76,10 +82,9 @@ Future<ProjGenClass> baseGeneration(Logger logger, ArgResults results, String pr
   logger.trace('Base Project Generated');
 
   return ProjGenClass(
-    logger: logger,
-    progress: genProgress,
-    path: resolvedPath,
-    proj: proj,
-    process: spawn
-  );
+      logger: logger,
+      progress: genProgress,
+      path: resolvedPath,
+      proj: proj,
+      process: spawn);
 }

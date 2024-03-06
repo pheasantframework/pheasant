@@ -9,18 +9,30 @@ import 'package:pheasant_cli/src/commands/init/app/appgen.dart';
 import 'package:pheasant_cli/src/commands/init/interface.dart';
 import 'package:pheasant_cli/src/config/config.dart';
 
-Future<void> fileGenConfig(Logger logger, String projName, String proj, String resolvedPath, ProcessManager manager, {required Map<String, dynamic> filesRef, required ArgResults results}) async {
+Future<void> fileGenConfig(Logger logger, String projName, String proj,
+    String resolvedPath, ProcessManager manager,
+    {required Map<String, dynamic> filesRef,
+    required ArgResults results}) async {
   var genProgress = logger.progress('Validating Options');
   Iterable answers = pluginanswers.values.first.toList();
   if (answers.isEmpty) {
-    stderr.writeln(wrapWith('\nYou must provide one plugin type to create', [red, styleBold]));
+    stderr.writeln(wrapWith(
+        '\nYou must provide one plugin type to create', [red, styleBold]));
     exit(1);
-  } else if (answers.where((element) => element.contains("components")).isEmpty) {
-    stderr.writeln(wrapWith('\nSorry, but the plugin types: ${answers.join(", ")}, are not supported yet. Please check the Pheasant Framework on pub.dev for any updates.', [green]));
+  } else if (answers
+      .where((element) => element.contains("components"))
+      .isEmpty) {
+    stderr.writeln(wrapWith(
+        '\nSorry, but the plugin types: ${answers.join(", ")}, are not supported yet. Please check the Pheasant Framework on pub.dev for any updates.',
+        [green]));
     exit(0);
   } else {
-    if (answers.where((element) => element.contains("(not supported)")).isNotEmpty) {
-      stderr.writeln(wrapWith('\nSorry, but the plugin types: ${answers.where((element) => element.contains("(not supported)")).join(", ")}, are not supported yet. Please check the Pheasant Framework on pub.dev for any updates.', [green]));
+    if (answers
+        .where((element) => element.contains("(not supported)"))
+        .isNotEmpty) {
+      stderr.writeln(wrapWith(
+          '\nSorry, but the plugin types: ${answers.where((element) => element.contains("(not supported)")).join(", ")}, are not supported yet. Please check the Pheasant Framework on pub.dev for any updates.',
+          [green]));
     }
   }
   genProgress.finish(showTiming: true);
@@ -45,13 +57,24 @@ class PlaceholderPlugin extends PheasantComponent {
 // You can add more components, but it is recommended to export them all into one file for ease of access by the framework renderer.
 ''';
   genProgress = logger.progress('Writing Project');
-  File componentfile = await File('$proj/lib/components.dart').create(recursive: true);
+  File componentfile =
+      await File('$proj/lib/components.dart').create(recursive: true);
   File('$proj/pheasant.plugin').create(recursive: true);
   await componentfile.writeAsString(mainFilePlaceholder);
 
   logger.trace('Generating Example Implementation');
   await Directory('$proj/example').delete(recursive: true);
-  await initAppGenerate(logger, results, manager, 'example',  projPath: '$projName/example', plugin: true, config: PheasantCliBaseConfig(plugins: [PheasantPlugin(name: projName, source: 'path', sourcesupp: '..', sourcesuppName: 'path')].toList()));
+  await initAppGenerate(logger, results, manager, 'example',
+      projPath: '$projName/example',
+      plugin: true,
+      config: PheasantCliBaseConfig(
+          plugins: [
+        PheasantPlugin(
+            name: projName,
+            source: 'path',
+            sourcesupp: '..',
+            sourcesuppName: 'path')
+      ].toList()));
 
   String phsReplacePlaceholder = '''
 <script>
@@ -70,7 +93,8 @@ String statement = "Hello World";
 <style>
 </style>
 ''';
-  await (await File('$proj/example/lib/App.phs').create()).writeAsString(phsReplacePlaceholder);
+  await (await File('$proj/example/lib/App.phs').create())
+      .writeAsString(phsReplacePlaceholder);
   await Directory('$proj/example/lib/components').delete(recursive: true);
   await File('$proj/example/CHANGELOG.md').delete();
   await File('$proj/example/.gitignore').delete();

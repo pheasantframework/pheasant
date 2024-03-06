@@ -4,7 +4,7 @@ import 'package:yaml_edit/yaml_edit.dart';
 
 String genBuildFile(PheasantCliBaseConfig pheasantConfig,
     {String? projNameFromPubspec, Logger? logger}) {
-      logger?.trace('Generating Build Files');
+  logger?.trace('Generating Build Files');
   Map<String, dynamic> buildConfig = {
     'targets': {
       r'$default': {

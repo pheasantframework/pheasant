@@ -14,8 +14,13 @@ Map<String, Type> get _appquestions => <String, Type>{
     };
 
 Map<String, Type> get _pluginquestions => <String, Type>{
-  ["Select the plugins you want to develop:","Use the left and right arrow keys to scroll through options.",'Press "Space" to select an option.','Press "Enter" to finish:\n'].join("\n"): List,
-  "Would you like to add JS?": bool,
+      [
+        "Select the plugins you want to develop:",
+        "Use the left and right arrow keys to scroll through options.",
+        'Press "Space" to select an option.',
+        'Press "Enter" to finish:\n'
+      ].join("\n"): List,
+      "Would you like to add JS?": bool,
     };
 
 Map<String, dynamic> appanswers = Map.fromIterable(_appquestions.keys);
@@ -42,30 +47,44 @@ void initAppInterface(ArgResults results) {
 }
 
 Future<void> initPluginInterface(ArgResults results, {Logger? logger}) async {
-  final pluginOptions = ["components", "state (not supported)", "app extensions (not supported)"];
+  final pluginOptions = [
+    "components",
+    "state (not supported)",
+    "app extensions (not supported)"
+  ];
   if (results.command!.wasParsed('yes')) {
     pluginanswers[pluginanswers.keys.first] = pluginOptions;
     pluginanswers[pluginanswers.keys.last] = true;
   } else {
-      final initList = ["components", "state (not supported)", "app extensions (not supported)"];
-      final _initList = ["components", "state (not supported)", "app extensions (not supported)"];
-      final choices = await optionSelector(pluginOptions, initList, _initList, " : ", color: cyan);
-      pluginanswers[_pluginquestions.keys.first] = choices;
-      var key = _pluginquestions.keys.last;
-      stdout.writeAll([lightBlue.wrap(key)!, styleBold.wrap('(y/N) ')], " ");
-      final ans = stdin.readLineSync();
-      if (ans == null) {
-        pluginanswers[key] = false;
-      } else {
-        pluginanswers[key] = ans == 'y';
-      }
+    final initList = [
+      "components",
+      "state (not supported)",
+      "app extensions (not supported)"
+    ];
+    final _initList = [
+      "components",
+      "state (not supported)",
+      "app extensions (not supported)"
+    ];
+    final choices = await optionSelector(
+        pluginOptions, initList, _initList, " : ",
+        color: cyan);
+    pluginanswers[_pluginquestions.keys.first] = choices;
+    var key = _pluginquestions.keys.last;
+    stdout.writeAll([lightBlue.wrap(key)!, styleBold.wrap('(y/N) ')], " ");
+    final ans = stdin.readLineSync();
+    if (ans == null) {
+      pluginanswers[key] = false;
+    } else {
+      pluginanswers[key] = ans == 'y';
+    }
   }
   stdout.writeln();
 }
 
 Future<Iterable<String>> optionSelector(
-  List<String> objects, 
-  List<String> initObjects, 
+  List<String> objects,
+  List<String> initObjects,
   List<String> previousInit,
   String separator, {
   String? preamble,
@@ -76,17 +95,18 @@ Future<Iterable<String>> optionSelector(
     stdout.write('\r');
     stdout.writeAll(objects, separator);
     stdout.write("    ");
-    stdout.write('\b'*4);
+    stdout.write('\b' * 4);
   }
+
   stdout.write(preamble ?? "");
   Completer completer = Completer<Iterable<String>>();
   stdout.writeAll(objects, separator);
-  stdin.lineMode = false; 
+  stdin.lineMode = false;
   int index = 1;
   List<int> coloured = [];
   late StreamSubscription<List<int>> sub;
-    var stdinbroadcast = stdin.asBroadcastStream();
-    sub = stdinbroadcast.listen((event) {
+  var stdinbroadcast = stdin.asBroadcastStream();
+  sub = stdinbroadcast.listen((event) {
     String character = utf8.decode(event);
     if (character == '\x1B[D') {
       if (index >= 1) {
@@ -109,12 +129,12 @@ Future<Iterable<String>> optionSelector(
         coloured.remove(index);
         objects.setAll(0, previousInit);
         objects = objects.map<String>((e) {
-        if (coloured.contains(objects.indexOf(e))) {
-          return color.wrap(e)!;
-        } else {
-          return e;
-        }
-      } ).toList();
+          if (coloured.contains(objects.indexOf(e))) {
+            return color.wrap(e)!;
+          } else {
+            return e;
+          }
+        }).toList();
       }
       initObjects.setAll(0, objects);
       resetOptions(objects, separator);
@@ -124,8 +144,7 @@ Future<Iterable<String>> optionSelector(
       stdin.lineMode = true;
       sub.cancel();
       completer.complete(coloured.map((e) => previousInit[e]));
-    }
-    else {
+    } else {
       resetOptions(objects, separator);
     }
   });

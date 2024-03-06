@@ -24,26 +24,28 @@ Future<void> createYamlConfig(Logger logger, String proj, String projName,
       'phsComponents': cliAnswers?.values.toList()[2] ?? false
     },
     'plugins': {
-      'main': appConfig?.plugins.where((el) => el is! PheasantDevPlugin).map((e) {
-        Map<String, dynamic> plugmap = {
-          e.name: {
-            'version': e.version
-          }
-        };
-        if (e.source != null) plugmap[e.name].addAll({'source': e.source!});
-        if (e.sourcesupp != null && e.sourcesuppName != null) plugmap[e.name].addAll({e.sourcesuppName!: e.sourcesupp!});
-        return plugmap;
-      }).toList() ?? [],
+      'main':
+          appConfig?.plugins.where((el) => el is! PheasantDevPlugin).map((e) {
+                Map<String, dynamic> plugmap = {
+                  e.name: {'version': e.version}
+                };
+                if (e.source != null)
+                  plugmap[e.name].addAll({'source': e.source!});
+                if (e.sourcesupp != null && e.sourcesuppName != null)
+                  plugmap[e.name].addAll({e.sourcesuppName!: e.sourcesupp!});
+                return plugmap;
+              }).toList() ??
+              [],
       'dev': appConfig?.plugins.whereType<PheasantDevPlugin>().map((e) {
-        Map<String, dynamic> plugmap = {
-          e.name: {
-            'version': e.version
-          }
-        };
-        if (e.source != null) plugmap[e.name].addAll({'source': e.source!});
-        if (e.sourcesupp != null && e.sourcesuppName != null) plugmap[e.name].addAll({e.sourcesuppName!: e.sourcesupp!});
-        return plugmap;
-      }).toList() ?? []
+            Map<String, dynamic> plugmap = {
+              e.name: {'version': e.version}
+            };
+            if (e.source != null) plugmap[e.name].addAll({'source': e.source!});
+            if (e.sourcesupp != null && e.sourcesuppName != null)
+              plugmap[e.name].addAll({e.sourcesuppName!: e.sourcesupp!});
+            return plugmap;
+          }).toList() ??
+          []
     },
     'dependencies': []
   };

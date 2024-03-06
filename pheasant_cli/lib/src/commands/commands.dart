@@ -12,7 +12,6 @@ import 'package:pheasant_cli/src/commands/general/configfile.dart';
 import 'package:pheasant_cli/src/commands/remove/remove_plugins.dart';
 import 'package:pubspec_parse/pubspec_parse.dart' as pub;
 
-
 import 'run/prereq/get_plugins.dart';
 import 'run/bg_process.dart';
 import 'run/main_process.dart';
@@ -28,11 +27,7 @@ import '../constants/buildfile.dart';
 import '../constants/clidoc.dart';
 import '../utils/src/usage.dart';
 
-enum ProjectType {
-  Application,
-  Plugin,
-  DevPlugin
-}
+enum ProjectType { Application, Plugin, DevPlugin }
 
 ProjectType parseProject(String name) {
   if (name == 'app') return ProjectType.Application;
@@ -73,17 +68,19 @@ void initCommand(ArgResults results) async {
     default:
       break;
   }
-  
+
   var verbose = results.wasParsed('verbose');
   var logger = verbose ? Logger.verbose() : Logger.standard();
   var manager = ProcessManager(stdin: stdin);
 
   switch (projectType) {
     case ProjectType.Application:
-      await initAppGenerate(logger, results, manager, projName, linter: appanswers.values.toList()[3]);
+      await initAppGenerate(logger, results, manager, projName,
+          linter: appanswers.values.toList()[3]);
       break;
     case ProjectType.Plugin:
-      await initPluginGenerate(logger, results, manager, projName, pluginanswers);
+      await initPluginGenerate(
+          logger, results, manager, projName, pluginanswers);
       break;
     default:
       break;
@@ -142,7 +139,8 @@ void runCommand(ArgResults results) async {
   }
   final data = pub.Pubspec.parse(File('pubspec.yaml').readAsStringSync());
 
-  buildFile = await buildFile.writeAsString(genBuildFile(appConfig, projNameFromPubspec: data.name));
+  buildFile = await buildFile
+      .writeAsString(genBuildFile(appConfig, projNameFromPubspec: data.name));
   progress.finish(showTiming: true);
 
   await Future.wait([
@@ -173,10 +171,13 @@ void buildCommand(ArgResults results) async {
 }
 
 void addCommand(ArgResults results) async {
-  List<String> configArgs = results.wasParsed('define') ? results['define'] : [];
+  List<String> configArgs =
+      results.wasParsed('define') ? results['define'] : [];
   var verbose = results.wasParsed('verbose');
   var logger = verbose ? Logger.verbose() : Logger.standard();
-  List<String> plugins = results.command!.arguments.where((element) => !element.contains('-')).toList();
+  List<String> plugins = results.command!.arguments
+      .where((element) => !element.contains('-'))
+      .toList();
   String? gitUrl = results.command!['git'];
   String? pathUrl = results.command!['path'];
   String? hostUrl = results.command!['hosted'];
@@ -192,15 +193,19 @@ void addCommand(ArgResults results) async {
   genProgress.finish(showTiming: true);
 
   logger.stdout('All ${logger.ansi.emphasized('done')}.');
-  logger.stdout('The following plugins were added: ${logger.ansi.emphasized(plugins.join(' '))}');
+  logger.stdout(
+      'The following plugins were added: ${logger.ansi.emphasized(plugins.join(' '))}');
   exit(0);
 }
 
 void removeCommand(ArgResults results) async {
-  List<String> configArgs = results.wasParsed('define') ? results['define'] : [];
+  List<String> configArgs =
+      results.wasParsed('define') ? results['define'] : [];
   var verbose = results.wasParsed('verbose');
   var logger = verbose ? Logger.verbose() : Logger.standard();
-  List<String> plugins = results.command!.arguments.where((element) => !element.contains('-')).toList();
+  List<String> plugins = results.command!.arguments
+      .where((element) => !element.contains('-'))
+      .toList();
 
   var genProgress = logger.progress('Removing Plugins');
   logger.stdout('\n');
@@ -212,6 +217,7 @@ void removeCommand(ArgResults results) async {
   genProgress.finish(showTiming: true);
 
   logger.stdout('All ${logger.ansi.emphasized('done')}.');
-  logger.stdout('The following plugins were removed: ${logger.ansi.emphasized(plugins.join(' '))}');
+  logger.stdout(
+      'The following plugins were removed: ${logger.ansi.emphasized(plugins.join(' '))}');
   exit(0);
 }

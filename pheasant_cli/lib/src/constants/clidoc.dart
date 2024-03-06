@@ -1,6 +1,7 @@
 Map<String, String> get cmdInfo => {
       'init': 'Create or start a new Pheasant project',
-      'doctor': 'Ensures all requirements and prerequisites are met to run the framework',
+      'doctor':
+          'Ensures all requirements and prerequisites are met to run the framework',
       'create': 'Alias for "init"',
       'help': 'Get help for any command',
       'run': 'Run a project from the server',
