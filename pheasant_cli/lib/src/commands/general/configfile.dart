@@ -15,6 +15,5 @@ Future<void> writeConfigToFile(AppConfig appConfig) async {
     stderr.writeln(red.wrap("\nError: ${wrapWith("The 'pheasant.yaml' file doesn't exist", [white, styleBold])}"));
     exit(2);
   }
-  // print(yamlEditor.toString());
   await File('./pheasant.yaml').writeAsString(yamlEditor.toString());
 }

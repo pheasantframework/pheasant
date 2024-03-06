@@ -14,7 +14,6 @@ void removePlugins(AppConfig appConfig, List<String> plugins) {
       appConfig.devPlugins.removeWhere((element) => element.name == el);
     }
   } else {
-    stderr.write('\n');
     stderr.writeln(red.wrap("Error: ${wrapWith("The given plugin${plugins.length == 1 ? "" : "s"}: ${plugins.join(', ')}, ${plugins.length == 1 ? "does" : "do"} not exist", [white, styleBold])}"));
   }
 }

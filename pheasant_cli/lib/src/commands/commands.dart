@@ -183,6 +183,7 @@ void addCommand(ArgResults results) async {
 
   Iterable<List<String>> items = plugins.map((e) => e.split(':'));
   var genProgress = logger.progress("Adding plugin(s) to 'pheasant.yaml' file");
+  logger.stdout('\n');
   logger.trace('Parsing config file');
   AppConfig appConfig = await validateProject(logger, configArgs, plugin: true);
   logger.trace('Adding plugins');
@@ -202,6 +203,7 @@ void removeCommand(ArgResults results) async {
   List<String> plugins = results.command!.arguments.where((element) => !element.contains('-')).toList();
 
   var genProgress = logger.progress('Removing Plugins');
+  logger.stdout('\n');
   logger.trace('Parsing config file');
   AppConfig appConfig = await validateProject(logger, configArgs, plugin: true);
   removePlugins(appConfig, plugins);

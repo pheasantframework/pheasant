@@ -23,9 +23,8 @@ AppConfig addPlugins(Iterable<List<String>> items, String? gitUrl, AppConfig app
       version = 'latest';
     }
     if (devPlugin) {
-      stdout.writeln();
-      stdout.writeln("Plugin $name Already Exists. Updating...");
       if (newConfig.devPlugins.where((el) => el.name == name).isNotEmpty) {
+        stdout.writeln("Plugin $name Already Exists. Updating...");
         var plugin = newConfig.devPlugins.singleWhere((el) => el.name == name);
         newConfig.devPlugins[newConfig.devPlugins.indexOf(plugin)] = plugin
         ..version = version
@@ -36,9 +35,8 @@ AppConfig addPlugins(Iterable<List<String>> items, String? gitUrl, AppConfig app
         break;
       }
     } else {
-      stdout.writeln();
-      stdout.writeln("Plugin $name Already Exists. Updating...");
       if (newConfig.plugins.where((el) => el.name == name).isNotEmpty) {
+        stdout.writeln("Plugin $name Already Exists. Updating...");
         var plugin = newConfig.plugins.singleWhere((el) => el.name == name);
         newConfig.plugins[newConfig.plugins.indexOf(plugin)] = plugin
         ..version = version

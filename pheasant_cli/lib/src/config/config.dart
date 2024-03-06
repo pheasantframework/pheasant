@@ -38,9 +38,7 @@ class PheasantCliBaseConfig {
       : configFile = PheasantConfigFile.json,
         projName = jsonDecode(jsonData)['project'],
         projVersion = jsonDecode(jsonData)['version'],
-        _environment = jsonDecode(jsonData)['env'] == 'dart'
-            ? PheasantEnvironment.dart
-            : PheasantEnvironment.node,
+        _environment = PheasantEnvironment.dart,
         entrypoints = jsonDecode(jsonData)['entry'],
         generalConfigs = jsonDecode(jsonData)['config'],
         plugins = (jsonDecode(jsonData)['plugins']['main'] as List)
@@ -68,9 +66,7 @@ class PheasantCliBaseConfig {
       : configFile = PheasantConfigFile.yaml,
         projName = loadYaml(yamlData)['project'],
         projVersion = loadYaml(yamlData)['version'],
-        _environment = loadYaml(yamlData)['env'] == 'dart'
-            ? PheasantEnvironment.dart
-            : PheasantEnvironment.node,
+        _environment = PheasantEnvironment.dart,
         entrypoints = (loadYaml(yamlData)['entry'] as YamlMap?)
             ?.value
             .cast<String, String>(),
@@ -102,7 +98,7 @@ class PheasantCliBaseConfig {
     Map<String, dynamic> outmap = {
     'project': projName,
     'version': projVersion,
-    'env': _environment.toString(),
+    'env': _environment.toString().split('.').last,
     };
     if (entrypoints != null) {
       outmap.addAll({
