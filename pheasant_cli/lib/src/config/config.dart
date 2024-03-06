@@ -121,7 +121,7 @@ class PheasantCliBaseConfig {
       'phsComponents': generalConfigs['phsComponents']
     },
     'plugins': {
-      'main': plugins.where((el) => el is! PheasantDevPlugin).map((e) {
+      'main': plugins.map((e) {
         Map<String, dynamic> plugmap = {
           e.name: {
             'version': e.version
@@ -131,7 +131,7 @@ class PheasantCliBaseConfig {
         if (e.sourcesupp != null && e.sourcesuppName != null) plugmap[e.name].addAll({e.sourcesuppName!: e.sourcesupp!});
         return plugmap;
       }).toList(),
-      'dev': plugins.whereType<PheasantDevPlugin>().map((e) {
+      'dev': devPlugins.map((e) {
         Map<String, dynamic> plugmap = {
           e.name: {
             'version': e.version
@@ -145,6 +145,11 @@ class PheasantCliBaseConfig {
     'dependencies': []
   });
     return outmap;
+  }
+
+  @override
+  String toString() {
+    return toMap().toString();
   }
 
   PheasantEnvironment get environment => _environment;
@@ -202,6 +207,11 @@ class PheasantPlugin {
     if (source == 'git') return 'git';
     if (source == 'hosted') return 'hosted';
     return 'unknown';
+  }
+
+  @override
+  String toString() {
+    return "Plugin: $name v$version${source == null ? "" : " -- $supptype: $sourcesupp"}";
   }
 }
 
