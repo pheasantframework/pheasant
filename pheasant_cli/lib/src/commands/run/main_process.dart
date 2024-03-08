@@ -49,7 +49,7 @@ Future<void> mainProcess(ProcessManager manager, Logger logger,
       'webdev',
       [
         'daemon',
-        'web:$port',
+        port == null ? '' : 'web:$port',
         ...runOptions,
         ...(outputOption.isNotEmpty && output != null
             ? [outputOption, outputOption]

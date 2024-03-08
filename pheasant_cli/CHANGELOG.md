@@ -1,3 +1,6 @@
+## 0.1.0-beta.1
+- Minor `run` fixes
+
 ## 0.1.0-beta
 - Minor bugs
 - Worked on `run` command
