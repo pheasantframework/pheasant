@@ -1,3 +1,6 @@
+## 0.1.0-tested
+- Updated Dependency Constraints
+
 ## 0.1.0-extended
 - Added Custom Components API for creating custom components and attributes
 

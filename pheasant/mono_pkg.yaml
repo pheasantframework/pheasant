@@ -8,3 +8,8 @@ stages:
     - format
   - unit_test:
     - test
+  - cron:
+    - test:
+      os:
+        - linux
+        - windows

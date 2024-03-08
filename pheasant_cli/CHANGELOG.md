@@ -1,3 +1,6 @@
+## 0.1.0-dev
+- Updated dependency constraints
+
 ## 0.1.0-beta.1
 - Minor `run` fixes
 

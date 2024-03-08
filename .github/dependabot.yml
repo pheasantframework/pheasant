@@ -18,7 +18,35 @@
     },
     {
       "package-ecosystem": "pub",
+      "directory": "pheasant_assets",
+      "schedule": {
+        "interval": "weekly"
+      }
+    },
+    {
+      "package-ecosystem": "pub",
+      "directory": "pheasant_build",
+      "schedule": {
+        "interval": "weekly"
+      }
+    },
+    {
+      "package-ecosystem": "pub",
       "directory": "pheasant_cli",
+      "schedule": {
+        "interval": "weekly"
+      }
+    },
+    {
+      "package-ecosystem": "pub",
+      "directory": "pheasant_meta",
+      "schedule": {
+        "interval": "weekly"
+      }
+    },
+    {
+      "package-ecosystem": "pub",
+      "directory": "pheasant_temp",
       "schedule": {
         "interval": "weekly"
       }

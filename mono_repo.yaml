@@ -1,10 +1,26 @@
 github:
+  cron: '0 0 * * 0'
+  on_completion:
+    - name: "Notify failure"
+      runs-on: ubuntu-latest
+      if: (github.event_name == 'push' || github.event_name == 'schedule') && failure()
+      steps:
+        - run: >
+            curl -H "Content-Type: application/json" -X POST -d \
+              "{'text':'Build failed! ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}'}" \
+              "${CHAT_WEBHOOK_URL}"
+          env:
+            CHAT_WEBHOOK_URL: ${{ secrets.CHAT_WEBHOOK_URL }}
   dependabot:
     updates:
       - package-ecosystem: "github-actions"
         directory: "/"
         schedule:
           interval: "monthly"
+  stages:
+    - name: cron
+      # Only run this stage for scheduled cron jobs
+      if: github.event_name == 'schedule'
 
 self_validate: analyze
 
