@@ -1,0 +1,27 @@
+# Created with package:mono_repo v6.6.1
+{
+  "version": 2,
+  "updates": [
+    {
+      "package-ecosystem": "github-actions",
+      "directory": "/",
+      "schedule": {
+        "interval": "monthly"
+      }
+    },
+    {
+      "package-ecosystem": "pub",
+      "directory": "pheasant",
+      "schedule": {
+        "interval": "weekly"
+      }
+    },
+    {
+      "package-ecosystem": "pub",
+      "directory": "pheasant_cli",
+      "schedule": {
+        "interval": "weekly"
+      }
+    }
+  ]
+}
