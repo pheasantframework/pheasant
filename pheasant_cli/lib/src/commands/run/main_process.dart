@@ -1,11 +1,11 @@
 // Copyright (c) 2024 The Pheasant Group. All Rights Reserved.
 // Please see the AUTHORS files for more information.
 // Intellectual property of third-party.
-// 
+//
 // This file, as well as use of the code in it, is governed by an MIT License
 // that can be found in the LICENSE file.
 // You may not use this file except in compliance with the License.
-  
+
 import 'dart:convert';
 import 'dart:io';
 import 'dart:async';
@@ -68,7 +68,7 @@ Future<void> mainProcess(ProcessManager manager, Logger logger,
         // logger.trace("$stream : ${stream.isEmpty} : ${stream.length} : ${stream == " "}");
         var datastream = LineSplitter()
             .convert(stream.splitMapJoin('][', onMatch: (m) => ']\n['));
-        datastream.forEach((element) {
+        for (var element in datastream) {
           dynamic mainstream;
           if (_jsondecodable(element)) {
             final output = jsonDecode(element);
@@ -76,20 +76,27 @@ Future<void> mainProcess(ProcessManager manager, Logger logger,
           } else {
             mainstream = {};
           }
-          logger.trace(
-              'Event: ${mainstream['event']}, Log: ${mainstream['params']['log']}');
-          if (mainstream['event'] == "app.started" ||
-              (mainstream['params']['log'] ?? "").contains("Succeeded")) {
-            logger.trace('Web server started successfully!');
-            webdev.finish(showTiming: true);
-            logger.stdout(styleBold.wrap('Build Successful!')!);
-            logger.stdout(wrapWith(
-                'Web App running on ${wrapWith('http://localhost:$port', [
-                      styleUnderlined
-                    ])}',
-                [yellow])!);
+          try {
+            logger.trace(
+                'Event: ${mainstream['event']}, Log: ${mainstream['params']['log']}');
+            if (mainstream['event'] == "app.started" ||
+                (mainstream['params']['log'] ?? "").contains("Succeeded")) {
+              logger.trace('Web server started successfully!');
+              webdev.finish(showTiming: true);
+              logger.stdout(styleBold.wrap('Build Successful!')!);
+              logger.stdout(wrapWith(
+                  'Web App running on ${wrapWith('http://localhost:$port', [
+                        styleUnderlined
+                      ])}',
+                  [yellow])!);
+            }
+          } on NoSuchMethodError catch (_) {
+            logger.stderr(
+                'There was an error in your code. Please solve the error and try again');
+          } catch (e) {
+            logger.trace('An error occured');
           }
-        });
+        }
       }
     })
     ..stderr.transform(utf8.decoder).forEach((stream) {
@@ -122,32 +129,3 @@ void _handleWebdevServeErrors(String stream, Logger logger) {
     exit(ExitCode.cantCreate.code);
   }
 }
-
-void _handleWebdevServeOutput(
-    String stream, Logger logger, int log, Progress webdev, String? port) {
-  if (stream.contains('WARNING') || stream.contains('SEVERE')) {
-    logger.stdout(wrapWith(
-        analyzeLog(stream), [stream.contains('WARNING') ? yellow : red])!);
-  }
-  if (stream.contains('--------------') && log == 0) {
-    log = 1;
-    logger.trace('Web server started successfully!');
-    webdev.finish(showTiming: true);
-    logger.stdout(styleBold.wrap('Build Successful!')!);
-    logger.stdout(wrapWith(
-        'Web App running on ${wrapWith('http://localhost:$port', [
-              styleUnderlined
-            ])}',
-        [yellow])!);
-  }
-  if (stream.contains('failed')) {
-    logger.trace('Web server failed!');
-    logger.trace(stream);
-    logger.stdout(wrapWith('Web Server Failed to Load: ', [red, styleBold])!);
-    logger.stdout(wrapWith(analyzeStream(stream), [styleBold])!);
-  }
-}
-
-/** Build options
- * --release
- */
