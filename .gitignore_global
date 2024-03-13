@@ -4,8 +4,6 @@ build/
 
 .DS_Store
 
-changes.md
-
-laws.md
+private/
 
 **.sh
