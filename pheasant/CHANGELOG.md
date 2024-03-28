@@ -1,3 +1,7 @@
+## 0.1.0-grade
+- Added Support for Routing and App Extensions
+- New `PheasantApp` component
+
 ## 0.1.0-extended
 - Added Custom Components API for creating custom components and attributes
 

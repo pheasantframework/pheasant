@@ -5,4 +5,4 @@
 /// NOTE: In further versions, there will be more libraries to expose other APIs such as plugin support, custom component supports and custom library support.
 library pheasant;
 
-export 'package:pheasant_build/pheasant_build.dart' show createApp;
+export 'package:pheasant_build/pheasant_build.dart' show createApp, PheasantApp;

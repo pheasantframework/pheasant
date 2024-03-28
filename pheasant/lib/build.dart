@@ -12,5 +12,13 @@ export 'package:pheasant_temp/pheasant_build.dart'
         AppState,
         Prop,
         prop,
-        noprop;
+        noprop,
+        navigateTo,
+        navigateWith,
+        onBack,
+        GlobalRoute,
+        getCurrentRoute,
+        UnknownPheasantTemplate,
+        fetchState,
+        initPage;
 export 'package:html/parser.dart' show parse, parseFragment;
