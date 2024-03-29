@@ -5,7 +5,7 @@ version: 0.1.0-grade
 repository: https://github.com/pheasantframework/pheasant
 
 environment:
-  sdk: ^3.2.0
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   pheasant_build: ^0.1.0-grade
