@@ -53,9 +53,9 @@ AppConfig addPlugins(Iterable<List<String>> items, String? gitUrl,
 }
 
 String? _getName(String? getSource) {
-  if (getSource == 'git' || getSource == 'hosted')
+  if (getSource == 'git' || getSource == 'hosted') {
     return 'url';
-  else if (getSource == 'path')
+  } else if (getSource == 'path')
     return 'path';
   else
     return null;
@@ -66,9 +66,9 @@ String? _getUrl(String? gitUrl, String? pathUrl, String? hostUrl) {
 }
 
 String? _getSource(String? gitUrl, String? pathUrl, String? hostUrl) {
-  if (gitUrl != null)
+  if (gitUrl != null) {
     return 'git';
-  else if (pathUrl != null)
+  } else if (pathUrl != null)
     return 'path';
   else if (hostUrl != null)
     return 'hosted';

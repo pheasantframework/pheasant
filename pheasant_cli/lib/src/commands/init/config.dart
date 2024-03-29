@@ -29,10 +29,12 @@ Future<void> createYamlConfig(Logger logger, String proj, String projName,
                 Map<String, dynamic> plugmap = {
                   e.name: {'version': e.version}
                 };
-                if (e.source != null)
+                if (e.source != null) {
                   plugmap[e.name].addAll({'source': e.source!});
-                if (e.sourcesupp != null && e.sourcesuppName != null)
+                }
+                if (e.sourcesupp != null && e.sourcesuppName != null) {
                   plugmap[e.name].addAll({e.sourcesuppName!: e.sourcesupp!});
+                }
                 return plugmap;
               }).toList() ??
               [],
@@ -41,8 +43,9 @@ Future<void> createYamlConfig(Logger logger, String proj, String projName,
               e.name: {'version': e.version}
             };
             if (e.source != null) plugmap[e.name].addAll({'source': e.source!});
-            if (e.sourcesupp != null && e.sourcesuppName != null)
+            if (e.sourcesupp != null && e.sourcesuppName != null) {
               plugmap[e.name].addAll({e.sourcesuppName!: e.sourcesupp!});
+            }
             return plugmap;
           }).toList() ??
           []
