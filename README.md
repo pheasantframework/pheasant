@@ -156,7 +156,7 @@ The Pheasant Framework, as of the current version, contains 4 packages:
 ## Contributing
 All contributions are welcome, and we continuously review them to make necessary and important changes to our framework.
 
-Please read the [contribution file](./CONTRIBUTING.md) for more information on how you can make a contribution.
+Please read the [contribution file](./CONTRIBUTING.md) and the [code of conduct](./CODE_OF_CONDUCT.md) for more information on how you can make a contribution.
 
 ## License
 This package is licensed under the [MIT License](./LICENSE).
