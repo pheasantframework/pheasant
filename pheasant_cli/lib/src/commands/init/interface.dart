@@ -69,13 +69,13 @@ Future<void> initPluginInterface(ArgResults results, {Logger? logger}) async {
       "state (not supported)",
       "app extensions (not supported)"
     ];
-    final _initList = [
+    final initList0 = [
       "components",
       "state (not supported)",
       "app extensions (not supported)"
     ];
     final choices = await optionSelector(
-        pluginOptions, initList, _initList, " : ",
+        pluginOptions, initList, initList0, " : ",
         color: cyan);
     pluginanswers[_pluginquestions.keys.first] = choices;
     var key = _pluginquestions.keys.last;

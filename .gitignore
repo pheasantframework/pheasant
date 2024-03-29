@@ -13,3 +13,4 @@ pubspec_overrides.yaml
 pubspec.lock
 
 doc_files.sh
+**/pubspec.lock

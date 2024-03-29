@@ -145,8 +145,9 @@ class PheasantCliBaseConfig {
             e.name: {'version': e.version}
           };
           if (e.source != null) plugmap[e.name].addAll({'source': e.source!});
-          if (e.sourcesupp != null && e.sourcesuppName != null)
+          if (e.sourcesupp != null && e.sourcesuppName != null) {
             plugmap[e.name].addAll({e.sourcesuppName!: e.sourcesupp!});
+          }
           return plugmap;
         }).toList(),
         'dev': devPlugins.map((e) {
@@ -154,8 +155,9 @@ class PheasantCliBaseConfig {
             e.name: {'version': e.version}
           };
           if (e.source != null) plugmap[e.name].addAll({'source': e.source!});
-          if (e.sourcesupp != null && e.sourcesuppName != null)
+          if (e.sourcesupp != null && e.sourcesuppName != null) {
             plugmap[e.name].addAll({e.sourcesuppName!: e.sourcesupp!});
+          }
           return plugmap;
         }).toList()
       },

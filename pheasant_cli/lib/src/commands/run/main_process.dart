@@ -68,7 +68,7 @@ Future<void> mainProcess(ProcessManager manager, Logger logger,
         // logger.trace("$stream : ${stream.isEmpty} : ${stream.length} : ${stream == " "}");
         var datastream = LineSplitter()
             .convert(stream.splitMapJoin('][', onMatch: (m) => ']\n['));
-        datastream.forEach((element) {
+        for (var element in datastream) {
           dynamic mainstream;
           if (_jsondecodable(element)) {
             final output = jsonDecode(element);
@@ -89,7 +89,7 @@ Future<void> mainProcess(ProcessManager manager, Logger logger,
                     ])}',
                 [yellow])!);
           }
-        });
+        }
       }
     })
     ..stderr.transform(utf8.decoder).forEach((stream) {

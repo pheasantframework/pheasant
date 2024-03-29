@@ -1,3 +1,6 @@
+## 0.1.0-grade
+- Extended Plugin Scaffolding Support.
+
 ## 0.1.0-beta.1
 - Minor `run` fixes
 
