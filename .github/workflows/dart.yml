@@ -32,7 +32,7 @@ jobs:
           sdk: stable
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
       - name: mono_repo self validate
         run: dart pub global activate mono_repo 6.6.1
       - name: mono_repo self validate
@@ -57,7 +57,7 @@ jobs:
           sdk: "3.2.0"
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
       - id: pheasant_pub_upgrade
         name: pheasant; dart pub upgrade
         run: dart pub upgrade
@@ -87,7 +87,7 @@ jobs:
           sdk: "3.2.0"
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
       - id: pheasant_pub_upgrade
         name: pheasant; dart pub upgrade
         run: dart pub upgrade
@@ -117,7 +117,7 @@ jobs:
           sdk: "3.2.3"
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
       - id: pheasant_cli_pub_upgrade
         name: pheasant_cli; dart pub upgrade
         run: dart pub upgrade
@@ -147,7 +147,7 @@ jobs:
           sdk: "3.2.3"
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
       - id: pheasant_cli_pub_upgrade
         name: pheasant_cli; dart pub upgrade
         run: dart pub upgrade
@@ -177,7 +177,7 @@ jobs:
           sdk: dev
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
       - id: pheasant_pub_upgrade
         name: pheasant; dart pub upgrade
         run: dart pub upgrade
@@ -207,7 +207,7 @@ jobs:
           sdk: dev
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
       - id: pheasant_cli_pub_upgrade
         name: pheasant_cli; dart pub upgrade
         run: dart pub upgrade
@@ -237,7 +237,7 @@ jobs:
           sdk: dev
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
       - id: pheasant_pub_upgrade
         name: pheasant; dart pub upgrade
         run: dart pub upgrade
@@ -267,7 +267,7 @@ jobs:
           sdk: dev
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
       - id: pheasant_cli_pub_upgrade
         name: pheasant_cli; dart pub upgrade
         run: dart pub upgrade
@@ -297,7 +297,7 @@ jobs:
           sdk: "3.2.0"
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
       - id: pheasant_pub_upgrade
         name: pheasant; dart pub upgrade
         run: dart pub upgrade
@@ -337,7 +337,7 @@ jobs:
           sdk: "3.2.3"
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
       - id: pheasant_cli_pub_upgrade
         name: pheasant_cli; dart pub upgrade
         run: dart pub upgrade
@@ -377,7 +377,7 @@ jobs:
           sdk: dev
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
       - id: pheasant_pub_upgrade
         name: pheasant; dart pub upgrade
         run: dart pub upgrade
@@ -417,7 +417,7 @@ jobs:
           sdk: dev
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
       - id: pheasant_cli_pub_upgrade
         name: pheasant_cli; dart pub upgrade
         run: dart pub upgrade
