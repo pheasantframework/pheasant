@@ -7,7 +7,7 @@
 // You may use this file only in accordance with the license.
   
 /// Version Information of the cli
-const String version = '0.1.0-alpha';
+const String version = '0.1.0-extended';
 
 Map<String, String> get githubLink => {
       'url': 'https://github.com/pheasantframework/pheasant.git',
