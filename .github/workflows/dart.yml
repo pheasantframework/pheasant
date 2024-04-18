@@ -33,6 +33,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - name: mono_repo self validate
         run: dart pub global activate mono_repo 6.6.1
       - name: mono_repo self validate
@@ -58,6 +61,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_pub_upgrade
         name: pheasant; dart pub upgrade
         run: dart pub upgrade
@@ -88,6 +94,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_assets_pub_upgrade
         name: pheasant_assets; dart pub upgrade
         run: dart pub upgrade
@@ -118,6 +127,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_build_pub_upgrade
         name: pheasant_build; dart pub upgrade
         run: dart pub upgrade
@@ -148,6 +160,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_meta_pub_upgrade
         name: pheasant_meta; dart pub upgrade
         run: dart pub upgrade
@@ -178,6 +193,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_temp_pub_upgrade
         name: pheasant_temp; dart pub upgrade
         run: dart pub upgrade
@@ -208,6 +226,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_pub_upgrade
         name: pheasant; dart pub upgrade
         run: dart pub upgrade
@@ -238,6 +259,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_assets_pub_upgrade
         name: pheasant_assets; dart pub upgrade
         run: dart pub upgrade
@@ -268,6 +292,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_build_pub_upgrade
         name: pheasant_build; dart pub upgrade
         run: dart pub upgrade
@@ -298,6 +325,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_meta_pub_upgrade
         name: pheasant_meta; dart pub upgrade
         run: dart pub upgrade
@@ -328,6 +358,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_temp_pub_upgrade
         name: pheasant_temp; dart pub upgrade
         run: dart pub upgrade
@@ -358,6 +391,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_cli_pub_upgrade
         name: pheasant_cli; dart pub upgrade
         run: dart pub upgrade
@@ -388,6 +424,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_cli_pub_upgrade
         name: pheasant_cli; dart pub upgrade
         run: dart pub upgrade
@@ -418,6 +457,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_pub_upgrade
         name: pheasant; dart pub upgrade
         run: dart pub upgrade
@@ -448,6 +490,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_assets_pub_upgrade
         name: pheasant_assets; dart pub upgrade
         run: dart pub upgrade
@@ -478,6 +523,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_build_pub_upgrade
         name: pheasant_build; dart pub upgrade
         run: dart pub upgrade
@@ -508,6 +556,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_cli_pub_upgrade
         name: pheasant_cli; dart pub upgrade
         run: dart pub upgrade
@@ -538,6 +589,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_meta_pub_upgrade
         name: pheasant_meta; dart pub upgrade
         run: dart pub upgrade
@@ -568,6 +622,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_temp_pub_upgrade
         name: pheasant_temp; dart pub upgrade
         run: dart pub upgrade
@@ -598,6 +655,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_pub_upgrade
         name: pheasant; dart pub upgrade
         run: dart pub upgrade
@@ -628,6 +688,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_assets_pub_upgrade
         name: pheasant_assets; dart pub upgrade
         run: dart pub upgrade
@@ -658,6 +721,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_build_pub_upgrade
         name: pheasant_build; dart pub upgrade
         run: dart pub upgrade
@@ -688,6 +754,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_cli_pub_upgrade
         name: pheasant_cli; dart pub upgrade
         run: dart pub upgrade
@@ -718,6 +787,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_meta_pub_upgrade
         name: pheasant_meta; dart pub upgrade
         run: dart pub upgrade
@@ -748,6 +820,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_temp_pub_upgrade
         name: pheasant_temp; dart pub upgrade
         run: dart pub upgrade
@@ -778,6 +853,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_pub_upgrade
         name: pheasant; dart pub upgrade
         run: dart pub upgrade
@@ -834,6 +912,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_assets_pub_upgrade
         name: pheasant_assets; dart pub upgrade
         run: dart pub upgrade
@@ -890,6 +971,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_build_pub_upgrade
         name: pheasant_build; dart pub upgrade
         run: dart pub upgrade
@@ -946,6 +1030,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_meta_pub_upgrade
         name: pheasant_meta; dart pub upgrade
         run: dart pub upgrade
@@ -1002,6 +1089,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_temp_pub_upgrade
         name: pheasant_temp; dart pub upgrade
         run: dart pub upgrade
@@ -1058,6 +1148,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_cli_pub_upgrade
         name: pheasant_cli; dart pub upgrade
         run: dart pub upgrade
@@ -1114,6 +1207,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_pub_upgrade
         name: pheasant; dart pub upgrade
         run: dart pub upgrade
@@ -1170,6 +1266,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_assets_pub_upgrade
         name: pheasant_assets; dart pub upgrade
         run: dart pub upgrade
@@ -1226,6 +1325,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_build_pub_upgrade
         name: pheasant_build; dart pub upgrade
         run: dart pub upgrade
@@ -1282,6 +1384,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_cli_pub_upgrade
         name: pheasant_cli; dart pub upgrade
         run: dart pub upgrade
@@ -1338,6 +1443,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_meta_pub_upgrade
         name: pheasant_meta; dart pub upgrade
         run: dart pub upgrade
@@ -1394,6 +1502,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_temp_pub_upgrade
         name: pheasant_temp; dart pub upgrade
         run: dart pub upgrade
@@ -1450,6 +1561,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_assets_pub_upgrade
         name: pheasant_assets; dart pub upgrade
         run: dart pub upgrade
@@ -1518,6 +1632,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_build_pub_upgrade
         name: pheasant_build; dart pub upgrade
         run: dart pub upgrade
@@ -1586,6 +1703,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_meta_pub_upgrade
         name: pheasant_meta; dart pub upgrade
         run: dart pub upgrade
@@ -1654,6 +1774,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_temp_pub_upgrade
         name: pheasant_temp; dart pub upgrade
         run: dart pub upgrade
@@ -1722,6 +1845,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_assets_pub_upgrade
         name: pheasant_assets; dart pub upgrade
         run: dart pub upgrade
@@ -1790,6 +1916,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_build_pub_upgrade
         name: pheasant_build; dart pub upgrade
         run: dart pub upgrade
@@ -1858,6 +1987,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_meta_pub_upgrade
         name: pheasant_meta; dart pub upgrade
         run: dart pub upgrade
@@ -1926,6 +2058,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_temp_pub_upgrade
         name: pheasant_temp; dart pub upgrade
         run: dart pub upgrade
@@ -1984,6 +2119,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_assets_pub_upgrade
         name: pheasant_assets; dart pub upgrade
         run: dart pub upgrade
@@ -2042,6 +2180,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_build_pub_upgrade
         name: pheasant_build; dart pub upgrade
         run: dart pub upgrade
@@ -2100,6 +2241,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_meta_pub_upgrade
         name: pheasant_meta; dart pub upgrade
         run: dart pub upgrade
@@ -2158,6 +2302,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_temp_pub_upgrade
         name: pheasant_temp; dart pub upgrade
         run: dart pub upgrade
@@ -2216,6 +2363,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_assets_pub_upgrade
         name: pheasant_assets; dart pub upgrade
         run: dart pub upgrade
@@ -2274,6 +2424,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_build_pub_upgrade
         name: pheasant_build; dart pub upgrade
         run: dart pub upgrade
@@ -2332,6 +2485,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_meta_pub_upgrade
         name: pheasant_meta; dart pub upgrade
         run: dart pub upgrade
@@ -2390,6 +2546,9 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        with:
+          submodules: true
+          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_temp_pub_upgrade
         name: pheasant_temp; dart pub upgrade
         run: dart pub upgrade
