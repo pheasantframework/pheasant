@@ -16,3 +16,4 @@ doc_files.sh
 **/pubspec.lock
 
 private/
+.env
