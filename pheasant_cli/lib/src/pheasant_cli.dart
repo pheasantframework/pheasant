@@ -6,4 +6,20 @@
 // that can be found in the LICENSE file. 
 // You may use this file only in accordance with the license.
   
-export 'utils/handle.dart';
+import 'package:args/command_runner.dart';
+import 'package:pheasant_cli/src/commands/cmdrunner.dart';
+import 'package:pheasant_cli/src/commands/commands.dart';
+
+Future<CommandRunner> run(List<String> args) async {
+  return PheasantCommandRunner("pheasant", "The Pheasant Framework Command Line Interface")
+  ..addCommand(DoctorCommand())
+  ..addCommand(InitCommand())
+  ..addCommand(RunCommand())
+  ..addCommand(BuildCommand())
+  ..addCommand(ServeCommand())
+  ..addCommand(CreateCommand())
+  ..addCommand(TestCommand())
+  ..addCommand(AddCommand())
+  ..addCommand(RemoveCommand())
+  ..run(args);
+}

@@ -1,3 +1,6 @@
+## 0.1.0-grade
+- Rebuild of the CLI with `CommandRunner`.
+
 ## 0.1.0-extended
 - Extended Plugin Scaffolding Support.
 
