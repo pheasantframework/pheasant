@@ -33,15 +33,12 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
       - name: mono_repo self validate
         run: dart pub global activate mono_repo 6.6.1
       - name: mono_repo self validate
         run: dart pub global run mono_repo generate --validate
   job_002:
-    name: "analyze; linux; Dart 3.0.0; PKG: pheasant; `dart analyze`"
+    name: "analyze; Dart 3.0.0; PKG: pheasant; `dart analyze`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -61,9 +58,6 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_pub_upgrade
         name: pheasant; dart pub upgrade
         run: dart pub upgrade
@@ -74,139 +68,7 @@ jobs:
         if: "always() && steps.pheasant_pub_upgrade.conclusion == 'success'"
         working-directory: pheasant
   job_003:
-    name: "analyze; linux; Dart 3.0.0; PKG: pheasant_assets; `dart analyze`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_assets;commands:analyze"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_assets
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: "3.0.0"
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_assets_pub_upgrade
-        name: pheasant_assets; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_assets
-      - name: pheasant_assets; dart analyze
-        run: dart analyze
-        if: "always() && steps.pheasant_assets_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_assets
-  job_004:
-    name: "analyze; linux; Dart 3.0.0; PKG: pheasant_build; `dart analyze`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_build;commands:analyze"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_build
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: "3.0.0"
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_build_pub_upgrade
-        name: pheasant_build; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_build
-      - name: pheasant_build; dart analyze
-        run: dart analyze
-        if: "always() && steps.pheasant_build_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_build
-  job_005:
-    name: "analyze; linux; Dart 3.0.0; PKG: pheasant_meta; `dart analyze`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_meta;commands:analyze"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_meta
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: "3.0.0"
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_meta_pub_upgrade
-        name: pheasant_meta; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_meta
-      - name: pheasant_meta; dart analyze
-        run: dart analyze
-        if: "always() && steps.pheasant_meta_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_meta
-  job_006:
-    name: "analyze; linux; Dart 3.0.0; PKG: pheasant_temp; `dart analyze`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_temp;commands:analyze"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_temp
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: "3.0.0"
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_temp_pub_upgrade
-        name: pheasant_temp; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_temp
-      - name: pheasant_temp; dart analyze
-        run: dart analyze
-        if: "always() && steps.pheasant_temp_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_temp
-  job_007:
-    name: "analyze; linux; Dart 3.0.0; PKG: pheasant; `dart format --output=none --set-exit-if-changed .`"
+    name: "analyze; Dart 3.0.0; PKG: pheasant; `dart format --output=none --set-exit-if-changed .`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -226,9 +88,6 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_pub_upgrade
         name: pheasant; dart pub upgrade
         run: dart pub upgrade
@@ -238,140 +97,8 @@ jobs:
         run: "dart format --output=none --set-exit-if-changed ."
         if: "always() && steps.pheasant_pub_upgrade.conclusion == 'success'"
         working-directory: pheasant
-  job_008:
-    name: "analyze; linux; Dart 3.0.0; PKG: pheasant_assets; `dart format --output=none --set-exit-if-changed .`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_assets;commands:format"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_assets
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: "3.0.0"
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_assets_pub_upgrade
-        name: pheasant_assets; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_assets
-      - name: "pheasant_assets; dart format --output=none --set-exit-if-changed ."
-        run: "dart format --output=none --set-exit-if-changed ."
-        if: "always() && steps.pheasant_assets_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_assets
-  job_009:
-    name: "analyze; linux; Dart 3.0.0; PKG: pheasant_build; `dart format --output=none --set-exit-if-changed .`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_build;commands:format"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_build
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: "3.0.0"
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_build_pub_upgrade
-        name: pheasant_build; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_build
-      - name: "pheasant_build; dart format --output=none --set-exit-if-changed ."
-        run: "dart format --output=none --set-exit-if-changed ."
-        if: "always() && steps.pheasant_build_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_build
-  job_010:
-    name: "analyze; linux; Dart 3.0.0; PKG: pheasant_meta; `dart format --output=none --set-exit-if-changed .`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_meta;commands:format"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_meta
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: "3.0.0"
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_meta_pub_upgrade
-        name: pheasant_meta; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_meta
-      - name: "pheasant_meta; dart format --output=none --set-exit-if-changed ."
-        run: "dart format --output=none --set-exit-if-changed ."
-        if: "always() && steps.pheasant_meta_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_meta
-  job_011:
-    name: "analyze; linux; Dart 3.0.0; PKG: pheasant_temp; `dart format --output=none --set-exit-if-changed .`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_temp;commands:format"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_temp
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: "3.0.0"
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_temp_pub_upgrade
-        name: pheasant_temp; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_temp
-      - name: "pheasant_temp; dart format --output=none --set-exit-if-changed ."
-        run: "dart format --output=none --set-exit-if-changed ."
-        if: "always() && steps.pheasant_temp_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_temp
-  job_012:
-    name: "analyze; linux; Dart 3.2.3; PKG: pheasant_cli; `dart analyze`"
+  job_004:
+    name: "analyze; Dart 3.2.3; PKG: pheasant_cli; `dart analyze`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -391,9 +118,6 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_cli_pub_upgrade
         name: pheasant_cli; dart pub upgrade
         run: dart pub upgrade
@@ -403,8 +127,8 @@ jobs:
         run: dart analyze
         if: "always() && steps.pheasant_cli_pub_upgrade.conclusion == 'success'"
         working-directory: pheasant_cli
-  job_013:
-    name: "analyze; linux; Dart 3.2.3; PKG: pheasant_cli; `dart format --output=none --set-exit-if-changed .`"
+  job_005:
+    name: "analyze; Dart 3.2.3; PKG: pheasant_cli; `dart format --output=none --set-exit-if-changed .`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -424,9 +148,6 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_cli_pub_upgrade
         name: pheasant_cli; dart pub upgrade
         run: dart pub upgrade
@@ -436,8 +157,8 @@ jobs:
         run: "dart format --output=none --set-exit-if-changed ."
         if: "always() && steps.pheasant_cli_pub_upgrade.conclusion == 'success'"
         working-directory: pheasant_cli
-  job_014:
-    name: "analyze; linux; Dart dev; PKG: pheasant; `dart analyze`"
+  job_006:
+    name: "analyze; Dart dev; PKG: pheasant; `dart analyze`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -457,9 +178,6 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_pub_upgrade
         name: pheasant; dart pub upgrade
         run: dart pub upgrade
@@ -469,74 +187,8 @@ jobs:
         run: dart analyze
         if: "always() && steps.pheasant_pub_upgrade.conclusion == 'success'"
         working-directory: pheasant
-  job_015:
-    name: "analyze; linux; Dart dev; PKG: pheasant_assets; `dart analyze`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_assets;commands:analyze"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_assets
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: dev
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_assets_pub_upgrade
-        name: pheasant_assets; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_assets
-      - name: pheasant_assets; dart analyze
-        run: dart analyze
-        if: "always() && steps.pheasant_assets_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_assets
-  job_016:
-    name: "analyze; linux; Dart dev; PKG: pheasant_build; `dart analyze`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_build;commands:analyze"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_build
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: dev
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_build_pub_upgrade
-        name: pheasant_build; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_build
-      - name: pheasant_build; dart analyze
-        run: dart analyze
-        if: "always() && steps.pheasant_build_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_build
-  job_017:
-    name: "analyze; linux; Dart dev; PKG: pheasant_cli; `dart analyze`"
+  job_007:
+    name: "analyze; Dart dev; PKG: pheasant_cli; `dart analyze`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -556,9 +208,6 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_cli_pub_upgrade
         name: pheasant_cli; dart pub upgrade
         run: dart pub upgrade
@@ -568,74 +217,8 @@ jobs:
         run: dart analyze
         if: "always() && steps.pheasant_cli_pub_upgrade.conclusion == 'success'"
         working-directory: pheasant_cli
-  job_018:
-    name: "analyze; linux; Dart dev; PKG: pheasant_meta; `dart analyze`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_meta;commands:analyze"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_meta
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: dev
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_meta_pub_upgrade
-        name: pheasant_meta; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_meta
-      - name: pheasant_meta; dart analyze
-        run: dart analyze
-        if: "always() && steps.pheasant_meta_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_meta
-  job_019:
-    name: "analyze; linux; Dart dev; PKG: pheasant_temp; `dart analyze`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_temp;commands:analyze"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_temp
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: dev
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_temp_pub_upgrade
-        name: pheasant_temp; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_temp
-      - name: pheasant_temp; dart analyze
-        run: dart analyze
-        if: "always() && steps.pheasant_temp_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_temp
-  job_020:
-    name: "analyze; linux; Dart dev; PKG: pheasant; `dart format --output=none --set-exit-if-changed .`"
+  job_008:
+    name: "analyze; Dart dev; PKG: pheasant; `dart format --output=none --set-exit-if-changed .`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -655,9 +238,6 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_pub_upgrade
         name: pheasant; dart pub upgrade
         run: dart pub upgrade
@@ -667,74 +247,8 @@ jobs:
         run: "dart format --output=none --set-exit-if-changed ."
         if: "always() && steps.pheasant_pub_upgrade.conclusion == 'success'"
         working-directory: pheasant
-  job_021:
-    name: "analyze; linux; Dart dev; PKG: pheasant_assets; `dart format --output=none --set-exit-if-changed .`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_assets;commands:format"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_assets
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: dev
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_assets_pub_upgrade
-        name: pheasant_assets; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_assets
-      - name: "pheasant_assets; dart format --output=none --set-exit-if-changed ."
-        run: "dart format --output=none --set-exit-if-changed ."
-        if: "always() && steps.pheasant_assets_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_assets
-  job_022:
-    name: "analyze; linux; Dart dev; PKG: pheasant_build; `dart format --output=none --set-exit-if-changed .`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_build;commands:format"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_build
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: dev
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_build_pub_upgrade
-        name: pheasant_build; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_build
-      - name: "pheasant_build; dart format --output=none --set-exit-if-changed ."
-        run: "dart format --output=none --set-exit-if-changed ."
-        if: "always() && steps.pheasant_build_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_build
-  job_023:
-    name: "analyze; linux; Dart dev; PKG: pheasant_cli; `dart format --output=none --set-exit-if-changed .`"
+  job_009:
+    name: "analyze; Dart dev; PKG: pheasant_cli; `dart format --output=none --set-exit-if-changed .`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -754,9 +268,6 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_cli_pub_upgrade
         name: pheasant_cli; dart pub upgrade
         run: dart pub upgrade
@@ -766,74 +277,8 @@ jobs:
         run: "dart format --output=none --set-exit-if-changed ."
         if: "always() && steps.pheasant_cli_pub_upgrade.conclusion == 'success'"
         working-directory: pheasant_cli
-  job_024:
-    name: "analyze; linux; Dart dev; PKG: pheasant_meta; `dart format --output=none --set-exit-if-changed .`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_meta;commands:format"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_meta
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: dev
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_meta_pub_upgrade
-        name: pheasant_meta; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_meta
-      - name: "pheasant_meta; dart format --output=none --set-exit-if-changed ."
-        run: "dart format --output=none --set-exit-if-changed ."
-        if: "always() && steps.pheasant_meta_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_meta
-  job_025:
-    name: "analyze; linux; Dart dev; PKG: pheasant_temp; `dart format --output=none --set-exit-if-changed .`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_temp;commands:format"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_temp
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: dev
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_temp_pub_upgrade
-        name: pheasant_temp; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_temp
-      - name: "pheasant_temp; dart format --output=none --set-exit-if-changed ."
-        run: "dart format --output=none --set-exit-if-changed ."
-        if: "always() && steps.pheasant_temp_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_temp
-  job_026:
-    name: "unit_test; linux; Dart 3.0.0; PKG: pheasant; `dart test`"
+  job_010:
+    name: "unit_test; Dart 3.0.0; PKG: pheasant; `dart test`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -853,9 +298,6 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_pub_upgrade
         name: pheasant; dart pub upgrade
         run: dart pub upgrade
@@ -875,83 +317,8 @@ jobs:
       - job_007
       - job_008
       - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-  job_027:
-    name: "unit_test; linux; Dart 3.0.0; PKG: pheasant_assets; `dart test`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_assets;commands:test"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_assets
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: "3.0.0"
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_assets_pub_upgrade
-        name: pheasant_assets; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_assets
-      - name: pheasant_assets; dart test
-        run: dart test
-        if: "always() && steps.pheasant_assets_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_assets
-    needs:
-      - job_001
-      - job_002
-      - job_003
-      - job_004
-      - job_005
-      - job_006
-      - job_007
-      - job_008
-      - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-  job_028:
-    name: "unit_test; linux; Dart 3.0.0; PKG: pheasant_build; `dart test`"
+  job_011:
+    name: "unit_test; Dart 3.0.0; PKG: pheasant_build; `dart test`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -970,10 +337,10 @@ jobs:
           sdk: "3.0.0"
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        uses: actions/checkout@v1
         with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
+            submodules: true
+            token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_build_pub_upgrade
         name: pheasant_build; dart pub upgrade
         run: dart pub upgrade
@@ -993,83 +360,8 @@ jobs:
       - job_007
       - job_008
       - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-  job_029:
-    name: "unit_test; linux; Dart 3.0.0; PKG: pheasant_meta; `dart test`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_meta;commands:test"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_meta
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: "3.0.0"
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_meta_pub_upgrade
-        name: pheasant_meta; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_meta
-      - name: pheasant_meta; dart test
-        run: dart test
-        if: "always() && steps.pheasant_meta_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_meta
-    needs:
-      - job_001
-      - job_002
-      - job_003
-      - job_004
-      - job_005
-      - job_006
-      - job_007
-      - job_008
-      - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-  job_030:
-    name: "unit_test; linux; Dart 3.0.0; PKG: pheasant_temp; `dart test`"
+  job_012:
+    name: "unit_test; Dart 3.0.0; PKG: pheasant_temp; `dart test`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -1088,10 +380,10 @@ jobs:
           sdk: "3.0.0"
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        uses: actions/checkout@v1
         with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
+            submodules: true
+            token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_temp_pub_upgrade
         name: pheasant_temp; dart pub upgrade
         run: dart pub upgrade
@@ -1111,24 +403,51 @@ jobs:
       - job_007
       - job_008
       - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-  job_031:
-    name: "unit_test; linux; Dart 3.2.3; PKG: pheasant_cli; `dart test`"
+  job_013:
+    name: "unit_test; Dart 3.2.3; PKG: pheasant_assets; `dart test`"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cache Pub hosted dependencies
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
+        with:
+          path: "~/.pub-cache/hosted"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.2.3;packages:pheasant_assets;commands:test"
+          restore-keys: |
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.2.3;packages:pheasant_assets
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.2.3
+            os:ubuntu-latest;pub-cache-hosted
+            os:ubuntu-latest
+      - name: Setup Dart SDK
+        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
+        with:
+          sdk: "3.2.3"
+      - id: checkout
+        name: Checkout repository
+        uses: actions/checkout@v1
+        with:
+            submodules: true
+            token: ${{ secrets.CI_TOKEN }}
+      - id: pheasant_assets_pub_upgrade
+        name: pheasant_assets; dart pub upgrade
+        run: dart pub upgrade
+        if: "always() && steps.checkout.conclusion == 'success'"
+        working-directory: pheasant_assets
+      - name: pheasant_assets; dart test
+        run: dart test
+        if: "always() && steps.pheasant_assets_pub_upgrade.conclusion == 'success'"
+        working-directory: pheasant_assets
+    needs:
+      - job_001
+      - job_002
+      - job_003
+      - job_004
+      - job_005
+      - job_006
+      - job_007
+      - job_008
+      - job_009
+  job_014:
+    name: "unit_test; Dart 3.2.3; PKG: pheasant_cli; `dart test`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -1148,9 +467,6 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_cli_pub_upgrade
         name: pheasant_cli; dart pub upgrade
         run: dart pub upgrade
@@ -1170,24 +486,51 @@ jobs:
       - job_007
       - job_008
       - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-  job_032:
-    name: "unit_test; linux; Dart dev; PKG: pheasant; `dart test`"
+  job_015:
+    name: "unit_test; Dart 3.2.3; PKG: pheasant_meta; `dart test`"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cache Pub hosted dependencies
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
+        with:
+          path: "~/.pub-cache/hosted"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.2.3;packages:pheasant_meta;commands:test"
+          restore-keys: |
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.2.3;packages:pheasant_meta
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.2.3
+            os:ubuntu-latest;pub-cache-hosted
+            os:ubuntu-latest
+      - name: Setup Dart SDK
+        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
+        with:
+          sdk: "3.2.3"
+      - id: checkout
+        name: Checkout repository
+        uses: actions/checkout@v1
+        with:
+            submodules: true
+            token: ${{ secrets.CI_TOKEN }}
+      - id: pheasant_meta_pub_upgrade
+        name: pheasant_meta; dart pub upgrade
+        run: dart pub upgrade
+        if: "always() && steps.checkout.conclusion == 'success'"
+        working-directory: pheasant_meta
+      - name: pheasant_meta; dart test
+        run: dart test
+        if: "always() && steps.pheasant_meta_pub_upgrade.conclusion == 'success'"
+        working-directory: pheasant_meta
+    needs:
+      - job_001
+      - job_002
+      - job_003
+      - job_004
+      - job_005
+      - job_006
+      - job_007
+      - job_008
+      - job_009
+  job_016:
+    name: "unit_test; Dart dev; PKG: pheasant; `dart test`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -1207,9 +550,6 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_pub_upgrade
         name: pheasant; dart pub upgrade
         run: dart pub upgrade
@@ -1229,24 +569,8 @@ jobs:
       - job_007
       - job_008
       - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-  job_033:
-    name: "unit_test; linux; Dart dev; PKG: pheasant_assets; `dart test`"
+  job_017:
+    name: "unit_test; Dart dev; PKG: pheasant_assets; `dart test`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -1265,10 +589,10 @@ jobs:
           sdk: dev
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        uses: actions/checkout@v1
         with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
+            submodules: true
+            token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_assets_pub_upgrade
         name: pheasant_assets; dart pub upgrade
         run: dart pub upgrade
@@ -1288,24 +612,8 @@ jobs:
       - job_007
       - job_008
       - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-  job_034:
-    name: "unit_test; linux; Dart dev; PKG: pheasant_build; `dart test`"
+  job_018:
+    name: "unit_test; Dart dev; PKG: pheasant_build; `dart test`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -1324,10 +632,10 @@ jobs:
           sdk: dev
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        uses: actions/checkout@v1
         with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
+            submodules: true
+            token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_build_pub_upgrade
         name: pheasant_build; dart pub upgrade
         run: dart pub upgrade
@@ -1347,24 +655,8 @@ jobs:
       - job_007
       - job_008
       - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-  job_035:
-    name: "unit_test; linux; Dart dev; PKG: pheasant_cli; `dart test`"
+  job_019:
+    name: "unit_test; Dart dev; PKG: pheasant_cli; `dart test`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -1384,9 +676,6 @@ jobs:
       - id: checkout
         name: Checkout repository
         uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_cli_pub_upgrade
         name: pheasant_cli; dart pub upgrade
         run: dart pub upgrade
@@ -1406,24 +695,8 @@ jobs:
       - job_007
       - job_008
       - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-  job_036:
-    name: "unit_test; linux; Dart dev; PKG: pheasant_meta; `dart test`"
+  job_020:
+    name: "unit_test; Dart dev; PKG: pheasant_meta; `dart test`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -1442,10 +715,10 @@ jobs:
           sdk: dev
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        uses: actions/checkout@v1
         with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
+            submodules: true
+            token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_meta_pub_upgrade
         name: pheasant_meta; dart pub upgrade
         run: dart pub upgrade
@@ -1465,24 +738,8 @@ jobs:
       - job_007
       - job_008
       - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-  job_037:
-    name: "unit_test; linux; Dart dev; PKG: pheasant_temp; `dart test`"
+  job_021:
+    name: "unit_test; Dart dev; PKG: pheasant_temp; `dart test`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
@@ -1501,10 +758,10 @@ jobs:
           sdk: dev
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        uses: actions/checkout@v1
         with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
+            submodules: true
+            token: ${{ secrets.CI_TOKEN }}
       - id: pheasant_temp_pub_upgrade
         name: pheasant_temp; dart pub upgrade
         run: dart pub upgrade
@@ -1524,1075 +781,3 @@ jobs:
       - job_007
       - job_008
       - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-  job_038:
-    name: "cron; linux; Dart 3.0.0; PKG: pheasant_assets; `dart test`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_assets;commands:test"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_assets
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: "3.0.0"
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_assets_pub_upgrade
-        name: pheasant_assets; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_assets
-      - name: pheasant_assets; dart test
-        run: dart test
-        if: "always() && steps.pheasant_assets_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_assets
-    needs:
-      - job_001
-      - job_002
-      - job_003
-      - job_004
-      - job_005
-      - job_006
-      - job_007
-      - job_008
-      - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-      - job_026
-      - job_027
-      - job_028
-      - job_029
-      - job_030
-      - job_031
-      - job_032
-      - job_033
-      - job_034
-      - job_035
-      - job_036
-      - job_037
-  job_039:
-    name: "cron; linux; Dart 3.0.0; PKG: pheasant_build; `dart test`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_build;commands:test"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_build
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: "3.0.0"
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_build_pub_upgrade
-        name: pheasant_build; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_build
-      - name: pheasant_build; dart test
-        run: dart test
-        if: "always() && steps.pheasant_build_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_build
-    needs:
-      - job_001
-      - job_002
-      - job_003
-      - job_004
-      - job_005
-      - job_006
-      - job_007
-      - job_008
-      - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-      - job_026
-      - job_027
-      - job_028
-      - job_029
-      - job_030
-      - job_031
-      - job_032
-      - job_033
-      - job_034
-      - job_035
-      - job_036
-      - job_037
-  job_040:
-    name: "cron; linux; Dart 3.0.0; PKG: pheasant_meta; `dart test`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_meta;commands:test"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_meta
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: "3.0.0"
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_meta_pub_upgrade
-        name: pheasant_meta; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_meta
-      - name: pheasant_meta; dart test
-        run: dart test
-        if: "always() && steps.pheasant_meta_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_meta
-    needs:
-      - job_001
-      - job_002
-      - job_003
-      - job_004
-      - job_005
-      - job_006
-      - job_007
-      - job_008
-      - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-      - job_026
-      - job_027
-      - job_028
-      - job_029
-      - job_030
-      - job_031
-      - job_032
-      - job_033
-      - job_034
-      - job_035
-      - job_036
-      - job_037
-  job_041:
-    name: "cron; linux; Dart 3.0.0; PKG: pheasant_temp; `dart test`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_temp;commands:test"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_temp
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: "3.0.0"
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_temp_pub_upgrade
-        name: pheasant_temp; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_temp
-      - name: pheasant_temp; dart test
-        run: dart test
-        if: "always() && steps.pheasant_temp_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_temp
-    needs:
-      - job_001
-      - job_002
-      - job_003
-      - job_004
-      - job_005
-      - job_006
-      - job_007
-      - job_008
-      - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-      - job_026
-      - job_027
-      - job_028
-      - job_029
-      - job_030
-      - job_031
-      - job_032
-      - job_033
-      - job_034
-      - job_035
-      - job_036
-      - job_037
-  job_042:
-    name: "cron; linux; Dart dev; PKG: pheasant_assets; `dart test`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_assets;commands:test"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_assets
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: dev
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_assets_pub_upgrade
-        name: pheasant_assets; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_assets
-      - name: pheasant_assets; dart test
-        run: dart test
-        if: "always() && steps.pheasant_assets_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_assets
-    needs:
-      - job_001
-      - job_002
-      - job_003
-      - job_004
-      - job_005
-      - job_006
-      - job_007
-      - job_008
-      - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-      - job_026
-      - job_027
-      - job_028
-      - job_029
-      - job_030
-      - job_031
-      - job_032
-      - job_033
-      - job_034
-      - job_035
-      - job_036
-      - job_037
-  job_043:
-    name: "cron; linux; Dart dev; PKG: pheasant_build; `dart test`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_build;commands:test"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_build
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: dev
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_build_pub_upgrade
-        name: pheasant_build; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_build
-      - name: pheasant_build; dart test
-        run: dart test
-        if: "always() && steps.pheasant_build_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_build
-    needs:
-      - job_001
-      - job_002
-      - job_003
-      - job_004
-      - job_005
-      - job_006
-      - job_007
-      - job_008
-      - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-      - job_026
-      - job_027
-      - job_028
-      - job_029
-      - job_030
-      - job_031
-      - job_032
-      - job_033
-      - job_034
-      - job_035
-      - job_036
-      - job_037
-  job_044:
-    name: "cron; linux; Dart dev; PKG: pheasant_meta; `dart test`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_meta;commands:test"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_meta
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: dev
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_meta_pub_upgrade
-        name: pheasant_meta; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_meta
-      - name: pheasant_meta; dart test
-        run: dart test
-        if: "always() && steps.pheasant_meta_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_meta
-    needs:
-      - job_001
-      - job_002
-      - job_003
-      - job_004
-      - job_005
-      - job_006
-      - job_007
-      - job_008
-      - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-      - job_026
-      - job_027
-      - job_028
-      - job_029
-      - job_030
-      - job_031
-      - job_032
-      - job_033
-      - job_034
-      - job_035
-      - job_036
-      - job_037
-  job_045:
-    name: "cron; linux; Dart dev; PKG: pheasant_temp; `dart test`"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cache Pub hosted dependencies
-        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
-        with:
-          path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_temp;commands:test"
-          restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_temp
-            os:ubuntu-latest;pub-cache-hosted;sdk:dev
-            os:ubuntu-latest;pub-cache-hosted
-            os:ubuntu-latest
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: dev
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_temp_pub_upgrade
-        name: pheasant_temp; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_temp
-      - name: pheasant_temp; dart test
-        run: dart test
-        if: "always() && steps.pheasant_temp_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_temp
-    needs:
-      - job_001
-      - job_002
-      - job_003
-      - job_004
-      - job_005
-      - job_006
-      - job_007
-      - job_008
-      - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-      - job_026
-      - job_027
-      - job_028
-      - job_029
-      - job_030
-      - job_031
-      - job_032
-      - job_033
-      - job_034
-      - job_035
-      - job_036
-      - job_037
-  job_046:
-    name: "cron; windows; Dart 3.0.0; PKG: pheasant_assets; `dart test`"
-    runs-on: windows-latest
-    steps:
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: "3.0.0"
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_assets_pub_upgrade
-        name: pheasant_assets; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_assets
-      - name: pheasant_assets; dart test
-        run: dart test
-        if: "always() && steps.pheasant_assets_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_assets
-    needs:
-      - job_001
-      - job_002
-      - job_003
-      - job_004
-      - job_005
-      - job_006
-      - job_007
-      - job_008
-      - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-      - job_026
-      - job_027
-      - job_028
-      - job_029
-      - job_030
-      - job_031
-      - job_032
-      - job_033
-      - job_034
-      - job_035
-      - job_036
-      - job_037
-  job_047:
-    name: "cron; windows; Dart 3.0.0; PKG: pheasant_build; `dart test`"
-    runs-on: windows-latest
-    steps:
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: "3.0.0"
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_build_pub_upgrade
-        name: pheasant_build; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_build
-      - name: pheasant_build; dart test
-        run: dart test
-        if: "always() && steps.pheasant_build_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_build
-    needs:
-      - job_001
-      - job_002
-      - job_003
-      - job_004
-      - job_005
-      - job_006
-      - job_007
-      - job_008
-      - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-      - job_026
-      - job_027
-      - job_028
-      - job_029
-      - job_030
-      - job_031
-      - job_032
-      - job_033
-      - job_034
-      - job_035
-      - job_036
-      - job_037
-  job_048:
-    name: "cron; windows; Dart 3.0.0; PKG: pheasant_meta; `dart test`"
-    runs-on: windows-latest
-    steps:
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: "3.0.0"
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_meta_pub_upgrade
-        name: pheasant_meta; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_meta
-      - name: pheasant_meta; dart test
-        run: dart test
-        if: "always() && steps.pheasant_meta_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_meta
-    needs:
-      - job_001
-      - job_002
-      - job_003
-      - job_004
-      - job_005
-      - job_006
-      - job_007
-      - job_008
-      - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-      - job_026
-      - job_027
-      - job_028
-      - job_029
-      - job_030
-      - job_031
-      - job_032
-      - job_033
-      - job_034
-      - job_035
-      - job_036
-      - job_037
-  job_049:
-    name: "cron; windows; Dart 3.0.0; PKG: pheasant_temp; `dart test`"
-    runs-on: windows-latest
-    steps:
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: "3.0.0"
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_temp_pub_upgrade
-        name: pheasant_temp; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_temp
-      - name: pheasant_temp; dart test
-        run: dart test
-        if: "always() && steps.pheasant_temp_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_temp
-    needs:
-      - job_001
-      - job_002
-      - job_003
-      - job_004
-      - job_005
-      - job_006
-      - job_007
-      - job_008
-      - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-      - job_026
-      - job_027
-      - job_028
-      - job_029
-      - job_030
-      - job_031
-      - job_032
-      - job_033
-      - job_034
-      - job_035
-      - job_036
-      - job_037
-  job_050:
-    name: "cron; windows; Dart dev; PKG: pheasant_assets; `dart test`"
-    runs-on: windows-latest
-    steps:
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: dev
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_assets_pub_upgrade
-        name: pheasant_assets; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_assets
-      - name: pheasant_assets; dart test
-        run: dart test
-        if: "always() && steps.pheasant_assets_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_assets
-    needs:
-      - job_001
-      - job_002
-      - job_003
-      - job_004
-      - job_005
-      - job_006
-      - job_007
-      - job_008
-      - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-      - job_026
-      - job_027
-      - job_028
-      - job_029
-      - job_030
-      - job_031
-      - job_032
-      - job_033
-      - job_034
-      - job_035
-      - job_036
-      - job_037
-  job_051:
-    name: "cron; windows; Dart dev; PKG: pheasant_build; `dart test`"
-    runs-on: windows-latest
-    steps:
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: dev
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_build_pub_upgrade
-        name: pheasant_build; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_build
-      - name: pheasant_build; dart test
-        run: dart test
-        if: "always() && steps.pheasant_build_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_build
-    needs:
-      - job_001
-      - job_002
-      - job_003
-      - job_004
-      - job_005
-      - job_006
-      - job_007
-      - job_008
-      - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-      - job_026
-      - job_027
-      - job_028
-      - job_029
-      - job_030
-      - job_031
-      - job_032
-      - job_033
-      - job_034
-      - job_035
-      - job_036
-      - job_037
-  job_052:
-    name: "cron; windows; Dart dev; PKG: pheasant_meta; `dart test`"
-    runs-on: windows-latest
-    steps:
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: dev
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_meta_pub_upgrade
-        name: pheasant_meta; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_meta
-      - name: pheasant_meta; dart test
-        run: dart test
-        if: "always() && steps.pheasant_meta_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_meta
-    needs:
-      - job_001
-      - job_002
-      - job_003
-      - job_004
-      - job_005
-      - job_006
-      - job_007
-      - job_008
-      - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-      - job_026
-      - job_027
-      - job_028
-      - job_029
-      - job_030
-      - job_031
-      - job_032
-      - job_033
-      - job_034
-      - job_035
-      - job_036
-      - job_037
-  job_053:
-    name: "cron; windows; Dart dev; PKG: pheasant_temp; `dart test`"
-    runs-on: windows-latest
-    steps:
-      - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
-        with:
-          sdk: dev
-      - id: checkout
-        name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
-        with:
-          submodules: true
-          token: ${{ secrets.CI_TOKEN }}
-      - id: pheasant_temp_pub_upgrade
-        name: pheasant_temp; dart pub upgrade
-        run: dart pub upgrade
-        if: "always() && steps.checkout.conclusion == 'success'"
-        working-directory: pheasant_temp
-      - name: pheasant_temp; dart test
-        run: dart test
-        if: "always() && steps.pheasant_temp_pub_upgrade.conclusion == 'success'"
-        working-directory: pheasant_temp
-    needs:
-      - job_001
-      - job_002
-      - job_003
-      - job_004
-      - job_005
-      - job_006
-      - job_007
-      - job_008
-      - job_009
-      - job_010
-      - job_011
-      - job_012
-      - job_013
-      - job_014
-      - job_015
-      - job_016
-      - job_017
-      - job_018
-      - job_019
-      - job_020
-      - job_021
-      - job_022
-      - job_023
-      - job_024
-      - job_025
-      - job_026
-      - job_027
-      - job_028
-      - job_029
-      - job_030
-      - job_031
-      - job_032
-      - job_033
-      - job_034
-      - job_035
-      - job_036
-      - job_037
