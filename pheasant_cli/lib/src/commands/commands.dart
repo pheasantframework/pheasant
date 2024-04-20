@@ -15,6 +15,7 @@ import 'package:io/ansi.dart';
 import 'cmds.dart';
 import 'shared/categorize.dart';
 
+/// The Command for `pheasant init`
 class InitCommand extends Command {
   @override
   String get description => '''Create a new Pheasant Project
@@ -54,6 +55,7 @@ class InitCommand extends Command {
   void run() => initCommand(argResults!);
 }
 
+/// The command for `pheasant doctor`
 class DoctorCommand extends Command {
   @override
   String get description => '''Doctor Command''';
@@ -71,6 +73,7 @@ class DoctorCommand extends Command {
   void run() => doctorCommand(argResults!);
 }
 
+/// The command for `pheasant run`
 class RunCommand extends Command {
   @override
   String get description => '''Run your Pheasant Application
@@ -102,6 +105,7 @@ class RunCommand extends Command {
   void run() => runCommand(argResults!);
 }
 
+/// The command for `pheasant build`
 class BuildCommand extends Command {
   @override
   String get description => '''Build a Pheasant Application
@@ -128,6 +132,7 @@ class BuildCommand extends Command {
   void run() => buildCommand(argResults!);
 }
 
+/// The command for `pheasant add`
 class AddCommand extends Command {
   @override
   String get description => '''Add Plugins to your project
@@ -158,6 +163,7 @@ class AddCommand extends Command {
   void run() => addCommand(argResults!);
 }
 
+/// The command for `pheasant remove`
 class RemoveCommand extends Command {
   @override
   String get description => '''Remove Plugins to your project
@@ -174,6 +180,7 @@ class RemoveCommand extends Command {
   void run() => removeCommand(argResults!);
 }
 
+/// The command for `pheasant create`
 class CreateCommand extends Command {
   @override
   String get description => InitCommand().description;
@@ -209,6 +216,7 @@ class CreateCommand extends Command {
   void run() => initCommand(argResults!);
 }
 
+/// The command for `pheasant serve`
 class ServeCommand extends Command {
   @override
   String get description => '''Run your Pheasant Application
@@ -235,6 +243,7 @@ class ServeCommand extends Command {
   void run() => runCommand(argResults!);
 }
 
+/// The command for `pheasant test`
 class TestCommand extends Command {
   @override
   String get description => '''Test a Pheasant Application
