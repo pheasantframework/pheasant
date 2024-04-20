@@ -15,9 +15,9 @@ import 'package:args/args.dart';
 import 'package:cli_util/cli_logging.dart';
 import 'package:io/ansi.dart';
 import 'package:io/io.dart';
-import 'package:pheasant_cli/src/commands/add/add_plugins.dart';
-import 'package:pheasant_cli/src/commands/general/configfile.dart';
-import 'package:pheasant_cli/src/commands/remove/remove_plugins.dart';
+import 'add/add_plugins.dart';
+import 'shared/configfile.dart';
+import 'remove/remove_plugins.dart';
 import 'package:pubspec_parse/pubspec_parse.dart' as pub;
 
 import 'run/prereq/get_plugins.dart';
@@ -27,7 +27,7 @@ import 'init/app/appgen.dart';
 import 'init/plugin/plugingen.dart';
 import 'init/interface.dart';
 import 'doctor/sdksearch.dart';
-import 'general/validate_project.dart';
+import 'shared/validate_project.dart';
 import 'build/build_application.dart';
 
 import '../config/config.dart';

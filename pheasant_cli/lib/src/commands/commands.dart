@@ -11,9 +11,9 @@ import 'dart:async';
 
 import 'package:args/command_runner.dart';
 import 'package:io/ansi.dart';
-import 'package:pheasant_cli/src/commands/cmds.dart';
 
-String categorize(String str) => wrapWith(str.replaceFirst(str[0], str[0].toUpperCase()), [styleBold, styleUnderlined])!;
+import 'cmds.dart';
+import 'shared/categorize.dart';
 
 class InitCommand extends Command {
   @override

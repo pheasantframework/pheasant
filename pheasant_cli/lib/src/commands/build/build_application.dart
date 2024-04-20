@@ -13,8 +13,8 @@ import 'package:cli_util/cli_logging.dart';
 import 'package:io/io.dart';
 import 'package:pubspec_parse/pubspec_parse.dart' as pub;
 
-import '../general/errors.dart';
-import '../general/validate_project.dart';
+import '../shared/errors.dart';
+import '../shared/validate_project.dart';
 import '../../config/config.dart';
 import '../../constants/buildfile.dart';
 

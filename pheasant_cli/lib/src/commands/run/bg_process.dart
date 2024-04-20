@@ -11,7 +11,7 @@ import 'dart:io';
 import 'package:cli_util/cli_logging.dart';
 import 'package:io/ansi.dart';
 import 'package:io/io.dart';
-import '../general/errors.dart';
+import '../shared/errors.dart';
 
 Future<void> bgProcess(ProcessManager manager, Logger logger) async {
   // Test

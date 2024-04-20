@@ -10,10 +10,10 @@ import 'dart:io';
 
 import 'package:cli_util/cli_logging.dart';
 import 'package:io/io.dart';
-import 'package:pheasant_cli/src/config/config.dart';
 import 'package:yaml_edit/yaml_edit.dart';
 
-import '../general/errors.dart';
+import '../../config/config.dart';
+import '../shared/errors.dart';
 
 Future<void> createYamlConfig(Logger logger, String proj, String projName,
     {Map<String, dynamic>? cliAnswers, AppConfig? appConfig}) async {

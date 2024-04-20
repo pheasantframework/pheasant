@@ -15,7 +15,7 @@ import 'package:io/ansi.dart';
 import 'package:io/io.dart';
 
 import 'log/analyze_log.dart';
-import '../general/errors.dart';
+import '../shared/errors.dart';
 
 Future<void> mainProcess(ProcessManager manager, Logger logger,
     {String? port, Iterable<String> options = const [], String? output}) async {

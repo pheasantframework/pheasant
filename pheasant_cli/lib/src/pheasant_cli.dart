@@ -10,6 +10,7 @@ import 'package:args/command_runner.dart';
 import 'package:pheasant_cli/src/commands/cmdrunner.dart';
 import 'package:pheasant_cli/src/commands/commands.dart';
 
+/// Command to run the CLI 
 Future<CommandRunner> run(List<String> args) async {
   return PheasantCommandRunner("pheasant", "The Pheasant Framework Command Line Interface")
   ..addCommand(DoctorCommand())

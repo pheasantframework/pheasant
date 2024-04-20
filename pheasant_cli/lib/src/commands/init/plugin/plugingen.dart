@@ -14,7 +14,7 @@ import 'package:io/io.dart';
 import 'package:path/path.dart';
 
 import 'pluginconfig.dart';
-import '../../general/errors.dart';
+import '../../shared/errors.dart';
 import '../app/appgen.dart';
 import '../config.dart';
 

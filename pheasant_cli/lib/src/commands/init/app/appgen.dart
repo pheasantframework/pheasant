@@ -18,7 +18,7 @@ import '../config.dart';
 import '../interface.dart';
 import 'custom_file.dart';
 
-import '../../general/errors.dart';
+import '../../shared/errors.dart';
 
 Future<void> initAppGenerate(
     Logger logger, ArgResults results, ProcessManager manager, String projName,
