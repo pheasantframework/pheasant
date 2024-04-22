@@ -1,3 +1,7 @@
+## 0.1.0-beta.2
+
+- Constraint problems fixed
+
 ## 0.1.0-beta.1
 
 - Minor Updates to the `Prop` constructor reflected in `pheasant_temp v0.1.0-beta.1`

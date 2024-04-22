@@ -14,7 +14,7 @@ dependencies:
   dart_style: ^2.3.4
   html: ^0.15.4
   markdown: ^7.1.1
-  pheasant_meta: ^0.1.0-beta.1
+  pheasant_meta: ^0.1.0-beta.2
   pheasant_assets: ^0.1.0-beta
 
 dev_dependencies:

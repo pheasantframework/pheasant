@@ -1,11 +1,11 @@
 name: pheasant_meta
 description: >- 
   Metadata to use in The Pheasant Framework. This also enlists base objects such as exceptions, errors and more for use in sibling packages.
-version: 0.1.0-beta.1
+version: 0.1.0-beta.2
 repository: https://github.com/pheasantframework/pheasant_meta
 
 environment:
-  sdk: ^3.2.3
+  sdk: ^3.0.0
 
 # Add regular dependencies here.
 dependencies:
