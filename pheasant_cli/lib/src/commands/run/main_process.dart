@@ -55,7 +55,8 @@ Future<void> mainProcess(ProcessManager manager, Logger logger,
             ? [outputOption, outputOption]
             : [])
       ],
-      runInShell: true)
+      runInShell: true
+    )
     ..stdout.transform(utf8.decoder).forEach((stream) {
       if (stream.isEmpty ||
           stream == " " ||

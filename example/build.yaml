@@ -4,11 +4,13 @@ targets:
       phse|pheasantMainBuilder:
         options:
           entry: lib/App.phs
+          web: web/main.dart
       phse|pheasantFileBuilder:
         options:
           entry: lib/App.phs
           sass: true
           phsComponents: true
+          js: true
 builders:
   pheasantMainBuilder:
     import: package:pheasant_build/src/build/builder.dart
@@ -26,5 +28,14 @@ builders:
     build_extensions:
       .phs:
         - .phs.dart
+    build_to: cache
+    auto_apply: root_package
+  pheasantRouterGenerator:
+    import: package:pheasant_build/src/build/builder.dart
+    builder_factories:
+      - pheasantRouterGenerator
+    build_extensions:
+      .dart:
+        - .routes.dart
     build_to: cache
     auto_apply: root_package

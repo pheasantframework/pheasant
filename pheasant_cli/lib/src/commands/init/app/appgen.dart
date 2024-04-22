@@ -93,7 +93,7 @@ Future<ProjGenClass> baseGeneration(
     '-t',
     'web',
     projPath ?? proj,
-    results.command!.wasParsed('force') ? '--force' : ''
+    results.wasParsed('force') ? '--force' : ''
   ]);
   // Check for errors in spawn
   await errorCheck(spawn, logger, genProgress);

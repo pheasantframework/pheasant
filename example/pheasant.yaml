@@ -10,5 +10,7 @@ config:
   linter: true
   formatter: true
   phsComponents: true
-plugins: []
+plugins:
+  main: []
+  dev: []
 dependencies: []

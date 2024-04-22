@@ -36,7 +36,7 @@ Map<String, dynamic> appanswers = Map.fromIterable(_appquestions.keys);
 Map<String, dynamic> pluginanswers = Map.fromIterable(_pluginquestions.keys);
 
 void initAppInterface(ArgResults results) {
-  if (results.command!.wasParsed('yes')) {
+  if (results.wasParsed('yes')) {
     appanswers.updateAll((key, value) => true);
   } else {
     _appquestions.forEach((key, value) {
@@ -60,7 +60,7 @@ Future<void> initPluginInterface(ArgResults results, {Logger? logger}) async {
     "state (not supported)",
     "app extensions (not supported)"
   ];
-  if (results.command!.wasParsed('yes')) {
+  if (results.wasParsed('yes')) {
     pluginanswers[pluginanswers.keys.first] = pluginOptions;
     pluginanswers[pluginanswers.keys.last] = true;
   } else {

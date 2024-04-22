@@ -107,10 +107,8 @@ void doctorCommand(ArgResults results) async {
 }
 
 void runCommand(ArgResults results) async {
-  List<String> configArgs =
-      results.wasParsed('define') ? results['define'] : [];
   String port =
-      results.command!.wasParsed('port') ? results.command!['port'] : '8080';
+      results.wasParsed('port') ? results['port'] : '8080';
 
   var verbose = results.wasParsed('verbose');
   var logger = verbose ? Logger.verbose() : Logger.standard();
@@ -118,7 +116,7 @@ void runCommand(ArgResults results) async {
   var serveManager = ProcessManager();
 
   logger.stdout(wrapWith('Pheasant\n', [yellow, styleBold])!);
-  AppConfig appConfig = await validateProject(logger, configArgs);
+  AppConfig appConfig = await validateProject(logger, []);
 
   var progress = logger.progress('Preparing Project for Build');
   File buildFile = await File('build.yaml').create();
@@ -136,45 +134,41 @@ void runCommand(ArgResults results) async {
     mainProcess(serveManager, logger,
         port: port,
         options: results.command?.options ?? [],
-        output: results.command!['output']),
+        output: results['output']),
   ]);
 
   await buildFile.delete();
 }
 
 void buildCommand(ArgResults results) async {
-  List<String> configArgs =
-      results.wasParsed('define') ? results['define'] : [];
   var verbose = results.wasParsed('verbose');
   var logger = verbose ? Logger.verbose() : Logger.standard();
   var manager = ProcessManager();
 
-  Progress progress = await checkProjectBeforeBuild(logger, configArgs);
+  Progress progress = await checkProjectBeforeBuild(logger, []);
 
   await buildApplication(progress, logger, manager, results);
 
   logger.stdout('All ${logger.ansi.emphasized('done')}.\n');
-  logger.stdout('Build Written to ${results.command!['output'] ?? 'build'}/');
+  logger.stdout('Build Written to ${results['output'] ?? 'build'}/');
   exit(0);
 }
 
 void addCommand(ArgResults results) async {
-  List<String> configArgs =
-      results.wasParsed('define') ? results['define'] : [];
   var verbose = results.wasParsed('verbose');
   var logger = verbose ? Logger.verbose() : Logger.standard();
-  List<String> plugins = results.command!.arguments
+  List<String> plugins = results.arguments
       .where((element) => !element.contains('-'))
       .toList();
-  String? gitUrl = results.command!['git'];
-  String? pathUrl = results.command!['path'];
-  String? hostUrl = results.command!['hosted'];
+  String? gitUrl = results['git'];
+  String? pathUrl = results['path'];
+  String? hostUrl = results['hosted'];
 
   Iterable<List<String>> items = plugins.map((e) => e.split(':'));
   var genProgress = logger.progress("Adding plugin(s) to 'pheasant.yaml' file");
   logger.stdout('\n');
   logger.trace('Parsing config file');
-  AppConfig appConfig = await validateProject(logger, configArgs, plugin: true);
+  AppConfig appConfig = await validateProject(logger, [], plugin: true);
   logger.trace('Adding plugins');
   AppConfig newConfig = addPlugins(items, gitUrl, appConfig, pathUrl, hostUrl);
   await writeConfigToFile(newConfig);
@@ -187,18 +181,16 @@ void addCommand(ArgResults results) async {
 }
 
 void removeCommand(ArgResults results) async {
-  List<String> configArgs =
-      results.wasParsed('define') ? results['define'] : [];
   var verbose = results.wasParsed('verbose');
   var logger = verbose ? Logger.verbose() : Logger.standard();
-  List<String> plugins = results.command!.arguments
+  List<String> plugins = results.arguments
       .where((element) => !element.contains('-'))
       .toList();
 
   var genProgress = logger.progress('Removing Plugins');
   logger.stdout('\n');
   logger.trace('Parsing config file');
-  AppConfig appConfig = await validateProject(logger, configArgs, plugin: true);
+  AppConfig appConfig = await validateProject(logger, [], plugin: true);
   removePlugins(appConfig, plugins);
   await writeConfigToFile(appConfig);
 

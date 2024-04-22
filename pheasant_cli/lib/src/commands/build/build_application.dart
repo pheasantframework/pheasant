@@ -27,10 +27,10 @@ Future<void> buildApplication(Progress progress, Logger logger,
   progress.finish(showTiming: true);
   progress = logger.progress('Building Code');
   List<String> args = ['build'];
-  if (results.command!.wasParsed('output')) {
-    args.addAll(['--output', results.command!['output']]);
+  if (results.wasParsed('output')) {
+    args.addAll(['--output', results['output']]);
   }
-  if (results.command!.wasParsed('release')) args.add('--release');
+  if (results.wasParsed('release')) args.add('--release');
   var buildProject = await manager.spawnDetached('webdev', args);
   await errorCheck(buildProject, logger, progress);
 }

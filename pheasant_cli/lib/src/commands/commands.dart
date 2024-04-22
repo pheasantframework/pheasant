@@ -35,6 +35,7 @@ class InitCommand extends Command {
             valueHelp: 'directory',
             help: 'The directory to create your new project',
           )
+          ..addFlag('verbose', abbr: 'V', negatable: false, help: "Output Verbose Logging")
           ..addFlag('yes',
               abbr: 'y',
               negatable: false,
@@ -64,9 +65,7 @@ class DoctorCommand extends Command {
   String get name => 'doctor';
 
   DoctorCommand() {
-    argParser.addFlag('verbose',
-              negatable: false,
-              help: 'Print more defined info during commands');
+    argParser.addFlag('verbose', abbr: 'V', negatable: false, help: "Output Verbose Logging");
   }
 
   @override
@@ -95,6 +94,7 @@ class RunCommand extends Command {
           ..addOption('output',
               abbr: 'o',
               help: 'A directory to write the results of the build to.')
+              ..addFlag('verbose', abbr: 'V', negatable: false, help: "Output Verbose Logging")
           ..addFlag('release',
               abbr: 'r',
               negatable: true,
@@ -123,6 +123,7 @@ class BuildCommand extends Command {
     argParser..addFlag('release',
               abbr: 'r', help: 'Build with release mode for this app')
               ..addFlag('test', negatable: true, defaultsTo: true, help: "Run tests before building command")
+              ..addFlag('verbose', abbr: 'V', negatable: false, help: "Output Verbose Logging")
           ..addOption('output',
               abbr: 'o',
               help: 'A directory to write the results of the build to.');
@@ -150,6 +151,7 @@ class AddCommand extends Command {
               valueHelp: 'url',
               help:
                   'Denote this is a github plugin with the repository at <url>')
+                  ..addFlag('verbose', abbr: 'V', negatable: false, help: "Output Verbose Logging")
           ..addOption('path',
               valueHelp: 'PATH',
               help: 'Denote this is a plugin gotten from path: <PATH>')
@@ -176,6 +178,10 @@ class RemoveCommand extends Command {
   @override
   String get category => categorize("plugins");
 
+  RemoveCommand() {
+    argParser.addFlag('verbose', abbr: 'V', negatable: false, help: "Output Verbose Logging");
+  }
+
   @override
   void run() => removeCommand(argResults!);
 }
@@ -201,6 +207,7 @@ class CreateCommand extends Command {
             valueHelp: 'directory',
             help: 'The directory to create your new project',
           )
+          ..addFlag('verbose', abbr: 'V', negatable: false, help: "Output Verbose Logging")
           ..addFlag('yes',
               abbr: 'y',
               negatable: false,
@@ -233,7 +240,9 @@ class ServeCommand extends Command {
   String get category => categorize("main");
 
   ServeCommand() {
-    argParser.addOption('port',
+    argParser
+    ..addFlag('verbose', abbr: 'V', negatable: false, help: "Output Verbose Logging")
+    ..addOption('port',
               abbr: 'p',
               defaultsTo: '8080',
               help: 'The port to run the web app on');
@@ -256,6 +265,10 @@ class TestCommand extends Command {
 
   @override
   String get category => categorize("main");
+
+  TestCommand() {
+    argParser.addFlag('verbose', abbr: 'V', negatable: false, help: "Output Verbose Logging");
+  }
 
   @override
   FutureOr? run() => throw UnimplementedError("The 'test' command is not available at the moment.");
