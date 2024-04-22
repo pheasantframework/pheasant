@@ -1,4 +1,4 @@
-## 0.1.0-grade
+## 0.1.0-extended
 - Extended Plugin Scaffolding Support.
 
 ## 0.1.0-beta.1

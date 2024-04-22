@@ -27,37 +27,37 @@ jobs:
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
       - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
+        uses: dart-lang/setup-dart@f0ead981b4d9a35b37f30d36160575d60931ec30
         with:
           sdk: stable
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - name: mono_repo self validate
         run: dart pub global activate mono_repo 6.6.1
       - name: mono_repo self validate
         run: dart pub global run mono_repo generate --validate
   job_002:
-    name: "analyze; Dart 3.2.0; PKG: pheasant; `dart analyze`"
+    name: "analyze; Dart 3.0.0; PKG: pheasant; `dart analyze`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
         uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.2.0;packages:pheasant;commands:analyze"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant;commands:analyze"
           restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.2.0;packages:pheasant
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.2.0
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
       - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
+        uses: dart-lang/setup-dart@f0ead981b4d9a35b37f30d36160575d60931ec30
         with:
-          sdk: "3.2.0"
+          sdk: "3.0.0"
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - id: pheasant_pub_upgrade
         name: pheasant; dart pub upgrade
         run: dart pub upgrade
@@ -68,26 +68,26 @@ jobs:
         if: "always() && steps.pheasant_pub_upgrade.conclusion == 'success'"
         working-directory: pheasant
   job_003:
-    name: "analyze; Dart 3.2.0; PKG: pheasant; `dart format --output=none --set-exit-if-changed .`"
+    name: "analyze; Dart 3.0.0; PKG: pheasant; `dart format --output=none --set-exit-if-changed .`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
         uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.2.0;packages:pheasant;commands:format"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant;commands:format"
           restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.2.0;packages:pheasant
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.2.0
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
       - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
+        uses: dart-lang/setup-dart@f0ead981b4d9a35b37f30d36160575d60931ec30
         with:
-          sdk: "3.2.0"
+          sdk: "3.0.0"
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - id: pheasant_pub_upgrade
         name: pheasant; dart pub upgrade
         run: dart pub upgrade
@@ -112,12 +112,12 @@ jobs:
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
       - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
+        uses: dart-lang/setup-dart@f0ead981b4d9a35b37f30d36160575d60931ec30
         with:
           sdk: "3.2.3"
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - id: pheasant_cli_pub_upgrade
         name: pheasant_cli; dart pub upgrade
         run: dart pub upgrade
@@ -142,12 +142,12 @@ jobs:
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
       - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
+        uses: dart-lang/setup-dart@f0ead981b4d9a35b37f30d36160575d60931ec30
         with:
           sdk: "3.2.3"
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - id: pheasant_cli_pub_upgrade
         name: pheasant_cli; dart pub upgrade
         run: dart pub upgrade
@@ -172,12 +172,12 @@ jobs:
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
       - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
+        uses: dart-lang/setup-dart@f0ead981b4d9a35b37f30d36160575d60931ec30
         with:
           sdk: dev
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - id: pheasant_pub_upgrade
         name: pheasant; dart pub upgrade
         run: dart pub upgrade
@@ -202,12 +202,12 @@ jobs:
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
       - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
+        uses: dart-lang/setup-dart@f0ead981b4d9a35b37f30d36160575d60931ec30
         with:
           sdk: dev
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - id: pheasant_cli_pub_upgrade
         name: pheasant_cli; dart pub upgrade
         run: dart pub upgrade
@@ -232,12 +232,12 @@ jobs:
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
       - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
+        uses: dart-lang/setup-dart@f0ead981b4d9a35b37f30d36160575d60931ec30
         with:
           sdk: dev
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - id: pheasant_pub_upgrade
         name: pheasant; dart pub upgrade
         run: dart pub upgrade
@@ -262,12 +262,12 @@ jobs:
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
       - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
+        uses: dart-lang/setup-dart@f0ead981b4d9a35b37f30d36160575d60931ec30
         with:
           sdk: dev
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - id: pheasant_cli_pub_upgrade
         name: pheasant_cli; dart pub upgrade
         run: dart pub upgrade
@@ -278,26 +278,26 @@ jobs:
         if: "always() && steps.pheasant_cli_pub_upgrade.conclusion == 'success'"
         working-directory: pheasant_cli
   job_010:
-    name: "unit_test; Dart 3.2.0; PKG: pheasant; `dart test`"
+    name: "unit_test; Dart 3.0.0; PKG: pheasant; `dart test`"
     runs-on: ubuntu-latest
     steps:
       - name: Cache Pub hosted dependencies
         uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
         with:
           path: "~/.pub-cache/hosted"
-          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.2.0;packages:pheasant;commands:test"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant;commands:test"
           restore-keys: |
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.2.0;packages:pheasant
-            os:ubuntu-latest;pub-cache-hosted;sdk:3.2.0
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
       - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
+        uses: dart-lang/setup-dart@f0ead981b4d9a35b37f30d36160575d60931ec30
         with:
-          sdk: "3.2.0"
+          sdk: "3.0.0"
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - id: pheasant_pub_upgrade
         name: pheasant; dart pub upgrade
         run: dart pub upgrade
@@ -318,6 +318,135 @@ jobs:
       - job_008
       - job_009
   job_011:
+    name: "unit_test; Dart 3.0.0; PKG: pheasant_build; `dart test`"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cache Pub hosted dependencies
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
+        with:
+          path: "~/.pub-cache/hosted"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_build;commands:test"
+          restore-keys: |
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_build
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0
+            os:ubuntu-latest;pub-cache-hosted
+            os:ubuntu-latest
+      - name: Setup Dart SDK
+        uses: dart-lang/setup-dart@f0ead981b4d9a35b37f30d36160575d60931ec30
+        with:
+          sdk: "3.0.0"
+      - id: checkout
+        name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+            submodules: true
+            token: ${{ secrets.CI_TOKEN }}
+      - id: pheasant_build_pub_upgrade
+        name: pheasant_build; dart pub upgrade
+        run: dart pub upgrade
+        if: "always() && steps.checkout.conclusion == 'success'"
+        working-directory: pheasant_build
+      - name: pheasant_build; dart test
+        run: dart test
+        if: "always() && steps.pheasant_build_pub_upgrade.conclusion == 'success'"
+        working-directory: pheasant_build
+    needs:
+      - job_001
+      - job_002
+      - job_003
+      - job_004
+      - job_005
+      - job_006
+      - job_007
+      - job_008
+      - job_009
+  job_012:
+    name: "unit_test; Dart 3.0.0; PKG: pheasant_temp; `dart test`"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cache Pub hosted dependencies
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
+        with:
+          path: "~/.pub-cache/hosted"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_temp;commands:test"
+          restore-keys: |
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0;packages:pheasant_temp
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.0.0
+            os:ubuntu-latest;pub-cache-hosted
+            os:ubuntu-latest
+      - name: Setup Dart SDK
+        uses: dart-lang/setup-dart@f0ead981b4d9a35b37f30d36160575d60931ec30
+        with:
+          sdk: "3.0.0"
+      - id: checkout
+        name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+            submodules: true
+            token: ${{ secrets.CI_TOKEN }}
+      - id: pheasant_temp_pub_upgrade
+        name: pheasant_temp; dart pub upgrade
+        run: dart pub upgrade
+        if: "always() && steps.checkout.conclusion == 'success'"
+        working-directory: pheasant_temp
+      - name: pheasant_temp; dart test
+        run: dart test
+        if: "always() && steps.pheasant_temp_pub_upgrade.conclusion == 'success'"
+        working-directory: pheasant_temp
+    needs:
+      - job_001
+      - job_002
+      - job_003
+      - job_004
+      - job_005
+      - job_006
+      - job_007
+      - job_008
+      - job_009
+  job_013:
+    name: "unit_test; Dart 3.2.3; PKG: pheasant_assets; `dart test`"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cache Pub hosted dependencies
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
+        with:
+          path: "~/.pub-cache/hosted"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.2.3;packages:pheasant_assets;commands:test"
+          restore-keys: |
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.2.3;packages:pheasant_assets
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.2.3
+            os:ubuntu-latest;pub-cache-hosted
+            os:ubuntu-latest
+      - name: Setup Dart SDK
+        uses: dart-lang/setup-dart@f0ead981b4d9a35b37f30d36160575d60931ec30
+        with:
+          sdk: "3.2.3"
+      - id: checkout
+        name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+            submodules: true
+            token: ${{ secrets.CI_TOKEN }}
+      - id: pheasant_assets_pub_upgrade
+        name: pheasant_assets; dart pub upgrade
+        run: dart pub upgrade
+        if: "always() && steps.checkout.conclusion == 'success'"
+        working-directory: pheasant_assets
+      - name: pheasant_assets; dart test
+        run: dart test
+        if: "always() && steps.pheasant_assets_pub_upgrade.conclusion == 'success'"
+        working-directory: pheasant_assets
+    needs:
+      - job_001
+      - job_002
+      - job_003
+      - job_004
+      - job_005
+      - job_006
+      - job_007
+      - job_008
+      - job_009
+  job_014:
     name: "unit_test; Dart 3.2.3; PKG: pheasant_cli; `dart test`"
     runs-on: ubuntu-latest
     steps:
@@ -332,12 +461,12 @@ jobs:
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
       - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
+        uses: dart-lang/setup-dart@f0ead981b4d9a35b37f30d36160575d60931ec30
         with:
           sdk: "3.2.3"
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - id: pheasant_cli_pub_upgrade
         name: pheasant_cli; dart pub upgrade
         run: dart pub upgrade
@@ -357,7 +486,50 @@ jobs:
       - job_007
       - job_008
       - job_009
-  job_012:
+  job_015:
+    name: "unit_test; Dart 3.2.3; PKG: pheasant_meta; `dart test`"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cache Pub hosted dependencies
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
+        with:
+          path: "~/.pub-cache/hosted"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:3.2.3;packages:pheasant_meta;commands:test"
+          restore-keys: |
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.2.3;packages:pheasant_meta
+            os:ubuntu-latest;pub-cache-hosted;sdk:3.2.3
+            os:ubuntu-latest;pub-cache-hosted
+            os:ubuntu-latest
+      - name: Setup Dart SDK
+        uses: dart-lang/setup-dart@f0ead981b4d9a35b37f30d36160575d60931ec30
+        with:
+          sdk: "3.2.3"
+      - id: checkout
+        name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+            submodules: true
+            token: ${{ secrets.CI_TOKEN }}
+      - id: pheasant_meta_pub_upgrade
+        name: pheasant_meta; dart pub upgrade
+        run: dart pub upgrade
+        if: "always() && steps.checkout.conclusion == 'success'"
+        working-directory: pheasant_meta
+      - name: pheasant_meta; dart test
+        run: dart test
+        if: "always() && steps.pheasant_meta_pub_upgrade.conclusion == 'success'"
+        working-directory: pheasant_meta
+    needs:
+      - job_001
+      - job_002
+      - job_003
+      - job_004
+      - job_005
+      - job_006
+      - job_007
+      - job_008
+      - job_009
+  job_016:
     name: "unit_test; Dart dev; PKG: pheasant; `dart test`"
     runs-on: ubuntu-latest
     steps:
@@ -372,12 +544,12 @@ jobs:
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
       - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
+        uses: dart-lang/setup-dart@f0ead981b4d9a35b37f30d36160575d60931ec30
         with:
           sdk: dev
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - id: pheasant_pub_upgrade
         name: pheasant; dart pub upgrade
         run: dart pub upgrade
@@ -397,7 +569,93 @@ jobs:
       - job_007
       - job_008
       - job_009
-  job_013:
+  job_017:
+    name: "unit_test; Dart dev; PKG: pheasant_assets; `dart test`"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cache Pub hosted dependencies
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
+        with:
+          path: "~/.pub-cache/hosted"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_assets;commands:test"
+          restore-keys: |
+            os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_assets
+            os:ubuntu-latest;pub-cache-hosted;sdk:dev
+            os:ubuntu-latest;pub-cache-hosted
+            os:ubuntu-latest
+      - name: Setup Dart SDK
+        uses: dart-lang/setup-dart@f0ead981b4d9a35b37f30d36160575d60931ec30
+        with:
+          sdk: dev
+      - id: checkout
+        name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+            submodules: true
+            token: ${{ secrets.CI_TOKEN }}
+      - id: pheasant_assets_pub_upgrade
+        name: pheasant_assets; dart pub upgrade
+        run: dart pub upgrade
+        if: "always() && steps.checkout.conclusion == 'success'"
+        working-directory: pheasant_assets
+      - name: pheasant_assets; dart test
+        run: dart test
+        if: "always() && steps.pheasant_assets_pub_upgrade.conclusion == 'success'"
+        working-directory: pheasant_assets
+    needs:
+      - job_001
+      - job_002
+      - job_003
+      - job_004
+      - job_005
+      - job_006
+      - job_007
+      - job_008
+      - job_009
+  job_018:
+    name: "unit_test; Dart dev; PKG: pheasant_build; `dart test`"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cache Pub hosted dependencies
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
+        with:
+          path: "~/.pub-cache/hosted"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_build;commands:test"
+          restore-keys: |
+            os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_build
+            os:ubuntu-latest;pub-cache-hosted;sdk:dev
+            os:ubuntu-latest;pub-cache-hosted
+            os:ubuntu-latest
+      - name: Setup Dart SDK
+        uses: dart-lang/setup-dart@f0ead981b4d9a35b37f30d36160575d60931ec30
+        with:
+          sdk: dev
+      - id: checkout
+        name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+            submodules: true
+            token: ${{ secrets.CI_TOKEN }}
+      - id: pheasant_build_pub_upgrade
+        name: pheasant_build; dart pub upgrade
+        run: dart pub upgrade
+        if: "always() && steps.checkout.conclusion == 'success'"
+        working-directory: pheasant_build
+      - name: pheasant_build; dart test
+        run: dart test
+        if: "always() && steps.pheasant_build_pub_upgrade.conclusion == 'success'"
+        working-directory: pheasant_build
+    needs:
+      - job_001
+      - job_002
+      - job_003
+      - job_004
+      - job_005
+      - job_006
+      - job_007
+      - job_008
+      - job_009
+  job_019:
     name: "unit_test; Dart dev; PKG: pheasant_cli; `dart test`"
     runs-on: ubuntu-latest
     steps:
@@ -412,12 +670,12 @@ jobs:
             os:ubuntu-latest;pub-cache-hosted
             os:ubuntu-latest
       - name: Setup Dart SDK
-        uses: dart-lang/setup-dart@b64355ae6ca0b5d484f0106a033dd1388965d06d
+        uses: dart-lang/setup-dart@f0ead981b4d9a35b37f30d36160575d60931ec30
         with:
           sdk: dev
       - id: checkout
         name: Checkout repository
-        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - id: pheasant_cli_pub_upgrade
         name: pheasant_cli; dart pub upgrade
         run: dart pub upgrade
@@ -427,6 +685,92 @@ jobs:
         run: dart test
         if: "always() && steps.pheasant_cli_pub_upgrade.conclusion == 'success'"
         working-directory: pheasant_cli
+    needs:
+      - job_001
+      - job_002
+      - job_003
+      - job_004
+      - job_005
+      - job_006
+      - job_007
+      - job_008
+      - job_009
+  job_020:
+    name: "unit_test; Dart dev; PKG: pheasant_meta; `dart test`"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cache Pub hosted dependencies
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
+        with:
+          path: "~/.pub-cache/hosted"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_meta;commands:test"
+          restore-keys: |
+            os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_meta
+            os:ubuntu-latest;pub-cache-hosted;sdk:dev
+            os:ubuntu-latest;pub-cache-hosted
+            os:ubuntu-latest
+      - name: Setup Dart SDK
+        uses: dart-lang/setup-dart@f0ead981b4d9a35b37f30d36160575d60931ec30
+        with:
+          sdk: dev
+      - id: checkout
+        name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+            submodules: true
+            token: ${{ secrets.CI_TOKEN }}
+      - id: pheasant_meta_pub_upgrade
+        name: pheasant_meta; dart pub upgrade
+        run: dart pub upgrade
+        if: "always() && steps.checkout.conclusion == 'success'"
+        working-directory: pheasant_meta
+      - name: pheasant_meta; dart test
+        run: dart test
+        if: "always() && steps.pheasant_meta_pub_upgrade.conclusion == 'success'"
+        working-directory: pheasant_meta
+    needs:
+      - job_001
+      - job_002
+      - job_003
+      - job_004
+      - job_005
+      - job_006
+      - job_007
+      - job_008
+      - job_009
+  job_021:
+    name: "unit_test; Dart dev; PKG: pheasant_temp; `dart test`"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cache Pub hosted dependencies
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9
+        with:
+          path: "~/.pub-cache/hosted"
+          key: "os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_temp;commands:test"
+          restore-keys: |
+            os:ubuntu-latest;pub-cache-hosted;sdk:dev;packages:pheasant_temp
+            os:ubuntu-latest;pub-cache-hosted;sdk:dev
+            os:ubuntu-latest;pub-cache-hosted
+            os:ubuntu-latest
+      - name: Setup Dart SDK
+        uses: dart-lang/setup-dart@f0ead981b4d9a35b37f30d36160575d60931ec30
+        with:
+          sdk: dev
+      - id: checkout
+        name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+            submodules: true
+            token: ${{ secrets.CI_TOKEN }}
+      - id: pheasant_temp_pub_upgrade
+        name: pheasant_temp; dart pub upgrade
+        run: dart pub upgrade
+        if: "always() && steps.checkout.conclusion == 'success'"
+        working-directory: pheasant_temp
+      - name: pheasant_temp; dart test
+        run: dart test
+        if: "always() && steps.pheasant_temp_pub_upgrade.conclusion == 'success'"
+        working-directory: pheasant_temp
     needs:
       - job_001
       - job_002
