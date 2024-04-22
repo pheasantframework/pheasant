@@ -1,0 +1,28 @@
+name: pheasant_build
+description: >-
+  The build package for all pheasant related compilation, as well as pheasant project configuration.
+version: 0.1.0-grade
+repository: https://github.com/pheasantframework/pheasant/tree/main/pheasant_build
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+# Add regular dependencies here.
+dependencies:
+  build: ^2.4.1
+  build_runner: ^2.4.7
+  build_web_compilers: ^4.0.7
+  pheasant_temp: ^0.1.0-grade
+  pheasant_meta: ^0.1.0-beta.1
+  pheasant_assets: ^0.1.0-beta
+  path: ^1.9.0
+  source_gen: ^1.5.0
+
+dev_dependencies:
+  build_test: ^2.2.2
+  lints: ^3.0.0
+  test: ^1.24.0
+
+topics:
+  - pheasant
+  - web
