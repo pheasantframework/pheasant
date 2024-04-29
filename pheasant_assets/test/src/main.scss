@@ -1,0 +1,27 @@
+// Random SCSS styles
+$primary-color: #ff6347;
+$secondary-color: #2ecc71;
+
+body {
+  font-family: "Open Sans", sans-serif;
+  background-color: #f5f5f5;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: $primary-color;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}
