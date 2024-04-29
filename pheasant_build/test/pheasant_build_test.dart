@@ -1,9 +1,9 @@
 // Copyright (c) 2024 The Pheasant Group. All Rights Reserved.
 // Please see the AUTHORS files for more information.
 // Intellectual property of third-party.
-// 
+//
 // This file, as well as use of the code in it, is governed by an MIT License
-// that can be found in the LICENSE file. 
+// that can be found in the LICENSE file.
 // You may use this file only in accordance with the license.
 // https://mit-license.org
 
@@ -67,14 +67,19 @@ int number = 9;
 '''
       };
       var splitAssets = {
-        'a|lib/App.phs': ['', '''
+        'a|lib/App.phs': [
+          '',
+          '''
 
 <div>
     <h2>Hello World</h2>
     <p>Welcome to the first test</p>
 </div>
-'''],
-        'b|lib/App.phs': ['int number = 9;', '''
+'''
+        ],
+        'b|lib/App.phs': [
+          'int number = 9;',
+          '''
 
 <div>
     <div p-for="int i = 0; i < number; ++i">
@@ -84,12 +89,13 @@ int number = 9;
         <p>Hello World Again</p>
     </div>
 </div>
-''']
+'''
+        ]
       };
 
       await testBuilder(
-        PheasantFileBuilder(sass: true, js: true), 
-        assets, 
+        PheasantFileBuilder(sass: true, js: true),
+        assets,
         onLog: print,
       );
     });
@@ -98,5 +104,4 @@ int number = 9;
       return null;
     });
   });
-
 }

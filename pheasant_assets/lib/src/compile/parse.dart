@@ -3,7 +3,7 @@
 // Intellectual property of third-party.
 //
 // This file, as well as use of the code in it, is governed by an MIT License
-// that can be found in the LICENSE file. 
+// that can be found in the LICENSE file.
 // You may use this file only in accordance with the license.
 
 import 'package:pheasant_assets/pheasant_assets.dart';
@@ -26,10 +26,12 @@ PheasantStyle getStyleInput(String style, {bool sassEnabled = true}) {
     r'>', // Match the closing angle bracket '>'
   );
   if (!style.contains(regex)) {
-    throw PheasantStyleException("There seems to be an error in the source parsed. There's no <style> opening tag");
+    throw PheasantStyleException(
+        "There seems to be an error in the source parsed. There's no <style> opening tag");
   }
   if (!style.contains("</style>")) {
-    throw PheasantStyleException("There seems to be an error in the source parsed. There's no <style> closing tag");
+    throw PheasantStyleException(
+        "There seems to be an error in the source parsed. There's no <style> closing tag");
   }
   Match mainMatch = regex.allMatches(style).first;
   String data =
