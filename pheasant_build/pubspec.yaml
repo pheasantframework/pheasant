@@ -2,7 +2,7 @@ name: pheasant_build
 description: >-
   The build package for all pheasant related compilation, as well as pheasant project configuration.
 version: 0.1.0-tested
-repository: https://github.com/pheasantframework/pheasant_build
+repository: https://github.com/pheasantframework/pheasant/tree/main/pheasant_build
 
 environment:
   sdk: '>=3.0.0'

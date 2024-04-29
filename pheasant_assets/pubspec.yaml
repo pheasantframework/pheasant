@@ -2,7 +2,7 @@ name: pheasant_assets
 description: >- 
   Package for rendering styles and other external assets from the Pheasant Framework for Component Files.
 version: 0.1.0-tested
-repository: https://github.com/pheasantframework/pheasant_assets
+repository: https://github.com/pheasantframework/pheasant/tree/main/pheasant_assets
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
