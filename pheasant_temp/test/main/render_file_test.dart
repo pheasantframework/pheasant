@@ -116,9 +116,7 @@ void main() {
       assert(RegExp(r'_i2.Element ' +
                   variableNameRegExp.pattern +
                   r" = _i2\.Element\.tag\(\'a\'\)")
-              .allMatches(output)
-              .length >=
-          2);
+              .allMatches(output).isNotEmpty);
       expect(output, contains('for (int i = 0; i < 2; ++i) {'));
       assert(RegExp(r'\<code\>markdown\<\/code\>').hasMatch(output));
       assert(RegExp(r'_i2.StyleElement ' +
