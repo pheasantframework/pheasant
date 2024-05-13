@@ -1,6 +1,11 @@
 ## 0.1.0-tested
 - Added unit tests for metadata.
 - Updated dependency constraints
+=======
+## 0.1.0-beta.2
+
+- Constraint problems fixed
+>>>>>>> main
 
 ## 0.1.0-beta.1
 

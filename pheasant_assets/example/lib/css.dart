@@ -7,6 +7,7 @@
 // You may use this file only in accordance with the license.
 // https://mit-license.org
 
+
 import 'package:pheasant_assets/pheasant_assets.dart';
 
 void main() {

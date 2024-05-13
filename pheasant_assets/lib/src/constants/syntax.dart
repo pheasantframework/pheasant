@@ -6,5 +6,6 @@
 // that can be found in the LICENSE file.
 // You may use this file only in accordance with the license.
 
+
 /// List of valid css syntaxes to use. Can be modified in the case that Pheasant is running on npm.
 List<String> syntax = ['css', 'sass', 'scss'];

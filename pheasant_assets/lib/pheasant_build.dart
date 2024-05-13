@@ -6,6 +6,7 @@
 // that can be found in the LICENSE file.
 // You may use this file only in accordance with the license.
 
+
 /// Minified version of the general `pheasant_assets` library for use during build.
 ///
 /// This library is usually used in the `pheasant_build` package, but you can use it for simple and quick encapsulation of asset processing code.

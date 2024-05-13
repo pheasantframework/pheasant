@@ -7,6 +7,7 @@
 // You may use this file only in accordance with the license.
 // https://mit-license.org
 
+
 import 'dart:js_interop';
 
 /// Get the current path of the page

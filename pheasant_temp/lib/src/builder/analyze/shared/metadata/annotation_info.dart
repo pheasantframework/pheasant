@@ -6,6 +6,7 @@
 // that can be found in the LICENSE file.
 // You may use this file only in accordance with the license.
 
+
 /// Class used to encapsulate compound annotation info.
 ///
 /// This class is used to get and encapsulate annotation info in annotations where parameters are passed such as the `@Prop()` annotation.

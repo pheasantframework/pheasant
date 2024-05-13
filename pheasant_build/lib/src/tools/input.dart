@@ -6,6 +6,7 @@
 // that can be found in the LICENSE file.
 // You may use this file only in accordance with the license.
 
+
 import 'package:pheasant_assets/pheasant_build.dart' show PheasantStyle;
 
 /// Base Class for a Pheasant File.

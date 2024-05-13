@@ -7,6 +7,7 @@
 // You may use this file only in accordance with the license.
 // https://mit-license.org
 
+
 import 'dart:html';
 
 void _onPageChange(void Function(Event event) func, [bool? useCapture]) {

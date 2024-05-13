@@ -4,6 +4,7 @@
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/pheasantframework/pheasant_meta/dart.yml?labelColor=rgb(245%2C%20193%2C%2066))
 
 
+
 This package contains metadata, constants and the likes used in the subsequent packages in the framework. It is not intended for direct use, but can be depended on as a dev depenedency when developing plugins and libraries for the Pheasant Framework.
 
 It also contains base classes for creating your own custom metadata for your plugins to be rendered by the framework.
@@ -13,6 +14,9 @@ It also contains base classes for creating your own custom metadata for your plu
 Get this package by running `dart pub`
 ```bash
 dart pub add pheasant_meta
+=======
+dart pub add dev:pheasant_meta
+>>>>>>> main
 ```
 
 Then you can make use of it directly in your project.

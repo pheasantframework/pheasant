@@ -6,6 +6,7 @@
 // that can be found in the LICENSE file.
 // You may use this file only in accordance with the license.
 
+
 import '../assets.dart' hide StyleScope;
 
 /// Small function to help in the creation of ids used to identify and scope component styles in a pheasant component.

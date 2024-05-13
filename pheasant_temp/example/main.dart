@@ -7,6 +7,7 @@
 // You may use this file only in accordance with the license.
 // https://mit-license.org
 
+
 import 'package:pheasant_temp/pheasant_temp.dart';
 
 void main() {
@@ -31,6 +32,9 @@ external void log(String data);
 
 """, template: """
 <div class="foo">
+=======
+<div class="foo" p-for="var value in nums">
+>>>>>>> main
   Welcome to Pheasant
   <p>Hello World {{number}}</p>
   <a href="#" class="fee" id="me">Click Here</a>
@@ -47,6 +51,17 @@ void main() {
   print("Hello World");
 }
 ```
+=======
+  # Hello
+  Welcome to the Pheasant Template Example Base
+  It's quite fun here, and this text here was actually originally markdown.
+  We can write single `code` and multiblock code like this
+  ```dart
+  void main() {
+    print("Hello World");
+  }
+  ```
+>>>>>>> main
   </md>
   <Component />
 </div>

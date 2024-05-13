@@ -6,6 +6,7 @@
 // that can be found in the LICENSE file.
 // You may use this file only in accordance with the license.
 
+
 import 'package:pheasant_meta/src/meta/basic/objects.dart';
 
 /// Annotation object used in pheasant compiled build files.
