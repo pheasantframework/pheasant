@@ -1,3 +1,12 @@
+// Copyright (c) 2024 The Pheasant Group. All Rights Reserved.
+// Please see the AUTHORS files for more information.
+// Intellectual property of third-party.
+//
+// This file, as well as use of the code in it, is governed by an MIT License
+// that can be found in the LICENSE file.
+// You may use this file only in accordance with the license.
+
+
 /// The major and general library containing all functionality to parse, scope and process css/sass in a Pheasant Component
 ///
 /// This library helps with the parsing, analyzing, rendering and scoping of styles located in the `styles` part of a pheasant file.

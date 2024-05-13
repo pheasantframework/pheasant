@@ -1,3 +1,7 @@
+## 0.1.0-tested
+- Implemented tests.
+- Updated Dependency Constraints
+
 ## 0.1.0-grade
 - Added Support for Routing via `p-route` attribute
 - Added new routing directives

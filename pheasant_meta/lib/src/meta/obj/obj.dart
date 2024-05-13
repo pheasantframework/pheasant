@@ -1,3 +1,12 @@
+// Copyright (c) 2024 The Pheasant Group. All Rights Reserved.
+// Please see the AUTHORS files for more information.
+// Intellectual property of third-party.
+//
+// This file, as well as use of the code in it, is governed by an MIT License
+// that can be found in the LICENSE file.
+// You may use this file only in accordance with the license.
+
+
 import 'package:pheasant_meta/src/meta/basic/objects.dart';
 
 /// Declares objects that are not supported in HTML5 Standard. These should therefore not be used in a HTML5 interface.
@@ -22,9 +31,8 @@ class AltVersion extends AnnotationObject {
 
   const AltVersion(this.functionName,
       {required this.version,
-      String info =
-          'This is an updated version of the function, so the old one is deprecated'})
-      : super(info: info);
+      super.info =
+          'This is an updated version of the function, so the old one is deprecated'});
 }
 
 /// Annotation object which declares that a certain function or object is not optimized/perfect, and should be replaced by alternative functionality during production, or at a later time.
@@ -40,8 +48,7 @@ class Change extends AnnotationObject {
   const Change(this.reason,
       {this.suggestedFunc,
       this.suggestedVersion,
-      String info = 'Do not make use of this in later versions'})
-      : super(info: info);
+      super.info = 'Do not make use of this in later versions'});
 }
 
 /// Annotation object used to denote functionality that will be used from [s], the given version.

@@ -1,3 +1,12 @@
+// Copyright (c) 2024 The Pheasant Group. All Rights Reserved.
+// Please see the AUTHORS files for more information.
+// Intellectual property of third-party.
+//
+// This file, as well as use of the code in it, is governed by an MIT License
+// that can be found in the LICENSE file.
+// You may use this file only in accordance with the license.
+
+
 import 'dart:io' show Directory;
 
 import 'package:csslib/parser.dart' as css show Message, compile;
@@ -46,9 +55,10 @@ String compileCss(PheasantStyle pheasantStyle, String cssString,
       return cssString;
     }
   } else {
-    if (!sassEnabled)
+    if (!sassEnabled) {
       throw PheasantStyleException(
           'Sass is not enabled on this project. Set sass to true in your pheasant.yaml or pheasant.json file in your project to use sass');
+    }
     try {
       final cssData = sass.compileStringToResult(cssString,
           syntax: pheasantStyle.syntax == 'scss'

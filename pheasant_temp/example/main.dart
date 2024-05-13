@@ -1,3 +1,13 @@
+// Copyright (c) 2024 The Pheasant Group. All Rights Reserved.
+// Please see the AUTHORS files for more information.
+// Intellectual property of third-party.
+//
+// This file, as well as use of the code in it, is governed by an MIT License
+// that can be found in the LICENSE file.
+// You may use this file only in accordance with the license.
+// https://mit-license.org
+
+
 import 'package:pheasant_temp/pheasant_temp.dart';
 
 void main() {
@@ -21,7 +31,10 @@ void subtractNum() {
 external void log(String data);
 
 """, template: """
+<div class="foo">
+=======
 <div class="foo" p-for="var value in nums">
+>>>>>>> main
   Welcome to Pheasant
   <p>Hello World {{number}}</p>
   <a href="#" class="fee" id="me">Click Here</a>
@@ -29,6 +42,16 @@ external void log(String data);
   <p>{{nums[0]}}</p>
   <fruit class="fred" id="foo"/>
   <md>
+# Hello
+Welcome to the Pheasant Template Example Base
+It's quite fun here, and this text here was actually originally markdown.
+We can write single `code` and multiblock code like this
+```dart
+void main() {
+  print("Hello World");
+}
+```
+=======
   # Hello
   Welcome to the Pheasant Template Example Base
   It's quite fun here, and this text here was actually originally markdown.
@@ -38,6 +61,7 @@ external void log(String data);
     print("Hello World");
   }
   ```
+>>>>>>> main
   </md>
   <Component />
 </div>

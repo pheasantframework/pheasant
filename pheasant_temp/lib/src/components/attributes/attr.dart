@@ -1,3 +1,12 @@
+// Copyright (c) 2024 The Pheasant Group. All Rights Reserved.
+// Please see the AUTHORS files for more information.
+// Intellectual property of third-party.
+//
+// This file, as well as use of the code in it, is governed by an MIT License
+// that can be found in the LICENSE file.
+// You may use this file only in accordance with the license.
+
+
 // ignore_for_file: constant_identifier_names
 
 /// Base class for a Pheasant Attribute/Directive in a '.phs' template file
