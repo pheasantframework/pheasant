@@ -8,7 +8,6 @@
 
 import 'package:pheasant_assets/pheasant_assets.dart';
 
-import '../assets.dart' hide PheasantStyleScoped;
 
 /// Code to extract a [PheasantStyle] from a `style` component in a pheasant file.
 ///

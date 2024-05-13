@@ -9,7 +9,6 @@
 
 import 'package:build_test/build_test.dart';
 import 'package:pheasant_build/src/build/src/pheasant_file_builder.dart';
-import 'package:pheasant_temp/pheasant_temp.dart';
 import 'package:test/test.dart';
 
 import 'package:pheasant_build/src/build/src/pheasant_router_builder.dart'
@@ -65,32 +64,6 @@ int number = 9;
 </div>
 </template>
 '''
-      };
-      var splitAssets = {
-        'a|lib/App.phs': [
-          '',
-          '''
-
-<div>
-    <h2>Hello World</h2>
-    <p>Welcome to the first test</p>
-</div>
-'''
-        ],
-        'b|lib/App.phs': [
-          'int number = 9;',
-          '''
-
-<div>
-    <div p-for="int i = 0; i < number; ++i">
-        <p>My number {i}</p>
-    </div>
-    <div>
-        <p>Hello World Again</p>
-    </div>
-</div>
-'''
-        ]
       };
 
       await testBuilder(

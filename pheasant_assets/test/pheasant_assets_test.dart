@@ -116,46 +116,23 @@ body {
       PheasantStyle sA = getStyleInput(a, sassEnabled: false);
       PheasantStyle sB = getStyleInput(b, sassEnabled: false);
       PheasantStyle sC = getStyleInput(c, sassEnabled: false);
-      PheasantStyle sD = getStyleInput(d, sassEnabled: false);
-      PheasantStyle sE = getStyleInput(e, sassEnabled: false);
-      PheasantStyle sF = getStyleInput(f, sassEnabled: false);
-      PheasantStyle sG = getStyleInput(g, sassEnabled: false);
+
+      test("Extract Styles in Files (sass disabled)", () {
+        expect(sA.src, isNull);
+        expect(sA.syntax, equals('css'));
+        expect(sA.scope, equals(StyleScope.local));
+        expect(sA.data, isNull);
+
+        expect(sB.src, isNull);
+        expect(sB.data, isNotEmpty);
+        expect(sB.scope, equals('css'));
+
+        expect(sC.src, isNull);
+        expect(sC.scope, equals(StyleScope.global));
+        expect(sC.syntax, equals('css'));
+      });
 
       test("Extract Styles in Files (sass disabled)", () {});
-
-      test("Extract Styles in Files (sass disabled)", () {});
     });
-  });
-
-  group('Compile Styles Test', () {
-    PheasantStyle sA = getStyleInput(a);
-    PheasantStyle sB = getStyleInput(b);
-    PheasantStyle sC = getStyleInput(c);
-    PheasantStyle sD = getStyleInput(d);
-    PheasantStyle sE = getStyleInput(e);
-    PheasantStyle sF = getStyleInput(f);
-    PheasantStyle sG = getStyleInput(g);
-
-    bool sass;
-
-    group('Sass Enabled Tests', () {
-      setUp(() => sass = true);
-
-      // expect(, matcher)
-    });
-
-    group("Sass Disabled Test", () {});
-  });
-
-  group('Compile and Scope Styles Test', () {
-    setUp(() {
-      // Additional setup goes here.
-    });
-
-    test('Sass Enabled Tests', () {
-      // expect(, matcher)
-    });
-
-    test("Sass Disabled Test", () {});
   });
 }

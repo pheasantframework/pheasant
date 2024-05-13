@@ -1,0 +1,8 @@
+| Package | Description | Version |
+|---|---|---|
+| [pheasant](pheasant/) | The Pheasant Framework is a progressive, fast-reload, modern frontend web framework that allows you to make powerful web applications in Dart. | [![pub package](https://img.shields.io/pub/v/pheasant.svg)](https://pub.dev/packages/pheasant) |
+| [pheasant_assets](pheasant_assets/) | Package for rendering styles and other external assets from the Pheasant Framework for Component Files. | [![pub package](https://img.shields.io/pub/v/pheasant_assets.svg)](https://pub.dev/packages/pheasant_assets) |
+| [pheasant_build](pheasant_build/) | The build package for all pheasant related compilation, as well as pheasant project configuration. | [![pub package](https://img.shields.io/pub/v/pheasant_build.svg)](https://pub.dev/packages/pheasant_build) |
+| [pheasant_cli](pheasant_cli/) | The official cli for running, creating and working with Pheasant projects and applications. | [![pub package](https://img.shields.io/pub/v/pheasant_cli.svg)](https://pub.dev/packages/pheasant_cli) |
+| [pheasant_meta](pheasant_meta/) | Metadata to use in The Pheasant Framework. This also enlists base objects such as exceptions, errors and more for use in sibling packages. | [![pub package](https://img.shields.io/pub/v/pheasant_meta.svg)](https://pub.dev/packages/pheasant_meta) |
+| [pheasant_temp](pheasant_temp/) | The Pheasant Framework Templating Engine to Create Renderable Dart Code for Pheasant Code. | [![pub package](https://img.shields.io/pub/v/pheasant_temp.svg)](https://pub.dev/packages/pheasant_temp) |
