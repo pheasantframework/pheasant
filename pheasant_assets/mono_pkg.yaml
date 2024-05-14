@@ -13,6 +13,3 @@ stages:
       os:
         - linux
         - windows
-=======
-    - test
->>>>>>> main

@@ -6,14 +6,6 @@ repository: https://github.com/pheasantframework/pheasant/tree/main/pheasant_ass
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
-=======
-version: 0.1.0-beta
-repository: https://github.com/pheasantframework/pheasant_assets
-
-environment:
-  sdk: ^3.2.3
->>>>>>> main
-
 # Add regular dependencies here.
 dependencies:
   csslib: ^1.0.0
@@ -23,8 +15,5 @@ dependencies:
 
 dev_dependencies:
   lints: ^3.0.0
-=======
-  lints: ^2.1.0
->>>>>>> main
   test: ^1.24.0
 
