@@ -1,7 +1,7 @@
 name: pheasant_cli
 description: The official cli for running, creating and working with Pheasant projects and applications.
 version: 0.1.0-grade
-repository: https://github.com/pheasantframework/pheasant/pheasant_cli
+repository: https://github.com/pheasantframework/pheasant/tree/main/pheasant_cli
 
 executables:
   pheasant:
