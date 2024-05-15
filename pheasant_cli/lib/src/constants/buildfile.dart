@@ -55,9 +55,9 @@ String genBuildFile(PheasantCliBaseConfig pheasantConfig,
         'build_to': 'cache',
         'auto_apply': 'root_package'
       },
-      'pheasantRouterGenerator': {
+      'pheasantRouterBuilder': {
         'import': "package:pheasant_build/src/build/builder.dart",
-        'builder_factories': ["pheasantRouterGenerator"],
+        'builder_factories': ["pheasantRouterBuilder"],
         'build_extensions': {
           ".dart": [".routes.dart"]
         },
