@@ -53,7 +53,9 @@ class InitCommand extends Command {
   }
 
   @override
-  void run() => initCommand(argResults!);
+  void run() {
+    initCommand(argResults!);
+  }
 }
 
 /// The command for `pheasant doctor`

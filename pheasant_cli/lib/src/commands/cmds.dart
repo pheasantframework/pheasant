@@ -45,7 +45,7 @@ ProjectType parseProject(String name) {
 void initCommand(ArgResults results) async {
   ProjectType projectType;
   try {
-    projectType = parseProject(results.command?['type']);
+    projectType = parseProject(results['type']);
   } catch (e) {
     stderr.writeln(red.wrap('"type" value invalid.'));
     exit(ExitCode.noInput.code);
@@ -60,9 +60,7 @@ void initCommand(ArgResults results) async {
     "Let's get strated with your new project\n",
     "\n"
   ]);
-  final projName = (results.arguments[1].contains('-')
-      ? results.arguments.last.split('/').last
-      : results.arguments[1]);
+  final projName = results.rest.first;
 
   switch (projectType) {
     case ProjectType.Application:
@@ -133,7 +131,7 @@ void runCommand(ArgResults results) async {
     bgProcess(buildManager, logger),
     mainProcess(serveManager, logger,
         port: port,
-        options: results.command?.options ?? [],
+        options: results.options,
         output: results['output']),
   ]);
 

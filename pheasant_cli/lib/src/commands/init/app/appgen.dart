@@ -76,7 +76,7 @@ Future<ProjGenClass> baseGeneration(
     {String? projPath}) async {
   var genProgress = logger.progress('Generating Project');
   // Create directory if stated
-  final dirPath = results.command?['directory'];
+  final dirPath = results['directory'];
   String resolvedPath = projPath ?? projName;
   if (dirPath != null) {
     resolvedPath = normalize(absolute(dirPath));
