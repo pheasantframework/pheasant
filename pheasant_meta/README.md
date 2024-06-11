@@ -14,9 +14,7 @@ It also contains base classes for creating your own custom metadata for your plu
 Get this package by running `dart pub`
 ```bash
 dart pub add pheasant_meta
-=======
 dart pub add dev:pheasant_meta
->>>>>>> main
 ```
 
 Then you can make use of it directly in your project.

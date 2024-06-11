@@ -6,13 +6,6 @@ repository: https://github.com/pheasantframework/pheasant/tree/main/pheasant_bui
 
 environment:
   sdk: '^3.0.0'
-=======
-version: 0.1.0-grade
-repository: https://github.com/pheasantframework/pheasant/tree/main/pheasant_build
-
-environment:
-  sdk: '>=3.0.0 <4.0.0'
->>>>>>> main
 
 # Add regular dependencies here.
 dependencies:
@@ -27,7 +20,7 @@ dependencies:
 
 dev_dependencies:
   build_test: ^2.2.2
-  lints: ^3.0.0
+  lints: ^4.0.0
   test: ^1.24.0
 
 topics:
