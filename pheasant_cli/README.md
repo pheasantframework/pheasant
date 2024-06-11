@@ -1,6 +1,8 @@
 # The Pheasant Framework CLI
 This is the package for the Pheasant Command Line Interface Application. 
 
+> There is current work on a new CLI for serving Pheasant Applications, which can be followed [here](https://github.com/nikeokoronkwo/pcli)
+
 `pheasant` is a cli tool for creating, testing, running and working on pheasant applications. With this tool, you can quickly get started with creating your pheasant projects with ease.
 
 ## New to Pheasant?
